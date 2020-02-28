@@ -1,0 +1,650 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="">
+  <meta name="author" content="">
+
+  <title>42 knots - Content streaming</title>
+
+  <!-- Bootstrap core CSS -->
+  <link href="/pub/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+
+  <!-- Custom fonts for this template -->
+  <link href="/pub/fontawesome-free/css/all.min.css" rel="stylesheet">
+  <link href="/pub/simple-line-icons/css/simple-line-icons.css" rel="stylesheet" type="text/css">
+  <link href="https://fonts.googleapis.com/css?family=Lato:300,400,700,300italic,400italic,700italic" rel="stylesheet" type="text/css">
+  
+  <!-- link rel="stylesheet" href="/pub/fonts/42font/style.css" -->
+
+  <!-- Custom styles for this template -->
+  <link href="../pub/css/templates/sblanding/landing-page.min.css" rel="stylesheet">
+  
+  <!-- https://www.w3schools.com/howto/howto_js_form_steps.asp -->
+
+	<style>
+		/* css form row padding - to work on the input obj */
+	.form-row {
+		padding-bottom: 10px;
+	}
+	/* css form row padding */
+	
+	.view-register.login {
+        display : none;
+    }
+    
+    .view-login.login {
+        display : block;
+    }
+    
+    .view-register {
+        display : block;
+    }
+    
+    .view-login {
+        display : none;
+    }
+	
+	/* Mark input boxes that gets an error on validation: */
+	.form-row input.invalid {
+	  background-color: #ffdddd;
+	}
+	
+	/* Hide all steps by default: */
+	.tab {
+	  display: none;
+	}
+	
+	.opentab {
+		display: flex !important;
+	}
+
+	/* Make circles that indicate the steps of the form: */
+	.step {
+	  height: 15px;
+	  width: 15px;
+	  margin: 0 2px;
+	  background-color: #bbbbbb;
+	  border: none;
+	  border-radius: 50%;
+	  display: inline-block;
+	  opacity: 0.5;
+	}
+
+	/* Mark the active step: */
+	.step.active {
+	  opacity: 1;
+	}
+
+	/* Mark the steps that are finished and valid: */
+	.step.finish {
+	  background-color: #4CAF50;
+	}
+	
+	.form-row {
+		padding: 15px;
+	}
+	
+	header.masthead {
+		background:url(../pub/images/boattrail.jpg) no-repeat center center; background-size:cover; /*  /pub/images/sblanding/bg-masthead.jpg  no-repeat center center;   */
+	}
+	
+	.bemsg {
+	    background-color: #efefef;
+	    border-color: #aaa;
+	    border-width: 1px;
+	    border-style: solid;
+	    color: red;
+	    font-weight: bold;
+	}
+	
+	.showcase a {
+	     color: #000;
+	}
+	
+	</style>
+	
+    <!-- Matomo -->
+    <script type="text/javascript">
+      var _paq = window._paq || [];
+      /* tracker methods like "setCustomDimension" should be called before "trackPageView" */
+      _paq.push(['trackPageView']);
+      _paq.push(['enableLinkTracking']);
+      (function() {
+        var u="//42knots.midrehov.com/analytics/";
+        _paq.push(['setTrackerUrl', u+'piwik.php']);
+        _paq.push(['setSiteId', '1']);
+        var d=document, g=d.createElement('script'), s=d.getElementsByTagName('script')[0];
+        g.type='text/javascript'; g.async=true; g.defer=true; g.src=u+'piwik.js'; s.parentNode.insertBefore(g,s);
+      })();
+    </script>
+    <!-- End Matomo Code -->
+
+</head>
+
+<body>
+
+  <!-- Navigation -->
+  <nav class="navbar navbar-light bg-light static-top" id="topbar">
+    <div class="container">
+      <a class="navbar-brand btn " href="/" style="background: rgb(101, 157, 189); color: #FFF2CC; ">42 knots</a>
+        <a class="navbar-brand btn " href="https://www.youtube.com/watch?v=y5YRDkmjtjA" target="_blank" style="background: #fefefe; color: #fdfdfd; font-size: 7px;">An obvious easter egg...</a>
+	  <button class="btn btn-primary showlogin view-register loginregister">Log In</button>
+	  <button class="btn btn-primary showlogin view-login loginregister">Sign Up</button>
+    </div>
+  </nav>
+
+  <!-- Masthead -->
+  <header class="masthead text-white text-center" id="sbheader">
+    <div class="overlay"></div>
+    <div class="container">
+      <div class="row">
+        <div class="col-xl-9 mx-auto">
+          <h1 class="mb-5" id="ch_title_0">42 knots</h1>
+		  <h2 class="mb-5" id="ch_description_0">create your own content stream</h2>
+        </div>
+		<div class="showlogin view-login col-md-10 col-lg-8 col-xl-7 mx-auto">
+
+			<form action="/?route=retailer/login/ajax" method="post" enctype="multipart/form-data" id="loginform">
+			    <input type="hidden" name="actiontype" value="login">
+				<!-- log in -->
+				<div class="form-row">
+							  <div class="col-lg-4 col-md-4 col-sm-6 mb-2 mb-md-0">
+								<input type="email" name="email" class="form-control form-control-lg" placeholder="Enter your email">
+							  </div>
+				<div class="col-lg-4 col-md-4 col-sm-6 mb-2 mb-md-0">
+								<input type="password" name="password" class="form-control form-control-lg" placeholder="Enter your password">
+							  </div>
+							  <div class="col-lg-4 col-md-4 col-sm-6">
+								<button type="submit" class="btn btn-block btn-lg btn-primary" id="loginsubmit">log in</button>
+							  </div>
+				</div>
+				
+        		<div class="form-row">
+        					  <div class="col-lg-12 col-md-12 col-sm-12 mb-2 mb-md-0 bemsg" id="errframe">
+        						<span id="errormsg"></span>
+        					  </div>
+
+        		</div>
+				<!-- log in -->
+			  </form>
+
+		</div>
+
+		<div class="showlogin view-register col-md-10 col-lg-8 col-xl-7 mx-auto">
+		<!-- sign up -->
+		<form action="/?route=retailer/login/ajax" method="post" enctype="multipart/form-data" class="editchform" id="regform">
+							<input type="hidden" name="actiontype" value="register">
+		<div class="form-row tab opentab">
+
+					  <div class="col-lg-4 col-md-4 col-sm-6 mb-2 mb-md-0">
+						  <div class="input-group">
+								  <span class="input-group-text" id="basic-addon1">@</span>
+								<input type="text" name="handle" class="form-control form-control-lg in_edithandle" placeholder="handle: letters or numbers. no spaces nor special characters">
+							</div>
+					  </div>
+						<div class="col-lg-4 col-md-4 col-sm-6 mb-2 mb-md-0">
+						<input type="email" id="email_0" name="email" class="form-control form-control-lg" placeholder="email">
+					  </div>
+
+		</div>
+		  
+
+
+		<div class="form-row tab">
+					  <div class="col-lg-4 col-md-4 col-sm-6 mb-2 mb-md-0">
+						<input type="text" id="title_for_0" name="retailername" class="form-control form-control-lg in_editretailername" placeholder="Your name" value="42 knots">
+					  </div>
+					<div class="col-lg-4 col-md-4 col-sm-6 mb-2 mb-md-0">
+						<input type="text" id="description_for_0" name="description" class="form-control form-control-lg in_editdescription" placeholder="Description" value="create your own content stream">
+					  </div>
+					  <div class="col-lg-4 col-md-4 col-sm-6 mb-2 mb-md-0">
+						<!-- input type="text" id="img_for_0" name="header_image" class="form-control form-control-lg in_editimg" placeholder="Channel header image url" value="/pub/images/sblanding/bg-masthead.jpg" -->
+						<div class="input-group">
+								<input type="text" id="img_for_0" name="header_image" class="form-control form-control-lg in_editimg" placeholder="Channel header image url" value="/pub/images/sblanding/bg-masthead.jpg">
+								  <button id="altcover" class=" btn btn-info"><i class="far fa-image"></i> </button>
+							</div>
+					  </div>
+		</div>
+
+			<div class="form-row tab ">
+					  <div class="col-lg-4 col-md-4 col-sm-4 mb-2 mb-md-0">
+						<input type="password" name="password" class="form-control form-control-lg" placeholder="password">
+					  </div>
+						<div class="col-lg-4 col-md-4 col-sm-4 mb-2 mb-md-0">
+						<input type="password" name="confirm" class="form-control form-control-lg" placeholder="confirm password">
+						</div>
+                    
+                    <div class="col-lg-4 col-md-4 col-sm-4 mb-2 mb-md-0">
+                    						<div class="custom-control custom-checkbox">
+                      <input type="checkbox" class="custom-control-input" id="customCheck1" name="agree">
+                      <label class="custom-control-label" for="customCheck1">I have read and agreed to the <a href="https://42knots.midrehov.com/pub/html/terms.html">terms and conditions</a></label>
+                    </div>
+                    						</div>
+		</div>
+		<!-- /div -->
+ 
+		<div class="form-row">
+					  <div class="col-lg-6 col-md-6 col-sm-6">
+						<!-- button type="submit" class="btn btn-block btn-lg btn-primary" >Sign up!</button -->
+						<button type="button" id="prevBtn" class="btn btn-block btn-lg btn-primary">Previous</button>
+					  </div>
+					  <div class="col-lg-6 col-md-6 col-sm-6">
+						<!-- button type="submit" class="btn btn-block btn-lg btn-primary" >Sign up!</button -->
+						<button type="button" id="nextBtn" class="btn btn-block btn-lg btn-primary">Next</button>
+					  </div>
+					  						
+		</div>
+
+
+		<div class="form-row">			
+				<!-- Circles which indicates the steps of the form: -->
+				<div style="text-align:center;margin-top:40px;">
+				  <span class="step"></span>
+				  <span class="step"></span>
+				  <span class="step"></span>
+				</div>
+					  
+		</div>
+
+		<!-- sign up -->
+		</form>
+		</div>
+
+      </div>
+    </div>
+  </header>
+
+  <!-- Icons Grid -->
+  <section class="features-icons bg-light text-center">
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-4">
+          <div class="features-icons-item mx-auto mb-5 mb-lg-0 mb-lg-3">
+            <div class="features-icons-icon d-flex">
+              <i class="icon-globe-alt m-auto text-primary"></i>
+            </div>
+            <h3>Create items</h3>
+            <p class="lead mb-0">throw inside and tag any link of anything you may find interesting</p>
+          </div>
+        </div>
+        <div class="col-lg-4">
+          <div class="features-icons-item mx-auto mb-5 mb-lg-0 mb-lg-3">
+            <div class="features-icons-icon d-flex">
+              <i class="icon-feed m-auto text-primary"></i>
+            </div>
+            <h3>Create channels</h3>
+            <p class="lead mb-0">Bundle your items to a channels, set with their own headers</p>
+          </div>
+        </div>
+        <div class="col-lg-4">
+          <div class="features-icons-item mx-auto mb-0 mb-lg-3">
+            <div class="features-icons-icon d-flex">
+              <i class="icon-paper-plane m-auto text-primary"></i>
+            </div>
+            <h3>Spread the word</h3>
+            <p class="lead mb-0">Spread your channals as Web Sites, Social accounts or RSS feeds with a click</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Image Showcases -->
+  <section class="showcase">
+    <div class="container-fluid p-0">
+      <div class="row no-gutters">
+
+        <div class="col-lg-6 order-lg-2 text-white showcase-img" style="background-image: url('https://miro.medium.com/max/1280/1*qMpGyNahR1SXIxCdSCQ6HA.jpeg');"></div>
+        <div class="col-lg-6 order-lg-1 my-auto showcase-text">
+          <h2><a href="https://link.medium.com/HHW3jq9qOZ">Getting started with 42 knots</a></h2>
+          <p class="lead mb-0"><a href="https://link.medium.com/HHW3jq9qOZ">Ok, so you’ve got the general idea, what’s next?</a></p>
+        </div>
+      </div>
+
+      <div class="row no-gutters">
+        <div class="col-lg-6 text-white showcase-img">
+                                    <iframe title="Embedded Wufoo Form"
+                                height="517"
+                                allowTransparency="true"
+                                frameborder="0"
+                                scrolling="no"
+                                style="width:100%;border:none"
+                                src="https://coffeeshopcrm.wufoo.com/embed/mewkovk15goy20/">
+                          <a href="https://coffeeshopcrm.wufoo.com/forms/mewkovk15goy20/">
+                            Fill out my Wufoo form!
+                          </a>
+                        </iframe>
+
+                                              
+        </div>
+        <div class="col-lg-6 my-auto showcase-text">
+          <h2>Contact</h2>
+          <p class="lead mb-0">On any topic</p>
+                                                  <div id="wuf-adv" style="font-family:inherit;font-size: small;color:#a7a7a7;text-align:center;display:block;">
+                            <span class="notranslate">
+                              HTML Forms powered by <a href="http://www.wufoo.com">Wufoo</a>.
+                            </span>
+                          </div>
+        </div>
+      </div>
+      <!--      
+      <div class="row no-gutters">
+        <div class="col-lg-6 order-lg-2 text-white showcase-img" style="background-image: url('../pub/images/sblanding/bg-showcase-3.jpg');"></div>
+        <div class="col-lg-6 order-lg-1 my-auto showcase-text">
+          <h2>Easy to Use &amp; Customize</h2>
+          <p class="lead mb-0">Landing Page is just HTML and CSS with a splash of SCSS for users who demand some deeper customization options. Out of the box, just add your content and images, and your new landing page will be ready to go!</p>
+        </div>
+      </div>
+      -->
+    </div>
+  </section>
+
+  <!-- Call to Action -->
+  <!--
+  <section class="call-to-action text-white text-center">
+    <div class="overlay"></div>
+    <div class="container">
+      <div class="row">
+        <div class="col-xl-9 mx-auto">
+          <h2 class="mb-4">Ready to get started? Sign up now!</h2>
+        </div>
+        <div class="col-md-10 col-lg-8 col-xl-7 mx-auto">
+          <form>
+            <div class="form-row">
+              <div class="col-12 col-md-9 mb-2 mb-md-0">
+                <input type="email" class="form-control form-control-lg" placeholder="Enter your email...">
+              </div>
+              <div class="col-12 col-md-3">
+                <button type="submit" class="btn btn-block btn-lg btn-primary">Sign up!</button>
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </section>
+-->
+  <!-- Footer -->
+  <footer class="footer bg-light">
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-6 h-100 text-center text-lg-left my-auto">
+          <ul class="list-inline mb-2">
+            <li class="list-inline-item">
+              <a href="#">About</a>
+            </li>
+            <li class="list-inline-item">&sdot;</li>
+            <li class="list-inline-item">
+              <a href="https://coffeeshopcrm.wufoo.com/forms/mewkovk15goy20/" target="_blank">Contact</a>
+            </li>
+            <li class="list-inline-item">&sdot;</li>
+            <li class="list-inline-item">
+              <a href="https://42knots.midrehov.com/pub/html/terms.html">Terms of Use</a>
+            </li>
+            <li class="list-inline-item">&sdot;</li>
+            <li class="list-inline-item">
+              <a href="#">Privacy Policy</a>
+            </li>
+          </ul>
+          <p class="text-muted small mb-4 mb-lg-0">&copy; Guy Louzon 2019. All Rights Reserved.</p>
+        </div>
+        <div class="col-lg-6 h-100 text-center text-lg-right my-auto">
+          <ul class="list-inline mb-0">
+            <li class="list-inline-item mr-3">
+              <a href="http://www.piedpiper.com/#developers">
+                <i class="fab fa-pied-piper fa-2x fa-fw" style="color: #007765;"></i>
+              </a>
+            </li>
+            <li class="list-inline-item mr-3">
+              <a href="https://twitter.com/@42knots">
+                <i class="fab fa-twitter-square fa-2x fa-fw"></i>
+              </a>
+            </li>
+            <li class="list-inline-item mr-3">
+              <a href="https://42knots.midrehov.com/42/6x7.php?v=webapp&channel=81">
+                <span class="icon-bw" style="background: rgb(101, 157, 189); color: #FFF2CC; font-size: 1.6em;"></span>
+              </a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Bootstrap core JavaScript -->
+  <script src="/pub/jquery/jquery.min.js"></script>
+  <script src="/pub/bootstrap/js/bootstrap.bundle.min.js"></script>
+  <script type="text/javascript">
+	
+	/**/
+	//to have the opening image set to screen
+    	$(function() {
+        var otherHeight = $("#topbar").outerHeight(true);
+        console.log('otherHeight = ' + otherHeight);
+        $(window).resize(function() {
+            let winheight = ($(window).height() - otherHeight);
+        	console.log('$(window).height() - otherHeight: ' + winheight);
+        	console.log('otherHeight = ' + otherHeight);
+            $('#sbheader').height( winheight + 'px');
+        }).resize();
+        
+       
+    });
+	/**/
+	
+	
+	// Https validation
+    if (location.protocol != 'https:')
+    {
+     location.href = 'https:' + window.location.href.substring(window.location.protocol.length);
+    }
+	
+	$(document).ready(function(){
+	
+		// onload
+		// global vars
+		var currentTab = 0; // Current tab is set to be the first tab (0)
+		var x = document.getElementsByClassName("tab");
+		const altcovers = ['//live.staticflickr.com/4222/34426687780_8b26fa1efb_b.jpg','//live.staticflickr.com/4175/34811722055_42e9b1b519_b.jpg','//live.staticflickr.com/4273/34734596996_a4549d7600_b.jpg','//live.staticflickr.com/4165/33910368824_e597fa1dac_b.jpg','//live.staticflickr.com/4156/34679916551_f4a7177442_b.jpg','https://webdesignerdepot.s3.amazonaws.com/default-images/45.jpg','https://www.iphonetricks.org/wp-content/uploads/2016/09/Harbor-Sunset-Wide-Gamut.jpg','https://exoplanets.nasa.gov/system/news_items/main_images/243_nyeheader.jpg','https://www.nps.gov/common/uploads/grid_builder/hfc/crop16_9/7E9AE9B6-1DD8-B71B-0BD2CA3A36AEBEC4.png','/pub/images/sblanding/bg-masthead.jpg','https://www.goodfreephotos.com/albums/italy/other-italy/beautiful-landscape-with-mountains-and-lakes-with-sky-in-italy.jpg','https://www.goodfreephotos.com/albums/italy/other-italy/high-mountains-landscape-of-dolomites-italy.jpg','https://www.goodfreephotos.com/albums/other-landscapes/beautiful-landscape-with-mountain-and-lake-scenic.jpg'];
+
+		// onload actions
+		$(".loginregister").click(function(){
+			$(".showlogin").toggleClass("login");
+		});
+		showTab(currentTab); // Display the current tab
+
+	   // keyups
+		$("input:text.in_edithandle").on('keyup', function() {
+			$("#ch_handle_0").text($(this).val());
+		});
+		$("input:text.in_editretailername").on('keyup', function() {
+			$("#ch_title_0").text($(this).val());
+		});
+		$("input:text.in_editdescription").on('keyup', function() {
+			$("#ch_description_0").text($(this).val());
+		});
+		$("input:text.in_editimg").on('keyup', function() {
+			//$("#ch_img_0").attr("src",$(this).val());
+			//background:url(/pub/images/sblanding/bg-masthead.jpg) no-repeat center center;
+			document.getElementById("sbheader").setAttribute("style", "background:url("  + $(this).val() + ") no-repeat center center; background-size:cover;");
+		});
+		
+		$("#altcover").on('click',function(e){
+		    e.preventDefault();
+		    let chosen = altcovers[Math.floor(Math.random() * 4)];
+		    document.getElementById("sbheader").setAttribute("style", "background:url("  + chosen + ") no-repeat center center;  background-size:cover;");
+		    document.getElementById("img_for_0").value = chosen;
+		    
+		});
+		
+		$('#regform').on('submit',function(e) {
+			e.preventDefault();
+			var actn = $(this).attr('action');
+			console.log("actn: " + actn);
+			var fitem_id = $(this).attr('id').substring(14, $(this).attr('id').length);
+
+			$.ajax({
+			   type: "POST",
+			   url: actn,
+			   data: $(this).serialize(),
+			   dataType: "json",
+			   success: function(data)
+			   {
+					if (data['status'] === 'ok') {
+						window.location.replace("../app/app.html");
+					} else {
+						$("#errormsg").text("bad username/ password");
+						console.log('went well, just not ok');
+						console.log(data);
+					}
+				},
+				error: function(data) {
+					$("#errormsg").text("server error");
+					console.log('bang!');
+					console.log(data);
+				}
+				
+			   });
+			 
+		 });					    
+
+		// wizard functions
+
+		$("#prevBtn").click(function(){
+			nextPrev(-1);
+		});
+		
+		$("#nextBtn").click(function(){
+		    if ("Submit" == document.getElementById("nextBtn").innerHTML) {
+		        $("#regform").submit();
+		    } else {
+		        nextPrev(1);
+		    }
+			
+		});
+		
+		// functions
+		function showTab(n) {
+		  // This function will display the specified tab of the form ...
+		  x[n].classList.add("opentab");
+		  // ... and fix the Previous/Next buttons:
+		  if (n == 0) {
+			document.getElementById("prevBtn").style.display = "none";
+		  } else {
+			document.getElementById("prevBtn").style.display = "inline";
+		  }
+		  if (n == (x.length - 1)) {
+			document.getElementById("nextBtn").innerHTML = "Submit";
+		  } else {
+			document.getElementById("nextBtn").innerHTML = "Next";
+		  }
+		  // ... and run a function that displays the correct step indicator:
+		  fixStepIndicator(n)
+		}
+
+		function nextPrev(n) {
+		  // This function will figure out which tab to display
+		  // Exit the function if any field in the current tab is invalid:
+		  if (n == 1 && !validateForm()) return false;
+		  // Hide the current tab:
+		  // Increase or decrease the current tab by 1:
+		  if (currentTab + n < x.length) { // as long as currentTab + n is between 0 and 2
+			x[currentTab].classList.remove("opentab");
+			currentTab = currentTab + n;
+				console.log("n: " + n);
+				console.log("currentTab: " + currentTab);
+
+		  } else {
+		  
+			document.getElementById("regform").submit();
+			
+		  }
+		  // Otherwise, display the correct tab:
+		  showTab(currentTab);
+		}
+
+		function validateForm() {
+		  // This function deals with validation of the form fields
+		  var x, y, i, valid = true;
+		  x = document.getElementsByClassName("tab");
+		  y = x[currentTab].getElementsByTagName("input");
+		  // A loop that checks every input field in the current tab:
+		  for (i = 0; i < y.length; i++) {
+			// If a field is empty...
+			if (y[i].value == "") {
+			  // add an "invalid" class to the field:
+			  y[i].className += " invalid";
+			  // and set the current valid status to false:
+			  valid = false;
+			}
+		  }
+		  // If the valid status is true, mark the step as finished and valid:
+		  if (valid) {
+			document.getElementsByClassName("step")[currentTab].className += " finish";
+		  }
+		  return valid; // return the valid status
+		}
+
+		function fixStepIndicator(n) {
+		  // This function removes the "active" class of all steps...
+		  var i, y = document.getElementsByClassName("step");
+		  for (i = 0; i < y.length; i++) {
+			y[i].className = y[i].className.replace(" active", "");
+		  }
+		  //... and adds the "active" class to the current step:
+		  y[n].className += " active";
+		}
+	
+    $('#loginform').submit(function(e) {
+            e.preventDefault();
+            $.ajax({
+               type: "POST",
+               url: '/?route=retailer/login/ajax',
+               data: $(this).serialize(),
+               success: function(data)
+               {
+        			if (data['status'] === 'ok') {
+        				window.location.replace("../app/app.html");
+        			} else {
+        			    $("#errormsg").text("bad username/ password");
+        			    console.log('went well, just not ok');
+        				console.log(data);
+        			}
+                },
+                error: function(data) {
+                    $("#errormsg").text("server error");
+                    console.log('bang!');
+                    console.log(data);
+        		}
+        		
+               });
+         });
+         
+         
+    	$(".logininput").on('keyup', function(e) {
+    	     if (e.keyCode == 13) {
+    			$("#loginform").submit();
+    	     }
+        });
+     
+		$("#loginsubmit").on('click', function () {
+		 var self = this;
+		  setTimeout(function(e) {
+			$("#loginform").submit();
+		  }, 0);
+				  
+		});
+	
+	
+	});
+  
+
+  </script>
+
+</body>
+
+</html>

@@ -671,16 +671,22 @@
                 "wording" : "edit"
             };
             btnbar.templatebutton = {
-                "jsClass" : "editbtn",
-                "idprefix" : "int_id_",
-                "fafa" : "wrench",
-                "wording" : "edit"
+                "jsClass" : "channel-template",
+                "idprefix" : "tmplt_id_",
+                "fafa" : "picture-o",
+                "wording" : "templates"
             };
             btnbar.followbutton = {
-                "jsClass" : "editbtn",
-                "idprefix" : "int_id_",
-                "fafa" : "wrench",
-                "wording" : "edit"
+                "jsClass" : "followbtn",
+                "idprefix" : "owner_id_",
+                "fafa" : "user-plus",
+                "wording" : "follow"
+            };
+            btnbar.viewsbutton = {
+                "jsClass" : "viewsbtn channel-horn",
+                "idprefix" : "horn_",
+                "fafa" : "user-bullhorn",
+                "wording" : "publish"
             };
     	    let itemsarr = chtypes[whois][channel.owner_type]['actions'];
     	    let btns = '';
@@ -700,8 +706,8 @@
                         <div class="icon-block">
                             <!-- --> ${btns} <!-- -->
                             <a id="" class="" href="#"><i class="fa fa-facebook"></i></a>
-                            <a id="ch_share_${channel['channel_id']}" class="viewsbtn channel-share" href="#"> <i class="fa fa-share"></i></a>
-                            <a href="#"> <i class="fa fa-twitter"></i></a>
+                            <a id="ch_share_${channel['channel_id']}" class="viewsbtn channel-share${channel.bulk}" href="#"> <i class="fa fa-share"></i></a>
+                            <a id="horn_${channel['channel_id']}" class="viewsbtn channel-horn{channel.bulk}" href="#"> <i class="fa fa-bullhorn"></i></a>
                             
                         </div>
                     </div>
@@ -726,7 +732,7 @@
 			}
 		}
 		
-		function loopitems(itemsjson0,elemId,func) {
+		function loopitems(itemsjson0,elemId,func, isBottom = true) {
     		var itemslist0 = '';
     		currentdisplay += laf.isError(itemsjson0.length,0);
     		console.log("currentdisplay: " + currentdisplay + ", itemsjson0.length: " + itemsjson0.length);
@@ -739,6 +745,13 @@
     			itemslist0 += window[func](itemsjson0[key]);
     		}
     		$("#" + elemId).append(itemslist0);
+    		/*
+    		if (isBottom) {
+    		    $("#" + elemId).append(itemslist0);
+    		} else {
+    		    $("#" + elemId).prepend(itemslist0);
+    		}
+    		*/
     	}
     	
     	function dummy() {}
@@ -1601,7 +1614,6 @@
     	
     	function loadOnScroll(){
 			if(Math.abs(window.scrollY - (document.documentElement.scrollHeight - window.innerHeight)) < 1) {
-			        console.log("bottom!");
 				   // ajax call get data from server and append to the div
 				   var aggitems = {};
 				    console.log('listlength: ' + listlength);
@@ -1652,6 +1664,17 @@
 					}
 					
 			}
+    	    
+    	}
+    	
+    	function scrollFtech(isBottom = true, limstart = 0, limend = 20) {
+    	    // fetch
+    	    // .then if isBottom
+    	        // add to bottom
+    	        // fix the global display vars
+    	   // else
+    	        // add to top - only the delta
+    	        // fix the global display vars
     	    
     	}
     	

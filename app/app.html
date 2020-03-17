@@ -202,37 +202,45 @@
 		        "me": {
 		            "flow":{
 		                "actions":["editbutton","templatebutton"],
-		                "icon": "fa fa-rss"
+		                "icon": "fa fa-rss",
+		                "editfunc" : "editRetailerBtn"
 		            },
 		            "stream":{
 		                "actions":["editbutton","templatebutton"],
-		                "icon": "fa fa-boat"
+		                "icon": "fa fa-boat",
+		                "editfunc" : "editRetailerBtn"
 		                },
 		            "fbt":{
 		                "actions":["editbutton","templatebutton"],
-		                "icon": "fa fa-tags"
+		                "icon": "fa fa-tags",
+		                "editfunc" : "editFbtBtn"
 		            },
 		            "flows":{
 		                "actions":[],
-		                "icon": "fa fa-rss"
+		                "icon": "fa fa-rss",
+		                "editfunc" : ""
 		            }
 		        },
 		        "notme": {
 		            "flow":{
 		                "actions":["followbutton"],
-		                "icon": "fa fa-rss"
+		                "icon": "fa fa-rss",
+		                "editfunc" : ""
 		            },
 		            "stream":{
 		                "actions":["followbutton"],
-		                "icon": "fa fa-boat"
+		                "icon": "fa fa-boat",
+		                "editfunc" : ""
 		            },
 		            "fbt":{
 		                "actions":[],
-		                "icon": "fa fa-tags"
+		                "icon": "fa fa-tags",
+		                "editfunc" : ""
 		            },
 		            "flows":{
 		                "actions":[],
-		                "icon": "fa fa-rss"
+		                "icon": "fa fa-rss",
+		                "editfunc" : ""
 		            }
 		        }
 		    
@@ -389,6 +397,18 @@
 		    return data;
 		}
 		/**/
+		
+        //https://www.tjvantoll.com/2015/09/13/fetch-and-errors/
+        /*
+        function handleErrors(response) {
+            if (!response.ok) {
+                throw Error(response.statusText);
+            }
+            return response;
+        }
+        /**/
+        //.then(handleErrors);
+
 		function loader(ctrlr) {
 		    $("[id*=popover]").remove();
 			clearElemId('main');
@@ -459,6 +479,7 @@
         		    ctrlr = item;
         		break;
 		    	}
+		    	
 
 		    actobj = actbase +  '&otype=' + ctrlr.otype;		    	
 		    bulk = 0;
@@ -597,29 +618,10 @@
 		<div class="twPc-divStats">
 			<ul class="twPc-Arrange">`;
 			// buttons bar
-			/**/
+
 			let itemsarr = chtypes[whois][channel.owner_type]['actions'];
 			itemsarr.forEach(actn => tmplt += btnbar[actn]);
-			//tmplt += editbutton;
-			/*
-			tmplt += '<li class="twPc-ArrangeSizeFit"><button class="btn btn-link editbtn" id="int_id_' + channel['key'] + '">';
-            tmplt += `
-							<span class="twPc-StatLabel twPc-block">Edit</span>
-							<i class="fa fa-wrench"></i>
-						</button>
-					</li>`;
-			/**/
-			//tmplt += templatebutton;
-				/*	
-			tmplt += '<li class="twPc-ArrangeSizeFit">';
-			tmplt += '<button class="btn btn-link channel-template' + channel.bulk + '" id="tmplt_id_' + channel['channel_id'] + '">';
-            tmplt += `
-							<span class="twPc-StatLabel twPc-block">Templates</span>
-							<i class="fa fa-picture-o"></i>
-						</button>
-					</li>`;
-                /**/
-					
+
             tmplt += `					
 					<li class="twPc-ArrangeSizeFit view view-fbt">
 					`;
@@ -662,6 +664,7 @@
                 channel['channel_id'] = 0;
             }
             
+            // to be imported as a part of channel
             let whois = 'me';
             if(channel.owner_type != 'fbt' && channel.owner_id != me) {
                 whois = 'notme';
@@ -692,13 +695,13 @@
                 "fafa" : "user-bullhorn",
                 "wording" : "publish"
             };
-    	    let itemsarr = chtypes[whois][channel.owner_type]['actions'];
+    	    let itemsarr = chtypes[channel.whois][channel.owner_type]['actions'];
     	    let btns = {};
 			let btnsstr = '';
-            //btns['editbtn'] = `<a class="${btnbar['editbtn'].jsClass}" id="${btnbar['editbtn'].idprefix}${channel.key}"><i class="fa fa-${btnbar['editbtn'].fafa}"></i></a>`;
-            //btns['templatebutton'] = `<a class="${btnbar['templatebutton'].jsClass}${channel.bulk}" id="${btnbar['templatebutton'].idprefix}${channel.channel_id}"><i class="fa fa-${btnbar['templatebutton'].fafa}"></i></a>`;
-            //btns['followbutton'] = `<a class="${btnbar['followbutton'].jsClass}" id="${btnbar['followbutton'].idprefix}${channel.owner_id}"  isfl="${channel.IsFl}"><i class="fa fa-${btnbar['followbutton'].fafa}"></i></a>`;
-    	    //  itemsarr.forEach(actn => btnsstr += btns[actn]);
+            btns['editbutton'] = `<button class="${btnbar['editbutton'].jsClass}" id="${btnbar['editbutton'].idprefix}${channel.key}"><i class="fa fa-${btnbar['editbutton'].fafa}"></i></button>`;
+            btns['templatebutton'] = `<button class="${btnbar['templatebutton'].jsClass}${channel.bulk}" id="${btnbar['templatebutton'].idprefix}${channel.channel_id}"><i class="fa fa-${btnbar['templatebutton'].fafa}"></i></button>`;
+            btns['followbutton'] = `<button class="${btnbar['followbutton'].jsClass}" id="${btnbar['followbutton'].idprefix}${channel.owner_id}"  isfl="${channel.IsFl}"><i class="fa fa-${btnbar['followbutton'].fafa}"></i></button>`;
+    	    itemsarr.forEach(actn => btnsstr += btns[actn]);
     	    tmplt += `
                 <div id="channel_${channel['key']}" class="card profile-card-2 channel2 media media-item schannel${channel.bulk}">
                     <div class="card-img-block">
@@ -711,9 +714,8 @@
                         <p class="card-text">${channel.description}</p>
                         <div class="icon-block">
                             <!-- --> ${btnsstr} <!-- -->
-                            <a id="" class="" href="#"><i class="fa fa-facebook"></i></a>
-                            <a id="ch_share_${channel['channel_id']}" class="viewsbtn channel-share${channel.bulk}" href="#"> <i class="fa fa-share"></i></a>
-                            <a id="horn_${channel['channel_id']}" class="viewsbtn channel-horn{channel.bulk}" href="#"> <i class="fa fa-bullhorn"></i></a>
+                            <button id="ch_share_${channel['channel_id']}" class="viewsbtn channel-share${channel.bulk}" href="#"> <i class="fa fa-share"></i></button>
+                            <button id="horn_${channel['channel_id']}" class="viewsbtn channel-horn${channel.bulk}" href="#"> <i class="fa fa-bullhorn"></i></button>
                             
                         </div>
                     </div>
@@ -765,7 +767,13 @@
     	function specsItem() {
     	    objsheader.bulk = antibulk;
     	    objsheader['key'] = -1;
-    	    let header = drawchannel(objsheader);
+            objsheader.whois = 'me';
+            if(objsheader.owner_type != 'fbt' && objsheader.owner_id != me) {
+                objsheader.whois = 'notme';
+            }
+    	    let header = drawchannel2(objsheader);
+    	     document.body.style.background = "rgba(3, 67, 120, 1) url('" + objsheader.image_url + "') no-repeat center center fixed"; 
+    	     document.body.style['background-size'] = "cover";
     	    $("#" + "main").prepend(header);
     	    let channelPopup = popupShareDelta;
     	    channelPopup.tmpltId = "channelSharer";
@@ -773,6 +781,7 @@
     	    popup = new popupShare(popupShareItem);
     	    //popup2 = new popupShare(fbt.popupParams);
     	    channelEditFunc = 'editRetailerBtn';
+    	    //channelEditFunc = chtypes[whois][channel.owner_type]['editfunc'];
     	    fbtEventsTriggers(antibulk--,popupShareItem.tmpltId,channelPopup.tmpltId);
 
     	}
@@ -824,26 +833,24 @@
 		    if (typeof channel.iactn == 'undefined') {
               channel.iactn = 'edit';
             }
-            if (typeof tagsarray[channel.fbt_id] == 'undefined') {
+            if (typeof tagsarray[channel.owner_id] == 'undefined') {
                 var tags = '';
             } else {
-                var tags = tagsarray[channel.fbt_id];
+                var tags = tagsarray[channel.owner_id];
             }
 			var tmplt = '';
-			tmplt += '<div style="margin-top: 2px;box-shadow: 1px 1px 2px #888888;" class="" id="edit_channel_' + channel.obj_id + '">';
-			tmplt += `
+			tmplt += `<div style="margin-top: 2px;box-shadow: 1px 1px 2px #888888;" class="" id="edit_channel_${channel.obj_id}">
 				<div class="form-group has-feedback">
-												<label class="control-label sr-only" for="inputSuccess5">Hidden label</label>`;
-			tmplt += '										<form action="' + channel.chaction  + '" method="post" enctype="multipart/form-data" class="editchform" id="editchform_id_' + channel.fbt_id + '">';
-			tmplt += '										<input type="hidden" name="iaction" value="' + channel.iactn + '">';
-			tmplt += '										<input type="hidden" name="fbt_id" value="' + channel.fbt_id +'">';
-			tmplt += '										<input type="text" class="form-control in_editchannel" aria-describedby="search" name="tags" style="background-color: beige;" value="' + tags +'" placeholder="tags names, comma seperated">';
-			tmplt += '										<input type="text" class="form-control in_editchannel" aria-describedby="search" name="title" style="background-color: beige;" value="' + channel.title + '" placeholder="Title" id="title_for_' + channel.fbt_id + '">';
-			tmplt += '										<input type="text" class="form-control in_editchannel" aria-describedby="search" name="description" style="background-color: beige;" value="' + channel.description + '" placeholder="Description" id="description_for_' + channel.fbt_id + '">';
-			tmplt += '										<input type="text" class="form-control in_editchannel" aria-describedby="search" name="profile_pic" style="background-color: beige;" value="' + channel.profile_pic + '" placeholder="avatar Icon" id="profile_pic_for_' + channel.fbt_id + '">';
-			tmplt += '										<div class="input-group">';
-			tmplt += '										    <input type="text" class="form-control in_editimg" aria-describedby="search" name="image_url" style="background-color: beige;" value="' + channel.image_url + '" placeholder="Channel header image url" id="img_for_' + channel.fbt_id + '">';
-			tmplt += `
+												<label class="control-label sr-only" for="inputSuccess5">Hidden label</label>
+													<form action="${channel.chaction}" method="post" enctype="multipart/form-data" class="editchform" id="editchform_id_${channel.owner_id}">
+													<input type="hidden" name="iaction" value="${channel.iactn}">
+													<input type="hidden" name="fbt_id" value="${channel.owner_id}">
+													<input type="text" class="form-control in_editchannel" aria-describedby="search" name="tags" style="background-color: beige;" value="${tags}" placeholder="tags names, comma seperated">
+													<input type="text" class="form-control in_editchannel" aria-describedby="search" name="title" style="background-color: beige;" value="${channel.title}" placeholder="Title" id="title_for_${channel.owner_id}">
+													<input type="text" class="form-control in_editchannel" aria-describedby="search" name="description" style="background-color: beige;" value="${channel['description']}" placeholder="Description" id="description_for_${channel.owner_id}">
+													<input type="text" class="form-control in_editchannel" aria-describedby="search" name="profile_pic" style="background-color: beige;" value="${channel.profile_pic}" placeholder="avatar Icon" id="profile_pic_for_${channel.owner_id}">
+													<div class="input-group">
+													    <input type="text" class="form-control in_editimg" aria-describedby="search" name="header_image" style="background-color: beige;" value="${channel.image_url}" placeholder="Channel header image url" id="img_for_${channel.owner_id}">
                                                                   <span class="input-group-btn btn42">
                                                                     <button type="button" class="btn btn-default btn-twitter submitedit btn42"><i class="fa fa-refresh"></i></button>
                                                                   </span>
@@ -851,9 +858,8 @@
                                                             </form>
 												<i type="submit" class="fa fa-tags form-control-feedback" aria-hidden="true"></i>
 											</div>
-				</div>
-			`;
-			return tmplt;
+				</div>`;
+				return tmplt;
 		}
 
 </script>
@@ -918,8 +924,6 @@
                     
                 })
                 .then(function(json) {
-                    //objsjson0.ftype = (' ' + ftype).slice(1);
-                    //console.log('objsjson0.ftype: ' + objsjson0.ftype);
                     // fold the header and the items, case items.
                     routehistory.push(JSON.parse(JSON.stringify(objsjson0)));
                     //delete objsjson0.ftype;
@@ -1307,7 +1311,6 @@
 	    		    obj_id = obj_id.substring(7, obj_id.length);
 					data = objsheader;
 					data.obj_id = obj_id;
-					console.log('obj_id: ' + obj_id);
 					data.chaction = retaileredit;
 					data.iactn = 'update';
 	    		    

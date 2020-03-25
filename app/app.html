@@ -423,7 +423,8 @@
 			/*
 			slice objsjson[ctrlr.loopsobj] at listlength, listlength + displayamount
 			*/
-			loopitems(objsjson[ctrlr.loopsobj],'main',ctrlr.func); /* loop through the sliced*/
+			//loopitems(objsjson[ctrlr.loopsobj],'main',ctrlr.func); /* loop through the sliced*/
+			$("#main").append(loopitems(objsjson[ctrlr.loopsobj],ctrlr.func));
 			window[ctrlr.eventTriggers](bulk);
 			// currentdisplay = listlength + displayamount
 			listlength = Object.keys(objsjson[ctrlr.loopsobj]).length;
@@ -500,19 +501,22 @@
     	    if (typeof item.description == 'undefined') {
               item.description = '';
             }
+            let tgsme = '';
+            if (item.retailer_id = me) {
+                tgsme = `			<li><button class="btn btn-link item-tag${item.bulk}" id="tag_item_${item.item_id}"><i class="fa fa-tags"></i></button></li>`
+    	    }
         var tmplt = `<div id ="item_${item.item_id}" class="sitem${item.bulk}">
         	         <div class="media media-item"><div class="media-heading" style="padding-left: 10px;">
 			          <div class="media-left"><a href="#" class="route2" route2="ftype=stream&fid="${item.owner_id}><img alt="" class="media-object img-rounded" src="${item.profile_pic}" style="max-width: 32px;"></a></div>
 			          <div class="media-body" style="vertical-align: middle;"><h4 class="media-heading"><span style="font-size: 70%; color:#999999; font-style: italic;">${item.username} </span> <span style="font-weight: bold;">${item.retailer_full_name}</span></h4></div></div>
-						<div class="media-body"  style="padding-left: 10px;">`;
-			tmplt +=        `<h4 class="media-heading"><a href="${item['link']}">`;
-			tmplt += item.title + '</a></h4>';
+						<div class="media-body"  style="padding-left: 10px;">
+						<h4 class="media-heading"><a href="${item['link']}">${item.title}</a></h4>`;
 			tmplt += `<p>${item.description}<img class="media-body-image" src="${item.image_url}" onerror="if (this.src != '/image/catalog/42/42knots.png') this.src = '/image/catalog/42/42knots.png';"></p>
 			          <ul class="nav nav-pills nav-pills-custom">
 			            
             			<li><button class="btn btn-link item-share${item.bulk}" id="share_item_${item.item_id}" routeto="${item['link']}"><i class="fa fa-share"></i></button></li>
         			    <li><button class="btn btn-link item-star${item.bulk}" id="star_item_${item.item_id}"><i class="fa fa-star"></i></button></li>
-            			<li><button class="btn btn-link item-tag${item.bulk}" id="tag_item_${item.item_id}"><i class="fa fa-tags"></i></button></li>
+            			${tgsme}
             			<li><button class="btn btn-link item-trash${item.bulk}" id="trash_item_${item.item_id}"><i class="fa fa-trash"></i></button></li>
     			       </ul>
 						</div>
@@ -702,8 +706,10 @@
             btns['templatebutton'] = `<button class="${btnbar['templatebutton'].jsClass}${channel.bulk}" id="${btnbar['templatebutton'].idprefix}${channel.channel_id}"><i class="fa fa-${btnbar['templatebutton'].fafa}"></i></button>`;
             btns['followbutton'] = `<button class="${btnbar['followbutton'].jsClass}" id="${btnbar['followbutton'].idprefix}${channel.owner_id}"  isfl="${channel.IsFl}"><i class="fa fa-${btnbar['followbutton'].fafa}"></i></button>`;
     	    itemsarr.forEach(actn => btnsstr += btns[actn]);
+    	    // '<div id="channel_' + channel['key'] + '" class="schannel' + channel.bulk + '" >';
     	    tmplt += `
-                <div id="channel_${channel['key']}" class="card profile-card-2 channel2 media media-item schannel${channel.bulk}">
+    	        <div id="channel_${channel['key']}" class="schannel${channel.bulk}">
+                <div class="card profile-card-2 channel2 media media-item">
                     <div class="card-img-block">
                         <img class="img-fluid" src="${channel.image_url}" alt="Card image cap">
                     </div>
@@ -720,6 +726,7 @@
                         </div>
                     </div>
                 </div>
+            </div>
     	    `;
     	    return tmplt;
     	}
@@ -740,7 +747,7 @@
 			}
 		}
 		
-		function loopitems(itemsjson0,elemId,func, isBottom = true) {
+		function loopitems(itemsjson0,func, isBottom = true) {
     		var itemslist0 = '';
     		currentdisplay += laf.isError(itemsjson0.length,0);
     		console.log("currentdisplay: " + currentdisplay + ", itemsjson0.length: " + itemsjson0.length);
@@ -752,14 +759,8 @@
                 
     			itemslist0 += window[func](itemsjson0[key]);
     		}
-    		$("#" + elemId).append(itemslist0);
-    		/*
-    		if (isBottom) {
-    		    $("#" + elemId).append(itemslist0);
-    		} else {
-    		    $("#" + elemId).prepend(itemslist0);
-    		}
-    		*/
+    		//$("#" + elemId).append(itemslist0);
+    		return itemslist0;
     	}
     	
     	function dummy() {}
@@ -839,13 +840,17 @@
                 var tags = tagsarray[channel.owner_id];
             }
 			var tmplt = '';
+			let tagsinput = '';
+			if (channel.owner_type == 'fbt') {
+                tagsinput = `<input type="text" class="form-control in_editchannel" aria-describedby="search" name="tags" style="background-color: beige;" value="${tags}" placeholder="tags names, comma seperated">`;
+			}
 			tmplt += `<div style="margin-top: 2px;box-shadow: 1px 1px 2px #888888;" class="" id="edit_channel_${channel.obj_id}">
 				<div class="form-group has-feedback">
 												<label class="control-label sr-only" for="inputSuccess5">Hidden label</label>
 													<form action="${channel.chaction}" method="post" enctype="multipart/form-data" class="editchform" id="editchform_id_${channel.owner_id}">
 													<input type="hidden" name="iaction" value="${channel.iactn}">
 													<input type="hidden" name="fbt_id" value="${channel.owner_id}">
-													<input type="text" class="form-control in_editchannel" aria-describedby="search" name="tags" style="background-color: beige;" value="${tags}" placeholder="tags names, comma seperated">
+													${tagsinput}
 													<input type="text" class="form-control in_editchannel" aria-describedby="search" name="title" style="background-color: beige;" value="${channel.title}" placeholder="Title" id="title_for_${channel.owner_id}">
 													<input type="text" class="form-control in_editchannel" aria-describedby="search" name="description" style="background-color: beige;" value="${channel['description']}" placeholder="Description" id="description_for_${channel.owner_id}">
 													<input type="text" class="form-control in_editchannel" aria-describedby="search" name="profile_pic" style="background-color: beige;" value="${channel.profile_pic}" placeholder="avatar Icon" id="profile_pic_for_${channel.owner_id}">
@@ -1612,11 +1617,11 @@
 			sliceat = Math.max(Math.min(displayamount,listlength - currentdisplay),0);
 			aggitems = laf.objSlice(objsjson[ctrlr.loopsobj],currentdisplay, currentdisplay + sliceat);
 			bulk++;
-			loopitems(aggitems,'main',ctrlr.func);
+			//loopitems(aggitems,ctrlr.func);
+			$("#main").append(loopitems(aggitems,ctrlr.func));
 			window[ctrlr.eventTriggers](bulk);
 
 			currentdisplay += sliceat;
-			console.log("currentdisplay: " + currentdisplay + ", sliceat: " + sliceat);
 			listlength += laf.isError(aggitems.length,0);
 			shouldTriggerScroll = true;
     	}
@@ -1625,30 +1630,17 @@
 			if(Math.abs(window.scrollY - (document.documentElement.scrollHeight - window.innerHeight)) < 1) {
 				   // ajax call get data from server and append to the div
 				   var aggitems = {};
-				    console.log('listlength: ' + listlength);
-				    console.log('currentdisplay: ' + currentdisplay);
-				    console.log('shouldTriggerScroll: ' + shouldTriggerScroll);
 					if (currentdisplay > 0) {
-					    console.log('listlength - currentdisplay (should be less than 1): ' + (listlength - currentdisplay));
+					    //console.log('listlength - currentdisplay (should be less than 1): ' + (listlength - currentdisplay));
 						if ((listlength - currentdisplay < 1) && shouldTriggerScroll) {
 						    //window.scrollBy(0, -25);
                             shouldTriggerScroll = false;
                             document.getElementById("countdown").style.display = "block";
-                            console.log(feedsrc  + '&limstart=' + listlength + '&limend=' + (listlength + displayamount));
                                     fetch(feedsrc  + '&limstart=' + listlength + '&limend=' + (listlength + displayamount) , {
                                       method: 'GET'
                                     })
                                     .then(function(response) { 
-                                        /*
-                                        if(laf.isJSON(response.text())) {
-                                           console.log("scroll Json !");
-                                        } else {
-                                           console.log("scroll NOT Json !");
-                                        }
-                                        console.log(response.text());
-                                        */
                                         return response.json();
-                                        
                                     })
                                     .then(function(json) {
                             			// add json.items to the global object items
@@ -1675,18 +1667,37 @@
 			}
     	    
     	}
-    	
-    	function scrollFtech(isBottom = true, limstart = 0, limend = 20) {
-    	    // fetch
-    	    // .then if isBottom
-    	        // add to bottom
-    	        // fix the global display vars
-    	   // else
-    	        // add to top - only the delta
-    	        // fix the global display vars
-    	    
+    	/*
+    	function loadOnRefresh() {
+			fetch(feedsrc  + '&limstart=0&limend=' + minload) , {
+				method: 'GET'
+			})
+			.then(function(response) { 
+				return response.json();
+			})
+			.then(function(json) {
+				console.log(objsjson['feed'][0].item_id);
+				let arr = [];
+				let de = {};
+				for (let i = 0; i < Object.keys(json['feed']).length; i++) {
+					arr[] = json['feed'][i]['item_id'];
+					de[item_id] = i;
+				}
+				let sat = objectBinSearch(arr,objsjson['feed'][0].item_id,0,Object.keys(json['feed']).length-1);
+				if(sat > 0) {
+					json['feed'].length = de[sat];
+				}
+				objsjson[ctrlr.loopsobj] = laf.objUnionAll(json,objsjson[ctrlr.loopsobj]);
+				tagsarray = laf.objUnionAll(json['tagsarray'],tagsarray,true);
+				listlength = Object.keys(objsjson[ctrlr.loopsobj]).length; // the current length of the list
+				bulk--;
+				
+				$("#main").prepend(loopitems(json,ctrlr.func));
+				window[ctrlr.eventTriggers](bulk);
+			});
     	}
-    	
+		/**/
+	
     	/*https://www.w3schools.com/howto/tryit.asp?filename=tryhow_js_navbar_sticky*/
     	function stickMenu() {
           if (window.pageYOffset >= sticky) {
@@ -1717,10 +1728,11 @@ $(window).load(function() {
         .then(function(json) {
             constants = JSON.parse(JSON.stringify(json));
             setConstants(constants);
+            nonRecurringEventsTriggers();
+	        routeto2("start");
         })
 
-	nonRecurringEventsTriggers();
-	routeto2("start");
+
 
 
 });

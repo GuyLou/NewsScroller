@@ -1667,9 +1667,9 @@
 			}
     	    
     	}
-    	/*
+    	/**/
     	function loadOnRefresh() {
-			fetch(feedsrc  + '&limstart=0&limend=' + minload) , {
+			fetch((feedsrc  + '&limstart=0&limend=' + minload) , {
 				method: 'GET'
 			})
 			.then(function(response) { 
@@ -1680,7 +1680,7 @@
 				let arr = [];
 				let de = {};
 				for (let i = 0; i < Object.keys(json['feed']).length; i++) {
-					arr[] = json['feed'][i]['item_id'];
+					arr.push(json['feed'][i]['item_id']);
 					de[item_id] = i;
 				}
 				let sat = objectBinSearch(arr,objsjson['feed'][0].item_id,0,Object.keys(json['feed']).length-1);

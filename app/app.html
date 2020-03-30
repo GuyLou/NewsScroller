@@ -398,17 +398,32 @@
 		}
 		/**/
 		
-        //https://www.tjvantoll.com/2015/09/13/fetch-and-errors/
-        /*
-        function handleErrors(response) {
-            if (!response.ok) {
-                throw Error(response.statusText);
-            }
-            return response;
+        /**/
+        function validateFetch(response) {
+			switch (true) {
+
+				case response.status >= 300 && response.status < 400:
+					window.location.href = response.location;
+				break;
+
+				case response.status >= 400 || response.json.length == 0:
+					window.location.href = baseurl;
+				break;
+
+				case response.status == 200:
+					return response;
+				break;
+
+				default:
+					window.location.href = baseurl;
+				break;
+
+			}
+
+            
         }
         /**/
-        //.then(handleErrors);
-
+ 
 		function loader(ctrlr) {
 		    $("[id*=popover]").remove();
 			clearElemId('main');
@@ -925,8 +940,10 @@
                   method: 'GET'
                 })
                 .then(function(response) {
-                    return response.json();
-                    
+					return validateFetch(response);
+                })
+                .then(function(response) {
+					return response.json();
                 })
                 .then(function(json) {
                     // fold the header and the items, case items.
@@ -947,25 +964,7 @@
             
         }
     }
-    /*
-    
-    $('#search2').submit(function(e) {
-		e.preventDefault();
-	    var routetosearch = {};
-	    routetosearch = JSON.parse(JSON.stringify(routetos.stream));        
-        let dblhash = $("#searchi").val();
-        
-        if (dblhash.substring( 0, 2) == '##') {
-            routetosearch.gvalue = dblhash.substring( 2, dblhash.length);
-        } else {
-            routetosearch.find = dblhash;
-        }
 
-        routetos.routetosearch = routetosearch;
-        $("#searchi").attr("routeto","routetosearch");
-	    routeto("searchi");
-    });
-*/
 
     $('#search').submit(function(e) {
 		e.preventDefault();
@@ -1444,33 +1443,6 @@
                     .catch(error => {
                         console.log(error);
                         })
-                        /**/
-                        /*
-                    
-	    		    			$.ajax({
-                    			   type: "POST",
-                    			   url: actn,
-                    			   data: $(this).serialize(),
-                    			   dataType: "json",
-                    			   success: function(data)
-                    			   {
-                    
-                        		       console.log('#edit_channel_' + fitem_id + ',  before');
-                        		       console.log('actn: ' + actn,'actobj: ' + actobj);
-                        			    if (actn == actobj) {
-                        			        objsjson[ctrlr.loopsobj][fitem_id] = data;
-                        			    }
-                    			    //objsjson[ctrlr.loopsobj][fitem_id] = data;
-                    				$('#editchform_id_' + fitem_id).remove();
-                    			   },
-                    				error: function(data) {
-                    					console.log('error: ');
-                    					console.log(data);
-                    					$('#edit_channel_' + fitem_id).remove();
-                    				}
-                    				
-                    			   });
-	    		    */
 	    		    
 	    		});
 	    		
@@ -1712,12 +1684,12 @@
 </script>
 <script type="text/Javascript">
 
-// gobal functions
+// global functions
 
 $(window).load(function() {
 	// init
 
-    // get constantds
+    // get constants
     fetch('https://42knots.midrehov.com/?route=retailer/app/json&ftype=constants', {
           method: 'GET'
         })

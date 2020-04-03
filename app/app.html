@@ -141,10 +141,10 @@
 <template id="change_password0">
     <form action="" method="post" enctype="multipart/form-data" class="change_password" id="change_password">
         <input type="hidden" name="iaction" value="password">
-	    <input type="password" class="form-control in_editchannel" aria-describedby="search" name="curpass" style="background-color: beige;" value="" placeholder="current password">
-	        <input type="password" class="form-control in_editchannel" aria-describedby="search" name="newpass" style="background-color: beige;" value="" placeholder="new password">
+	    <input type="password" class="form-control" aria-describedby="search" name="curpass" style="background-color: beige;" value="" placeholder="current password">
+	        <input type="password" class="form-control" aria-describedby="search" name="newpass" style="background-color: beige;" value="" placeholder="new password">
 	        <div class="input-group">
-		        <input type="password" class="form-control in_editimg" aria-describedby="search" name="confirm" style="background-color: beige;" value="" placeholder="confirm new password" id="confirm">
+		        <input type="password" class="form-control" aria-describedby="search" name="confirm" style="background-color: beige;" value="" placeholder="confirm new password" id="confirm">
 	            <span class="input-group-btn">
 	                <button type="submit" class="btn btn-default btn-twitter gopass"><i class="fa fa-refresh"></i><!-- span class="glyphicon glyphicon-refresh"></span --></button>
 	            </span>
@@ -383,33 +383,23 @@
 			"popupParams": popupShareDelta
 		};
 		
-		/*
-		function validateFetch(data) {
-		    if (laf.isJSON(data)) {
-		        let sts = JSON.parse(data);
-		        if ((typeof sts['status'] != 'undefined') && sts['status'] != 'not ok') {
-		            return data;
-		        }
-		    }
-
-		    // if !JSON OR sts JSON.parse(data)
-		    
-		    return data;
-		}
-		/**/
-		
-        /**/
         function validateFetch(response) {
+            /**/
 			switch (true) {
-
+                
 				case response.status >= 300 && response.status < 400:
 					window.location.href = response.location;
 				break;
 
-				case response.status >= 400 || response.json.length == 0:
+				case response.status >= 400:
 					window.location.href = baseurl;
 				break;
-
+/*
+				case response.json.length == 0:
+					//throw new Error("Something went badly wrong!");
+					console.log(response);
+				break;
+*/
 				case response.status == 200:
 					return response;
 				break;
@@ -417,10 +407,9 @@
 				default:
 					window.location.href = baseurl;
 				break;
-
 			}
-
-            
+            /**/
+            //return response;
         }
         /**/
  
@@ -726,13 +715,13 @@
     	        <div id="channel_${channel['key']}" class="schannel${channel.bulk}">
                 <div class="card profile-card-2 channel2 media media-item">
                     <div class="card-img-block">
-                        <img class="img-fluid" src="${channel.image_url}" alt="Card image cap">
+                        <img class="img-fluid" src="${channel.image_url}" alt="Card image cap" id="ch_img_${channel['key']}">
                     </div>
                     <div class="card-body pt-5">
                         <img src="${channel.profile_pic}" alt="profile-image" class="profile"/>
                         ${flowstring}                        
-                        <h5 class="card-title"><a href="${channel.link}">${channel.title}</a></h5>
-                        <p class="card-text">${channel.description}</p>
+                        <h5 class="card-title"><a href="${channel.link}"><span id="ch_title_${channel['key']}">${channel.title}</span></a></h5>
+                        <p class="card-text" id="ch_description_${channel['key']}">${channel.description}</p>
                         <div class="icon-block">
                             <!-- --> ${btnsstr} <!-- -->
                             <button id="ch_share_${channel['channel_id']}" class="viewsbtn channel-share${channel.bulk}" href="#"> <i class="fa fa-share"></i></button>
@@ -868,7 +857,7 @@
 													${tagsinput}
 													<input type="text" class="form-control in_editchannel" aria-describedby="search" name="title" style="background-color: beige;" value="${channel.title}" placeholder="Title" id="title_for_${channel.owner_id}">
 													<input type="text" class="form-control in_editchannel" aria-describedby="search" name="description" style="background-color: beige;" value="${channel['description']}" placeholder="Description" id="description_for_${channel.owner_id}">
-													<input type="text" class="form-control in_editchannel" aria-describedby="search" name="profile_pic" style="background-color: beige;" value="${channel.profile_pic}" placeholder="avatar Icon" id="profile_pic_for_${channel.owner_id}">
+													<input type="text" class="form-control in_profiepic" aria-describedby="search" name="profile_pic" style="background-color: beige;" value="${channel.profile_pic}" placeholder="avatar Icon" id="profile_pic_for_${channel.owner_id}">
 													<div class="input-group">
 													    <input type="text" class="form-control in_editimg" aria-describedby="search" name="header_image" style="background-color: beige;" value="${channel.image_url}" placeholder="Channel header image url" id="img_for_${channel.owner_id}">
                                                                   <span class="input-group-btn btn42">
@@ -1102,7 +1091,7 @@
         	                    'bulk' : antibulk,
         	                    'chaction': actobj
         	                };
-        	               var newitem = drawchannel(newChannel);
+        	               var newitem = drawchannel2(newChannel);
         	               $("#main").prepend(newitem);
         	               newitem = editChannel(newChannel);
         	               $("#channel_" + newChannel.fbt_id).append(newitem);
@@ -1116,7 +1105,11 @@
     						    dest = id_.split("_");
     						    $("#ch_" + dest[0] + "_" + newChannel.fbt_id).attr("src",$(this).val());
     	    		        });
-    	    		        
+                            $("input:text.in_profiepic").on('keyup', function() {
+    	    		            var id_ = $(this).attr('id');
+    						    dest = id_.split("_");
+    						    $("#ch_" + dest[0] + "_" + newChannel.fbt_id).attr("src",$(this).val());
+    	    		        });   	    		        
                     		$('#channel_-1').on('submit','.editchform',function(e) {
                     			e.preventDefault();
                     			var actn = $(this).attr('action');

@@ -384,11 +384,14 @@
 		};
 		
         function validateFetch(response) {
-            /**/
 			switch (true) {
                 
-				case response.status >= 300 && response.status < 400:
+				case (response.status >= 300 && response.status < 400):
 					window.location.href = response.location;
+				break;
+				
+				case response.redirected && response.status == 200:
+					window.location.href = response.url;
 				break;
 
 				case response.status >= 400:
@@ -408,8 +411,6 @@
 					window.location.href = baseurl;
 				break;
 			}
-            /**/
-            //return response;
         }
         /**/
  
@@ -1687,8 +1688,11 @@ $(window).load(function() {
           method: 'GET'
         })
         .then(function(response) {
+            console.log(response);
+			return validateFetch(response);
+        })
+        .then(function(response) {
             return response.json();
-            
         })
         .then(function(json) {
             constants = JSON.parse(JSON.stringify(json));

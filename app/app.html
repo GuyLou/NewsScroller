@@ -105,7 +105,7 @@
 								<label class="control-label sr-only" for="inputSuccess5">Hidden label</label>
 								<form action="" method="post" enctype="multipart/form-data" id="fetchform">
 								    <input type="hidden" name="iaction" value="fetchurl">
-								    <input type="text" class="form-control in42" id="fetch" aria-describedby="search" name="fetchurl" placeholder="Throw a url inside...">
+								    <input type="text" class="form-control in42" id="fetch" aria-describedby="search" name="fetchurl" placeholder="paste a url...">
 								</form>
 								<i class="fa fa-camera form-control-feedback" aria-hidden="true"></i>
 								<!-- span class="glyphicon glyphicon-camera-retro form-control-feedback" aria-hidden="true"></span -->
@@ -279,9 +279,9 @@
 		var feedlink = 'https://42knots.midrehov.com/index.php?route=retailer/app/json'; //'<b>Notice</b>: Undefined variable: feedlink in <b>/home/midrehov/public_html/42knots/catalog/view/theme/default/template/retailer/app.tpl</b> on line <b>272</b>';
 		var feedsrc = feedlink + '&ftype=' + ftype;
 		var faction = '';
-		var actbase = ''; //'<b>Notice</b>: Undefined variable: actobj in <b>/home/midrehov/public_html/42knots/catalog/view/theme/default/template/retailer/app.tpl</b> on line <b>275</b>';
+		var actbase = '';
 		var actobj = '';
-		var retaileredit = ''; //'<b>Notice</b>: Undefined variable: retaileredit in <b>/home/midrehov/public_html/42knots/catalog/view/theme/default/template/retailer/app.tpl</b> on line <b>277</b>';
+		var retaileredit = '';
 		var tagsaction = '';
 		const channelbase = 'https://42knots.midrehov.com/42/6x7.php?v=webapp&channel='; // baseurl + '/42/apps/cards.html?channel=';
 		var ctrlr = {};
@@ -314,7 +314,7 @@
                     		"textcolor": "#32CD32",
                     		"background":"#000000",
                     		"fa":"clipboard",
-                    		"linkbase":"" // baseurl = '42/6x7.php?channel='; // $('#editpasswordbtn').on('shown.bs.popover', function () {
+                    		"linkbase":"" // baseurl = '42/6x7.php?channel=';
                     	},
                     	*/
                     	"postrss": {
@@ -808,7 +808,7 @@
                 actn = actobj;
                 specs += '<input type="hidden" name="iaction" value="add">';
             } else {
-                actn = tagsaction; //'<b>Notice</b>: Undefined variable: tagsaction in <b>/home/midrehov/public_html/42knots/catalog/view/theme/default/template/retailer/app.tpl</b> on line <b>778</b>';  
+                actn = tagsaction;
             }
             if (typeof tagsarray[itemdata.item_id] == 'undefined') {
                 var tags = '';
@@ -824,7 +824,7 @@
     tmplt += specs;
     tmplt += '								    <input type="hidden" name="obj_id" value="' + itemdata.item_id +'">';
     tmplt += '								    <input type="hidden" name="otype" value="' + itemdata.otype +'">';
-    tmplt += '								    <input type="text" class="form-control" aria-describedby="search" name="tags" style="background-color: beige;" value="' + tags + '">';
+    tmplt += '								    <input type="text" class="form-control" aria-describedby="search" name="tags" style="background-color: beige;" value="' + tags + '" placeholder="tag by text, comma seperated">';
         tmplt += `    								</form>
     								<!-- span type="submit" class="glyphicon glyphicon-tags form-control-feedback" aria-hidden="true"></span -->
     								<i type="submit" class="fa fa-tags form-control-feedback" aria-hidden="true"></i>

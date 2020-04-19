@@ -58,7 +58,7 @@
       
     }
 </style>
-
+<script type="text/javascript" src="app/items.js"></script>
 </head>
 
 <body>
@@ -67,7 +67,7 @@
     <ul class="topbar" role="navigation">
         <li><button class="btn btn-link" id="backwardsbtn"><i class="fa fa-reply"></i><span class="notmobile">  Back</span></button></li>
         <li><button class="btn btn-link route2" routeto2="ftype=flow"  id="rtstream"><!-- i class="fa fa-home"></i --><span class="icon-bw" style="font-size: 1.32em;"></span><span class="notmobile">  Home</span></button></li>
-        <li><button class="btn btn-link route2" routeto2="ftype=fbt" routeto="fbt" id="rtfbt"><i class="fa fa-film"></i><span class="notmobile"> Channels</span></button></li>
+        <li><button class="btn btn-link route2" routeto2="ftype=fbt" id="rtfbt"><i class="fa fa-film"></i><span class="notmobile"> Channels</span></button></li>
         <li><button class="btn btn-link popup-share" id="editpasswordbtn"><i class="fa fa-key"></i><span class="notmobile">  Settings</span></button></li>
         
         <li><button class="btn btn-link" id="rtout"><i class="fa fa-sign-out"></i><span class="notmobile"> Log out</span></button></li>
@@ -494,7 +494,7 @@
         	//popup = new popupShare(ctrlr.popupParams);
 		}
 
-    	function drawitem(item) {
+    	function drawitem3(item) {
     	    
     	    let defaults = {};
     	    defaults['description'] = '';
@@ -506,15 +506,21 @@
     	    if (typeof item.description == 'undefined') {
               item.description = '';
             }
+    	    dirclass = 'directionl';
+            rtlDirCheck = new RegExp('^[^'+'A-Za-z\u00C0-\u00D6\u00D8-\u00F6\u00F8-\u02B8\u0300-\u0590\u0800-\u1FFF'+'\u2C00-\uFB1C\uFDFE-\uFE6F\uFEFD-\uFFFF'+']*['+'\u0591-\u07FF\uFB1D-\uFDFD\uFE70-\uFEFC'+']');
+            if (rtlDirCheck.test(item.title)) {
+                 dirclass = 'directionr';
+            }
+            
             let tgsme = '';
             if (item.retailer_id = me) {
                 tgsme = `			<li><button class="btn btn-link item-tag${item.bulk}" id="tag_item_${item.item_id}"><i class="fa fa-tags"></i></button></li>`
     	    }
         var tmplt = `<div id ="item_${item.item_id}" class="sitem${item.bulk}">
-        	         <div class="media media-item"><div class="media-heading" style="padding-left: 10px;">
-			          <div class="media-left"><a href="#" class="route2" route2="ftype=stream&fid="${item.owner_id}><img alt="" class="media-object img-rounded" src="${item.profile_pic}" style="max-width: 32px;"></a></div>
+        	         <div class="media media-item"><div class="media-heading">
+			          <div class="media-left"><a href="#" id="href_item_${item.item_id}" class="route2" routeto2="ftype=stream&fid=${item.retailer_id}"><img alt="" class="media-object img-rounded" src="${item.profile_pic}" style="max-width: 32px;"></a></div>
 			          <div class="media-body" style="vertical-align: middle;"><h4 class="media-heading"><span style="font-size: 70%; color:#999999; font-style: italic;">${item.username} </span> <span style="font-weight: bold;">${item.retailer_full_name}</span></h4></div></div>
-						<div class="media-body"  style="padding-left: 10px;">
+						<div class="media-body ${dirclass}"  style="padding-left: 10px;">
 						<h4 class="media-heading"><a href="${item['link']}">${item.title}</a></h4>`;
 			tmplt += `<p>${item.description}<img class="media-body-image" src="${item.image_url}" onerror="if (this.src != '/image/catalog/42/42knots.png') this.src = '/image/catalog/42/42knots.png';"></p>
 			          <ul class="nav nav-pills nav-pills-custom">
@@ -721,7 +727,7 @@
                     <div class="card-body pt-5">
                         <img src="${channel.profile_pic}" alt="profile-image" class="profile"/>
                         ${flowstring}                        
-                        <h5 class="card-title"><a href="${channel.link}"><span id="ch_title_${channel['key']}">${channel.title}</span></a></h5>
+                        <h4 class="card-title"><a href="${channel.link}"><span id="ch_title_${channel['key']}">${channel.title}</span></a></h5>
                         <p class="card-text" id="ch_description_${channel['key']}">${channel.description}</p>
                         <div class="icon-block">
                             <!-- --> ${btnsstr} <!-- -->
@@ -1209,7 +1215,7 @@
         
     }
     
-	var itemEventsTriggers = function( bulk = 0, popupShareId = 'itemSharer') {
+	var itemEventsTriggers3 = function( bulk = 0, popupShareId = 'itemSharer') {
 
 		$(".sitem" + bulk).on('submit','.tagsform',function(e) {
 			e.preventDefault();
@@ -1605,6 +1611,9 @@
                                     fetch(feedsrc  + '&limstart=' + listlength + '&limend=' + (listlength + displayamount) , {
                                       method: 'GET'
                                     })
+                                    .then(function(response) {
+                    					return validateFetch(response);
+                                    })
                                     .then(function(response) { 
                                         return response.json();
                                     })
@@ -1638,6 +1647,9 @@
 			fetch((feedsrc  + '&limstart=0&limend=' + minload) , {
 				method: 'GET'
 			})
+            .then(function(response) {
+				return validateFetch(response);
+            })
 			.then(function(response) { 
 				return response.json();
 			})
@@ -1688,7 +1700,6 @@ $(window).load(function() {
           method: 'GET'
         })
         .then(function(response) {
-            console.log(response);
 			return validateFetch(response);
         })
         .then(function(response) {
@@ -1731,6 +1742,9 @@ $("#rtout").click(function(){
 
     fetch('/?route=retailer/logout', {
           method: 'GET'
+        })
+        .then(function(response) {
+			return validateFetch(response);
         })
         .then(function(response) {
             return response.json();
@@ -1801,4 +1815,4 @@ $('.change_password').on('submit',function(e) {
 
 </script>
 </body>
-</html>
+</html>s

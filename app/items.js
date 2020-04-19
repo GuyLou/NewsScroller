@@ -1,6 +1,6 @@
 
 
-    const popupShareItem4 = {"attachment":"main","tmpltId" : "itemSharer"};
+    const popupShareItem = {"attachment":"main","tmpltId" : "itemSharer"};
 
     function drawitem(item) {
         

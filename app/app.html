@@ -58,7 +58,7 @@
       
     }
 </style>
-<script type="text/javascript" src="app/items.js"></script>
+<script type="text/javascript" src="../app/items.js"></script>
 </head>
 
 <body>
@@ -73,7 +73,7 @@
         <li><button class="btn btn-link" id="rtout"><i class="fa fa-sign-out"></i><span class="notmobile"> Log out</span></button></li>
         <li><img src="/pub/images/rss-wifi-signal-preloader-gif.gif" style="max-height: 33px; display: none;" id="countdown"></li>
         <!-- li class="twitter__bird"><i class="fa fa-twitter"></i></li -->
-        <li><form id="search"><input type="text" class="form-control-nav" id="searchi" aria-describedby="search1" name="find" placeholder="search, ## for tag search"></form></li>
+        <li><form id="search"><input type="text" class="form-control-nav" id="searchi" aria-describedby="search1" name="find" placeholder="search"></form></li>
         <!-- li><i class="fa fa-user-circle-o"></i></li -->
         <!-- li><button class="btn btn-link">tweet</button></li -->
     </ul>
@@ -286,6 +286,7 @@
 		const channelbase = 'https://42knots.midrehov.com/42/6x7.php?v=webapp&channel='; // baseurl + '/42/apps/cards.html?channel=';
 		var ctrlr = {};
 
+		//const popupShareItem5 = {"attachment":"main","tmpltId" : "itemSharer"};
 		const popupShareDelta = {
 			    "attachment":"main",
 			    "tmpltId" : "channelSharer",
@@ -393,7 +394,11 @@
 					window.location.href = response.url;
 				break;
 
-				case response.status >= 400:
+				case (response.status >= 500 && response.status < 600):
+					document.getElementById("countdown").style.display = "none";
+					throw new Error('Whoops!');
+				break;
+				case (response.status >= 400 && response.status < 500):
 					window.location.href = baseurl;
 				break;
 /*
@@ -620,7 +625,7 @@
     	    return tmplt;
     	}
     	/**/
-    	function drawchannel2(channel) {
+    	function drawchannel2(channel,chtypes) {
     	    
     	    let tmplt = '';
     	    let flowstring = '<div class="fcwrapper"> <span><a id="achnls_' + channel['channel_id'] + '" class="route2" routeto2="ftype=stream&fid=' + channel['owner_id'] + '" href="#"> Stream </a></span> | <span><a id="achnlf_' + channel['channel_id'] + '" class="route2" routeto2="ftype=flow&fid=' + channel['owner_id'] + '" href="#"> Flow </a></span> | <span><a id="achnlc_' + channel['channel_id'] + '" class="route2" routeto2="ftype=fbt&fid=' + channel['owner_id'] + '" href="#"> Channels </a></span><br> Following <span class="fcounter"><a id="afle_' + channel['channel_id'] + '" class="route2" routeto2="ftype=flows&flowtype=follower&fid=' + channel['owner_id'] + '" href="#">' + channel['followers'] + '</a></span> | Followers <span class="fcounter"><a id="aflr_' + channel['channel_id'] + '" class="route2" routeto2="ftype=flows&flowtype=followee&fid=' + channel['owner_id'] + '" href="#">' + channel['followees'] + '</a></span> </div>';
@@ -722,7 +727,7 @@
                   itemsjson0[key]['bulk'] = bulk;
                 }
                 
-    			itemslist0 += window[func](itemsjson0[key]);
+    			itemslist0 += window[func](itemsjson0[key],chtypes);
     		}
     		//$("#" + elemId).append(itemslist0);
     		return itemslist0;
@@ -737,7 +742,7 @@
             if(objsheader.owner_type != 'fbt' && objsheader.owner_id != me) {
                 objsheader.whois = 'notme';
             }
-    	    let header = drawchannel2(objsheader);
+    	    let header = drawchannel2(objsheader,chtypes);
     	     document.body.style.background = "rgba(3, 67, 120, 1) url('" + objsheader.image_url + "') no-repeat center center fixed"; 
     	     document.body.style['background-size'] = "cover";
     	    $("#" + "main").prepend(header);
@@ -915,6 +920,20 @@
         }
     }
 
+	$('#searchi').focus(function(){
+		$('#searchi').popover({
+			placement: 'bottom',
+			container: 'body',
+			html: true,
+			content: function() {
+				return 'free text for items, ## for own tagging filter, @ for user search';
+			}
+		});
+	});
+
+	$("#searchi").blur(function(){
+		$("[id*=popover]").remove();
+	}); 
 
     $('#search').submit(function(e) {
 		e.preventDefault();
@@ -981,7 +1000,7 @@
 				   data.item_id = 0;
 				   data.guid = data.url;
 				   data.bulk = antibulk;
-				   var newitem = drawitem(data);
+				   var newitem = drawitem(data,chtypes);
 				   //$("#main").prepend(newitem);
 				   $(newitem).insertAfter('#channel_-1');
 				   data.otype = 'item';
@@ -1052,7 +1071,7 @@
         	                    'bulk' : antibulk,
         	                    'chaction': actobj
         	                };
-        	               var newitem = drawchannel2(newChannel);
+        	               var newitem = drawchannel2(newChannel,chtypes);
         	               $("#main").prepend(newitem);
         	               newitem = editChannel(newChannel);
         	               $("#channel_" + newChannel.fbt_id).append(newitem);
@@ -1676,4 +1695,4 @@ $('.change_password').on('submit',function(e) {
 
 </script>
 </body>
-</html>s
+</html>

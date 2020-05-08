@@ -783,23 +783,22 @@
                 var tags = '';
             } else {
                 var tags = tagsarray[itemdata.item_id];
-            }
+			}
+			if (itemdata.dis == 'undefined') {
+				itemdata.dis = '';
+			}
             
-    	var tmplt = '<div style="margin-top: 2px;box-shadow: 1px 1px 2px #888888;" class="" id="formtag_' + itemdata.item_id + '">';
-    	tmplt += `
-    <div class="form-group has-feedback">
-    								<label class="control-label sr-only" for="inputSuccess5">Hidden label</label>`;
-    tmplt += '								<form action="'  + actn  +  '" method="post" enctype="multipart/form-data" class="tagsform" id="tagsform_id_' + itemdata.item_id + '">';
-    tmplt += specs;
-    tmplt += '								    <input type="hidden" name="obj_id" value="' + itemdata.item_id +'">';
-    tmplt += '								    <input type="hidden" name="otype" value="' + itemdata.otype +'">';
-    tmplt += '								    <input type="text" class="form-control" aria-describedby="search" name="tags" style="background-color: beige;" value="' + tags + '" placeholder="tag by text, comma seperated">';
-        tmplt += `    								</form>
-    								<!-- span type="submit" class="glyphicon glyphicon-tags form-control-feedback" aria-hidden="true"></span -->
-    								<i type="submit" class="fa fa-tags form-control-feedback" aria-hidden="true"></i>
-    							</div>
-    </div>
-    	`;
+			var tmplt = `<div style="margin-top: 2px;box-shadow: 1px 1px 2px #888888;" class="" id="formtag_${itemdata.item_id}">
+						<div class="form-group has-feedback">
+    					<label class="control-label sr-only" for="inputSuccess5">Hidden label</label>
+    					<form action="${actn}" method="post" enctype="multipart/form-data" class="tagsform" id="tagsform_id_${itemdata.item_id}">`;
+			tmplt += specs;
+			tmplt += `<input type="hidden" name="obj_id" value="${itemdata.item_id}">
+					<input type="hidden" name="otype" value="${itemdata.otype}">
+					<input type="text" class="form-control" aria-describedby="search" name="tags" style="background-color: beige;" value="${tags}" ${itemdata.otype} placeholder="tag by text, comma seperated">    								</form>
+                                <i type="submit" class="fa fa-tags form-control-feedback" aria-hidden="true"></i>
+                            </div></div>
+    		`;
 		return tmplt;
 		
         }
@@ -989,7 +988,7 @@
 			}
 			$.ajax({
 			   type: "POST",
-			   url: faction, //'<b>Notice</b>: Undefined variable: faction in <b>/home/midrehov/public_html/42knots/catalog/view/theme/default/template/retailer/app.tpl</b> on line <b>993</b>',
+			   url: faction,
 			   data: $(this).serialize(),
 			   dataType: "json",
 			   //dataType: "text",

@@ -23,6 +23,7 @@
 <link href="//fonts.googleapis.com/css?family=Open+Sans:400,400i,300,700" rel="stylesheet" type="text/css" />
 <!-- link href="catalog/view/theme/default/stylesheet/stylesheet.css" rel="stylesheet" -->
 <link href="../pub/fonts/42font/style.css" rel="stylesheet">
+<link href="../pub/fonts/babelfish/babelfish.css" rel="stylesheet">
 
 <link rel="preload" href="/pub/images/tplicons/tmplt_magazine.png" as="image" type="image/png">
 <link rel="preload" href="/pub/images/tplicons/tmplt_cards.png" as="image" type="image/png">
@@ -56,7 +57,10 @@
       pointer-events: none;
       cursor: default;
       
-    }
+	}
+	.babelfish {
+		font-size: 1.22em;
+	}
 </style>
 <script type="text/javascript" src="../app/items.js"></script>
 </head>
@@ -65,12 +69,12 @@
 <div class="navbar navbar-default navbar-static-top" id="topbar">
 
     <ul class="topbar" role="navigation">
-        <li><button class="btn btn-link" id="backwardsbtn"><i class="fa fa-reply"></i><span class="notmobile">  Back</span></button></li>
-        <li><button class="btn btn-link route2" routeto2="ftype=flow"  id="rtstream"><!-- i class="fa fa-home"></i --><span class="icon-bw" style="font-size: 1.32em;"></span><span class="notmobile">  Home</span></button></li>
-        <li><button class="btn btn-link route2" routeto2="ftype=fbt" id="rtfbt"><i class="fa fa-film"></i><span class="notmobile"> Channels</span></button></li>
-        <li><button class="btn btn-link popup-share" id="editpasswordbtn"><i class="fa fa-key"></i><span class="notmobile">  Settings</span></button></li>
+        <li><button class="btn btn-link" id="backwardsbtn"><span class="icon-back babelfish"></span><span class="notmobile">  Back</span></button></li>
+        <li><button class="btn btn-link route2" routeto2="ftype=flow"  id="rtstream"><span class="icon-feed42 babelfish"></span><span class="notmobile">  Home</span></button></li>
+        <li><button class="btn btn-link route2" routeto2="ftype=fbt" id="rtfbt"><span class="icon-film babelfish"></span><span class="notmobile"> Channels</span></button></li>
+        <li><button class="btn btn-link popup-share" id="editpasswordbtn"><span class="icon-key babelfish"></span><span class="notmobile">  Settings</span></button></li>
         
-        <li><button class="btn btn-link" id="rtout"><i class="fa fa-sign-out"></i><span class="notmobile"> Log out</span></button></li>
+        <li><button class="btn btn-link" id="rtout"><span class="icon-exit babelfish"></span><span class="notmobile"> Log out</span></button></li>
         <li><img src="/pub/images/rss-wifi-signal-preloader-gif.gif" style="max-height: 33px; display: none;" id="countdown"></li>
         <!-- li class="twitter__bird"><i class="fa fa-twitter"></i></li -->
         <li><form id="search"><input type="text" class="form-control-nav" id="searchi" aria-describedby="search1" name="find" placeholder="search"></form></li>
@@ -82,9 +86,9 @@
 
 <div class="container">
 	<div class="row">
-		<div class="col-sm-3">
+		<div class="col-sm-1 col-md-2 col-lg-3">
 		</div>
-		<div class="col-sm-6">
+		<div class="col-sm-10 col-md-8 col-lg-6">
 			<div class="panel panel-info">
 			    
                 <div class="panel-heading view view-fbt" style="display: block;">
@@ -134,7 +138,7 @@
 			</div>
 		</div>
 
-		<div class="col-sm-3"></div>
+		<div class="col-sm-1 col-md-2 col-lg-3"></div>
 	</div>
 </div>
 <template id="start" routeto2="ftype=flow"></template>
@@ -285,7 +289,7 @@
 		var tagsaction = '';
 		const channelbase = 'https://42knots.midrehov.com/42/6x7.php?v=webapp&channel='; // baseurl + '/42/apps/cards.html?channel=';
 		var ctrlr = {};
-
+		const webshare = (navigator.share !== undefined);
 		//const popupShareItem5 = {"attachment":"main","tmpltId" : "itemSharer"};
 		const popupShareDelta = {
 			    "attachment":"main",
@@ -1385,21 +1389,30 @@
                         return document.getElementById(popupDeltaId).innerHTML;
                       }
                 });
-                
-                $(".channel-share" + bulk).popover({  //  .on('popover', function (e) {
-                //e.preventDefault();
-              placement: 'right',
-              container: 'body',
-              html: true,
-              content: function() {
-              ch_id = $(this).attr('id');
-              ch_id = ch_id.substring(9, ch_id.length);
-                popup.updatePopUp(channelbase + ch_id); // to fix. should be channel id returned from the backend
-                return document.getElementById(popupShareId).innerHTML;
-              }
-        });
-        
-                /**/
+				
+				/**/
+				$(".channel-share" + bulk).click(function(){
+					ch_id = $(this).attr('id');
+					ch_id = ch_id.substring(9, ch_id.length);
+					if (webshare) {
+						const shareData = {url: channelbase + ch_id};
+						navigator.share(shareData)
+						.then(() => console.log('Successful share'))
+						.catch((error) => console.log('Error sharing', error));
+					} else {
+						$(".channel-share" + bulk).popover({  //  .on('popover', function (e) {
+							//e.preventDefault();
+						placement: 'right',
+						container: 'body',
+						html: true,
+						content: function() {
+							popup.updatePopUp(channelbase + ch_id); // to fix. should be channel id returned from the backend
+							return document.getElementById(popupShareId).innerHTML;
+						}
+						});
+					}
+				});
+
                 $(".channel-template" + bulk).on('shown.bs.popover', function () {
                     $('.tmpltbtn').on('click',function(e) {
                     	e.preventDefault();

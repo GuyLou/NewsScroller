@@ -123,14 +123,23 @@
             
         });		
 
-        $(".item-share" + bulk).popover({
-              placement: 'right',
-              container: 'body',
-              html: true,
-              content: function() {
-                popup.updatePopUp($(this).attr('routeto'));
-                return document.getElementById('itemSharer').innerHTML;
-              }
+        $(".item-share" + bulk).click(function(){
+            if (webshare) {
+                const shareData = {url: $(this).attr('routeto')};
+                navigator.share(shareData)
+                .then(() => console.log('Successful share'))
+                .catch((error) => console.log('Error sharing', error));
+            } else {
+                $(".item-share" + bulk).popover({
+                    placement: 'right',
+                    container: 'body',
+                    html: true,
+                    content: function() {
+                      popup.updatePopUp($(this).attr('routeto'));
+                      return document.getElementById('itemSharer').innerHTML;
+                    }
+              });
+            }
         });
         
 /*

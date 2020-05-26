@@ -6,8 +6,8 @@
         
         let defaults = {};
         defaults['description'] = '';
-        defaults['profile_pic'] = '';
-        defaults['username'] = '';
+        defaults['profile_pic'] = 'http://icons.iconarchive.com/icons/iconshock/hitchhikers-guide/256/Hitchhiker-Symbol-icon.png';
+        defaults['handle'] = '';
         defaults['retailer_full_name'] = '';
         
         item = Object.assign(defaults, item); // defaults will be run over by the item attributes. but we eliminates undefines...
@@ -21,20 +21,22 @@
         }
         
         let tgsme = '';
-        if (item.retailer_id = me) {
-            tgsme = `			<li><button class="btn btn-link item-tag${item.bulk}" id="tag_item_${item.item_id}"><i class="fa fa-tags"></i></button></li>
-            <li><button class="btn btn-link item-trash${item.bulk}" id="trash_item_${item.item_id}"><i class="fa fa-trash"></i></button></li>`;
+        let isme = 0;
+        if (item.retailer_id == me) {
+            isme = 1;
+            tgsme = `<li><button class="btn btn-link item-trash${item.bulk}" id="trash_item_${item.item_id}"><i class="fa fa-trash"></i></button></li>`;
         }
     var tmplt = `<div id ="item_${item.item_id}" class="sitem${item.bulk}">
                     <div class="media media-item"><div class="media-heading">
                     <div class="media-left"><a href="#" id="href_item_${item.item_id}" class="route2" routeto2="ftype=stream&fid=${item.retailer_id}"><img alt="" class="media-object img-rounded" src="${item.profile_pic}" style="max-width: 32px;"></a></div>
-                    <div class="media-body" style="vertical-align: middle;"><h4 class="media-heading"><span style="font-size: 70%; color:#999999; font-style: italic;">@${item.username} </span> <span style="font-weight: bold;">${item.retailer_full_name}</span></h4></div></div>
+                    <div class="media-body" style="vertical-align: middle;"><h4 class="media-heading"><a href="#" id="href_item_${item.item_id}" class="route2 link-unstyled" routeto2="ftype=stream&fid=${item.retailer_id}"><span style="font-size: 70%; color:#999999; font-style: italic;">@${item.handle} </span> <span style="font-weight: bold;">${item.retailer_full_name}</span></a></h4></div></div>
                     <div class="media-body ${dirclass}"  style="padding-left: 10px;">
                     <h4 class="media-heading"><a href="${item['link']}">${item.title}</a></h4>`;
         tmplt += `<p>${item.description}<img class="media-body-image" src="${item.image_url}" onerror="if (this.src != '/image/catalog/42/42knots.png') this.src = '/image/catalog/42/42knots.png';"></p>
                     <ul class="nav nav-pills nav-pills-custom">
                     <li><button class="btn btn-link item-share${item.bulk}" id="share_item_${item.item_id}" routeto="${item['link']}"><i class="fa fa-share"></i></button></li>
                     <li><button class="btn btn-link item-star${item.bulk}" id="star_item_${item.item_id}"><i class="fa fa-star"></i></button></li>
+                    <li><button class="btn btn-link item-tag${item.bulk}" id="${isme}_tag_item_${item.item_id}"><i class="fa fa-tags"></i></button></li>
                     ${tgsme}
                     </ul>
                     </div>
@@ -76,8 +78,9 @@
 
 		$(".item-tag" + bulk).click(function(){
 			var data = {};
-			data.item_id = $(this).attr('id');
-			data.item_id = data.item_id.substring(9, data.item_id.length);
+            data.item_id = $(this).attr('id');
+            data.isme = data.item_id.substring(0, 1);
+            data.item_id = data.item_id.substring(11, data.item_id.length);
 			if ($("#" + "formtag_" + data.item_id).length > 0) {
 				$("#" + "formtag_" + data.item_id).remove();
 			} else {
@@ -142,5 +145,8 @@
             }
         });
         
+/*
+
+*/
 
 	};

@@ -207,22 +207,30 @@
 		            "flow":{
 		                "actions":["editbutton","templatebutton"],
 		                "icon": "fa fa-rss",
-		                "editfunc" : "editRetailerBtn"
+		                "editfunc" : "editRetailerBtn",
+						"classHidden":{}
 		            },
 		            "stream":{
 		                "actions":["editbutton","templatebutton"],
 		                "icon": "fa fa-boat",
-		                "editfunc" : "editRetailerBtn"
+		                "editfunc" : "editRetailerBtn",
+						"classHidden":{}
 		                },
 		            "fbt":{
 		                "actions":["editbutton","templatebutton"],
 		                "icon": "fa fa-tags",
-		                "editfunc" : "editFbtBtn"
+		                "editfunc" : "editFbtBtn",
+						"classHidden":{
+							"profile": "hidden",
+							"handle": "hidden",
+							"flowstring": "hidden"
+							}
 		            },
 		            "flows":{
 		                "actions":[],
 		                "icon": "fa fa-rss",
-		                "editfunc" : ""
+		                "editfunc" : "",
+						"classHidden":{}
 		            }
 		        },
 		        "notme": {
@@ -234,17 +242,24 @@
 		            "stream":{
 		                "actions":["followbutton"],
 		                "icon": "fa fa-boat",
-		                "editfunc" : ""
+		                "editfunc" : "",
+						"classHidden":{}
 		            },
 		            "fbt":{
 		                "actions":[],
 		                "icon": "fa fa-tags",
-		                "editfunc" : ""
+		                "editfunc" : "",
+						"classHidden":{
+							"profile": "hidden",
+							"handle": "hidden",
+							"flowstring": "hidden"
+							}
 		            },
 		            "flows":{
 		                "actions":[],
 		                "icon": "fa fa-rss",
-		                "editfunc" : ""
+		                "editfunc" : "",
+						"classHidden":{}
 		            }
 		        }
 		    
@@ -256,6 +271,7 @@
 		var popup = {}; // default items
 		var channelEditFunc = 'editRetailerBtn';
 		var baseurl = ''; // 'https://42knots.midrehov.com/';
+		var fortytwobase ='';
 
 		// scroller vars
     	const displayamount = 20; // the items per 'page'
@@ -299,48 +315,53 @@
                     		"textcolor": "#ffe330",
                     		"background": "rgb(101, 157, 189)",
                     		"fa":"mobile",
-                    		"linkbase":"https://42knots.midrehov.com/42/6x7.php?v=webapp&channel=" // baseurl = '42/apps/cards.html?channel=';'
+                    		"linkbase":"https://42knots.midrehov.com/42/6x7.php?v=webapp&channel=" // fortytwobase = 'apps/cards.html?channel=';'
                     	},
                       	"rss": {
                     		"textcolor": "#ffffff",
                     		"background":"#ee802f",
                     		"fa":"rss",
-                    		"linkbase":"https://42knots.midrehov.com/42/6x7.php?v=rss&channel=" // baseurl = '42/6x7.php?channel=';
-                    	},
+                    		"linkbase":"https://42knots.midrehov.com/42/6x7.php?v=rss&channel=" // fortytwobase = '6x7.php?channel=';
+						},
+						"feedly": {
+                    		"textcolor": "#dddddd",
+                    		"background":"#2bb24c",
+                    		"fa":"rss",
+                    		"linkbase":"https://feedly.com/i/subscription/feed%2Fhttps%3A%2F%2F42knots.midrehov.com%2F42%2F6x7.php%3Fv%3Drss%26channel%3D"
+						}
+						,
                       	"json": {
                     		"textcolor": "#32CD32",
                     		"background":"#000000",
                     		"fa":"file-code-o",
-                    		"linkbase":"https://42knots.midrehov.com/42/6x7.php?v=json&channel=" // baseurl = '42/6x7.php?channel=';
+                    		"linkbase":"https://42knots.midrehov.com/42/6x7.php?v=json&channel=" // fortytwobase = '6x7.php?channel=';
+						}
+						/*,
+						"spacer": {
+                    		"textcolor": "#ffffff",
+                    		"background":"#ffffff",
+                    		"fa":"rss",
+                    		"linkbase":""
                     	},
-                    	/*
-                      	"copy": {
-                    		"textcolor": "#32CD32",
-                    		"background":"#000000",
-                    		"fa":"clipboard",
-                    		"linkbase":"" // baseurl = '42/6x7.php?channel=';
-                    	},
-                    	*/
                     	"postrss": {
                     		"textcolor": "#ffffff",
                     		"background":"#F04F23",
                     		"fa":"comment-o",
-                    		"linkbase":"https://app.postrss.com/r/9711" // 'https://feedly.com/i/subscription/feed/' + baseurl + '42/6x7.php?channel='' https://feedly.com/i/subscription/feed/https://42knots.midrehov.com/42/6x7.php?channel=
-                    	}
-                    	/*
-                    	,
+                    		"linkbase":"https://app.postrss.com/r/9711"
+                    	},
                       	"mailchimp": {
                     		"textcolor": "#000000",
                     		"background":"#FFe01B",
                     		"fa":"envelope", // mailchimp
-                    		"linkbase":"https://mailchimp.com/help/share-your-blog-posts-with-mailchimp/"
+                    		"linkbase":"https://mailchimp.com/help/share-your-blog-posts-with-mailchimp/?"
                     	},
                       	"flipboard": {
                     		"textcolor": "#ffffff",
                     		"background":"#e12828",
-                    		"fa":"flipboard",
-                    		"linkbase":"https://www.facebook.com/sharer/sharer.php?u=https://42knots.midrehov.com/42/apps/cards.html?channel="  		
-                    	},
+                    		"fa":"signal",
+                    		"linkbase":"https://about.flipboard.com/inside-flipboard/new-feed-your-rss-feed-into-a-flipboard-magazine/?"  		
+						}
+						,
                       	"facebook": {
                     		"textcolor": "#ffffff",
                     		"background":"#3b5998",
@@ -352,7 +373,7 @@
             };
 		
 		const fbt = {
-			"func" : "drawchannel",
+			"func" : "drawchannel2",
 			"loopsobj" : "feed",
 			"otype" : "fbt",
 			"eventTriggers" : "fbtEventsTriggers",
@@ -361,7 +382,7 @@
 		};
 
 		const flows = {
-			"func" : "drawchannel",
+			"func" : "drawchannel2",
 			"loopsobj" : "feed",
 			"otype" : "fbt", // which elements shold be displayed or hidden - identical to fbt
 			"eventTriggers" : "fbtEventsTriggers",
@@ -379,7 +400,7 @@
 		};
 		
 		const channels = {
-			"func" : "drawchannel",
+			"func" : "drawchannel2",
 			"loopsobj" : "feed",
 			"otype" : "fbt", // which elements shold be displayed or hidden - identical to fbt
 			"eventTriggers" : "fbtEventsTriggers",
@@ -501,7 +522,7 @@
         	loader(ctrlr);
         	//popup = new popupShare(ctrlr.popupParams);
 		}
-
+		/*
     	function drawchannel(channel) {
 
     	    dirclass = 'directionl';
@@ -632,7 +653,6 @@
     	function drawchannel2(channel,chtypes) {
     	    
     	    let tmplt = '';
-    	    let flowstring = '<div class="fcwrapper"> <span><a id="achnls_' + channel['channel_id'] + '" class="route2" routeto2="ftype=stream&fid=' + channel['owner_id'] + '" href="#"> Stream </a></span> | <span><a id="achnlf_' + channel['channel_id'] + '" class="route2" routeto2="ftype=flow&fid=' + channel['owner_id'] + '" href="#"> Flow </a></span> | <span><a id="achnlc_' + channel['channel_id'] + '" class="route2" routeto2="ftype=fbt&fid=' + channel['owner_id'] + '" href="#"> Channels </a></span><br> Following <span class="fcounter"><a id="afle_' + channel['channel_id'] + '" class="route2" routeto2="ftype=flows&flowtype=follower&fid=' + channel['owner_id'] + '" href="#">' + channel['followers'] + '</a></span> | Followers <span class="fcounter"><a id="aflr_' + channel['channel_id'] + '" class="route2" routeto2="ftype=flows&flowtype=followee&fid=' + channel['owner_id'] + '" href="#">' + channel['followees'] + '</a></span> </div>';
     	    dirclass = 'directionl';
     	    if (typeof channel.language != 'undefined' && ((channel.language == 'he') || (channel.language == 'ar'))) {
               dirclass = 'directionr';
@@ -644,9 +664,22 @@
             
             // to be imported as a part of channel
             let whois = 'me';
-            if(channel.owner_type != 'fbt' && channel.owner_id != me) {
-                whois = 'notme';
-            }
+            if (typeof channel[whois] == 'undefined') {
+                if (channel.owner_type != 'fbt' && channel.owner_id != me) {
+					whois = 'notme';
+				}
+            } else {
+				whois = channel[whois];
+			}
+
+			chtview = {
+				"profile":"",
+				"handle":"",
+				"flowstring":""
+			}
+
+			chtview = { ...chtview, ...chtypes[whois][channel.owner_type]['classHidden'] };
+			let flowstring = `<div class="fcwrapper ${chtview.flowstring}"> <span><a id="achnls_${channel['channel_id']}" class="route2" routeto2="ftype=stream&fid=${channel['owner_id']}" href="#"> Stream </a></span> | <span><a id="achnlf_${channel['channel_id']}" class="route2" routeto2="ftype=flow&fid=${channel['owner_id']}" href="#"> Flow </a></span> | <span><a id="achnlc_${channel['channel_id']}" class="route2" routeto2="ftype=fbt&fid=${channel['owner_id']}" href="#"> Channels </a></span><br> Following <span class="fcounter"><a id="afle_${channel['channel_id']}" class="route2" routeto2="ftype=flows&flowtype=follower&fid=${channel['owner_id']}" href="#">${channel['followers']}</a></span> | Followers <span class="fcounter"><a id="aflr_${channel['channel_id']}" class="route2" routeto2="ftype=flows&flowtype=followee&fid=${channel['owner_id']}" href="#">${channel['followees']}</a></span> </div>`;
             
             let btnbar = {};
             btnbar.editbutton = {
@@ -673,7 +706,7 @@
                 "fafa" : "user-bullhorn",
                 "wording" : "publish"
             };
-    	    let itemsarr = chtypes[channel.whois][channel.owner_type]['actions'];
+    	    let itemsarr = chtypes[whois][channel.owner_type]['actions'];
     	    let btns = {};
 			let btnsstr = '';
             btns['editbutton'] = `<button class="${btnbar['editbutton'].jsClass}" id="${btnbar['editbutton'].idprefix}${channel.key}"><i class="fa fa-${btnbar['editbutton'].fafa}"></i></button>`;
@@ -688,9 +721,9 @@
                         <img class="img-fluid" src="${channel.image_url}" alt="Card image cap" id="ch_img_${channel['key']}">
                     </div>
                     <div class="card-body pt-5">
-                        <img src="${channel.profile_pic}" alt="profile-image" class="profile"/>
-                        ${flowstring}                        
-                        <h4 class="card-title"><a href="${channel.link}"><span id="ch_title_${channel['key']}">${channel.title}</span></a></h5>
+                        <img src="${channel.profile_pic}" alt="profile-image" class="profile ${chtview.profile}">
+                        ${flowstring}
+                        <h4 class="card-title"><a href="${channel.link}"><span style="font-size: 70%; color:#999999; font-style: italic;" class="${chtview.handle}">@${channel.handle} </span><span id="ch_title_${channel['key']}">${channel.title}</span></a></h5>
                         <p class="card-text" id="ch_description_${channel['key']}">${channel.description}</p>
                         <div class="icon-block">
                             <!-- --> ${btnsstr} <!-- -->
@@ -784,8 +817,9 @@
             } else {
                 var tags = tagsarray[itemdata.item_id];
 			}
-			if (itemdata.dis == 'undefined') {
-				itemdata.dis = '';
+			let dissed = 'disabled'
+			if (itemdata.isme == '1') {
+				dissed = '';
 			}
             
 			var tmplt = `<div style="margin-top: 2px;box-shadow: 1px 1px 2px #888888;" class="" id="formtag_${itemdata.item_id}">
@@ -795,7 +829,7 @@
 			tmplt += specs;
 			tmplt += `<input type="hidden" name="obj_id" value="${itemdata.item_id}">
 					<input type="hidden" name="otype" value="${itemdata.otype}">
-					<input type="text" class="form-control" aria-describedby="search" name="tags" style="background-color: beige;" value="${tags}" ${itemdata.otype} placeholder="tag by text, comma seperated">    								</form>
+					<input type="text" class="form-control" aria-describedby="search" name="tags" style="background-color: beige;" value="${tags}" placeholder="tag by text, comma seperated" ${dissed}>    								</form>
                                 <i type="submit" class="fa fa-tags form-control-feedback" aria-hidden="true"></i>
                             </div></div>
     		`;
@@ -814,6 +848,10 @@
             }
 			var tmplt = '';
 			let tagsinput = '';
+			chtview = {
+				"profile":""
+			}
+			chtview = { ...chtview, ...chtypes['me'][channel.owner_type]['classHidden'] };
 			if (channel.owner_type == 'fbt') {
                 tagsinput = `<input type="text" class="form-control in_editchannel" aria-describedby="search" name="tags" style="background-color: beige;" value="${tags}" placeholder="tags names, comma seperated">`;
 			}
@@ -826,7 +864,7 @@
 													${tagsinput}
 													<input type="text" class="form-control in_editchannel" aria-describedby="search" name="title" style="background-color: beige;" value="${channel.title}" placeholder="Title" id="title_for_${channel.owner_id}">
 													<input type="text" class="form-control in_editchannel" aria-describedby="search" name="description" style="background-color: beige;" value="${channel['description']}" placeholder="Description" id="description_for_${channel.owner_id}">
-													<input type="text" class="form-control in_profiepic" aria-describedby="search" name="profile_pic" style="background-color: beige;" value="${channel.profile_pic}" placeholder="avatar Icon" id="profile_pic_for_${channel.owner_id}">
+													<input type="text" class="form-control in_profiepic ${chtview.profile}" aria-describedby="search" name="profile_pic" style="background-color: beige;" value="${channel.profile_pic}" placeholder="avatar Icon" id="profile_pic_for_${channel.owner_id}">
 													<div class="input-group">
 													    <input type="text" class="form-control in_editimg" aria-describedby="search" name="header_image" style="background-color: beige;" value="${channel.image_url}" placeholder="Channel header image url" id="img_for_${channel.owner_id}">
                                                                   <span class="input-group-btn btn42">
@@ -1007,6 +1045,7 @@
 				   //$("#main").prepend(newitem);
 				   $(newitem).insertAfter('#channel_-1');
 				   data.otype = 'item';
+				   data.isme = '1';
 				   newitem = addform(data);
 				   $("#item_0").append(newitem);
 					$("#item_0").addClass("newObj");
@@ -1072,7 +1111,9 @@
         	                    'title' : '',
         	                    'description' : '',
         	                    'bulk' : antibulk,
-        	                    'chaction': actobj
+        	                    'chaction': actobj,
+								'whois':'me',
+								'owner_type': 'fbt'
         	                };
         	               var newitem = drawchannel2(newChannel,chtypes);
         	               $("#main").prepend(newitem);
@@ -1238,7 +1279,6 @@
 	    		    obj_id = obj_id.substring(7, obj_id.length);
 					data = objsjson[ctrlr.loopsobj][obj_id];
 					data.obj_id = obj_id;
-					console.log('obj_id: ' + obj_id);
 					data.chaction = actobj;
 	    		    
 
@@ -1300,7 +1340,7 @@
                     {
                         method: "POST",
                         body: "followee=" + followee
-                    })
+					})
                     .then(function(res){
                         return res.json();
                     })
@@ -1614,6 +1654,8 @@ function setConstants(constants) {
         //ftype = constants['ftype'];
         baseurl = constants['baseurl'];
         me = constants['me'];
+		fortytwobase = baseurl + '42/';
+		// get personal data
         
         // links set
         ftype = constants['ftype'];
@@ -1621,13 +1663,15 @@ function setConstants(constants) {
         retaileredit = getroute + 'retailer/update'; // constants['retaileredit'];
         tagsaction = getroute + 'retailer/tags/edittags'; //constants['retaileredit'];
         //feedlink = constants['feedlink'];
-        faction = actbase + '&otype=item'; //constants['faction'];
+		faction = actbase + '&otype=item'; //constants['faction'];
         
         // attribution set
-        $("#fetchform").attr('action',faction);
+		$("#fetchform").attr('action',faction);
+		$("#change_password").attr('action',retaileredit);
         $("html").attr('dir',constants['direction']);
         $("html").attr('lang',constants['lang']);
-        $("base").attr('href',baseurl);
+		$("base").attr('href',baseurl);
+		
 }
 
 $("#rtout").click(function(){

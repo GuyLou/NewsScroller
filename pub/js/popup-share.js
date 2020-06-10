@@ -19,7 +19,8 @@ class popupShare {
               	"email": {
             		"bootstrap":"warning",
             		"textcolor": "#ffe330",
-            		"fa":"envelope",
+					"fa":"envelope",
+					"icon":"envelope",
 					"linkbase":"mailto:?Body=",
 					"classes":""
             	},
@@ -27,7 +28,8 @@ class popupShare {
             		"bootstrap":"success",
             		"textcolor": "#ffffff",
             		"background":"#25D366",
-            		"fa":"whatsapp",
+					"fa":"whatsapp",
+					"icon":"whatsapp",
             		"linkbase":"whatsapp://send?text=",
 					"classes":""		
             	},
@@ -35,7 +37,8 @@ class popupShare {
             		"bootstrap":"info",
             		"textcolor": "#ffffff",
             		"background":"#1da1f2",
-            		"fa":"twitter-square",
+					"fa":"twitter-square",
+					"icon":"twitter-square",
             		"linkbase":"https://twitter.com/share?url=",
 					"classes":""
             	},
@@ -43,14 +46,14 @@ class popupShare {
             		"bootstrap":"primary",
             		"textcolor": "#ffffff",
             		"background":"#3b5998",
-            		"fa":"facebook-square",
+					"icon":"facebook",
             		"linkbase":"https://www.facebook.com/sharer/sharer.php?u=",
 					"classes":"" 		
             	},
             	"linkedin": {
             		"textcolor": "#ffffff",
             		"background":"#0e76a8",
-            		"fa":"linkedin-square", 
+					"icon":"linkedin",
             	    "linkbase":"https://www.linkedin.com/shareArticle?mini=true&url=",
 					"classes":""
             	}
@@ -102,7 +105,7 @@ class popupShare {
 		    if (this.destinations[key].hasOwnProperty("textcolor")) {
 		        linkstyle += 'color: ' + this.destinations[key]['textcolor'] + '; ';
 		    }
-			bar += '<li style="display: inline-block; zoom: 1; *display: inline; vertical-align: middle;"><a href="' + this.destinations[key].linkbase + this.sharelink + '" style="' + linkstyle + '" class="btn ' + this.destinations[key].classes + '"><i class="fa fa-' + this.destinations[key].fa + '"></i></a></li>'; //  text-' + this.destinations[key].bootstrap + '"
+			bar += '<li style="display: inline-block; zoom: 1; *display: inline; vertical-align: middle;"><a href="' + this.destinations[key].linkbase + this.sharelink + '" style="' + linkstyle + '" class="btn ' + this.destinations[key].classes + '"><span class="icon-' + this.destinations[key].icon + '"></span></a></li>'; //  text-' + this.destinations[key].bootstrap + '"
 
 		}
 		bar += '</ul></div>' + '\n';

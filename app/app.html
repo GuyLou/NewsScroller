@@ -17,8 +17,6 @@
 <link href="../pub/css/3.3.5_bootstrap.min.css" rel="stylesheet" media="screen" />
 <script src="../pub/js/3.3.5_bootstrap.min.js" type="text/javascript"></script>
 
-<!-- link href="catalog/view/javascript/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css" / -->
-<link href="../pub/fonts/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css" />
 
 <link href="//fonts.googleapis.com/css?family=Open+Sans:400,400i,300,700" rel="stylesheet" type="text/css" />
 <!-- link href="catalog/view/theme/default/stylesheet/stylesheet.css" rel="stylesheet" -->
@@ -70,16 +68,14 @@
 
     <ul class="topbar" role="navigation">
         <li><button class="btn btn-link" id="backwardsbtn"><span class="icon-back babelfish"></span><span class="notmobile">  Back</span></button></li>
-        <li><button class="btn btn-link route2" routeto2="ftype=flow"  id="rtstream"><span class="icon-feed42 babelfish"></span><span class="notmobile">  Home</span></button></li>
+		<li><button class="btn btn-link route2" routeto2="ftype=flow"  id="rtstream"><span class="icon-feed42 babelfish"></span><span class="notmobile">  Home</span></button></li>
+		<!-- li><button class="btn btn-link route2" routeto2="ftype=stream"  id="rtstream"><span class="icon-boat42 babelfish"></span><span class="notmobile">  Stream</span></button></li -->
         <li><button class="btn btn-link route2" routeto2="ftype=fbt" id="rtfbt"><span class="icon-film babelfish"></span><span class="notmobile"> Channels</span></button></li>
         <li><button class="btn btn-link popup-share" id="editpasswordbtn"><span class="icon-key babelfish"></span><span class="notmobile">  Settings</span></button></li>
         
         <li><button class="btn btn-link" id="rtout"><span class="icon-exit babelfish"></span><span class="notmobile"> Log out</span></button></li>
         <li><img src="/pub/images/rss-wifi-signal-preloader-gif.gif" style="max-height: 33px; display: none;" id="countdown"></li>
-        <!-- li class="twitter__bird"><i class="fa fa-twitter"></i></li -->
         <li><form id="search"><input type="text" class="form-control-nav" id="searchi" aria-describedby="search1" name="find" placeholder="search"></form></li>
-        <!-- li><i class="fa fa-user-circle-o"></i></li -->
-        <!-- li><button class="btn btn-link">tweet</button></li -->
     </ul>
 
 </div>
@@ -96,7 +92,7 @@
 						
 						<div class="media-body">
 							<div class="form-group has-feedback">
-								    <button id="addChannel" aria-describedby="search" class="form-control btn btn42"><i class="fa fa-film"></i></button>
+								    <button id="addChannel" aria-describedby="search" class="form-control btn btn42"><span class="icon-film babelfish"></span></button>
 							</div>
 						</div>
 					</div>
@@ -111,13 +107,12 @@
 								    <input type="hidden" name="iaction" value="fetchurl">
 								    <input type="text" class="form-control in42" id="fetch" aria-describedby="search" name="fetchurl" placeholder="paste a url...">
 								</form>
-								<i class="fa fa-camera form-control-feedback" aria-hidden="true"></i>
-								<!-- span class="glyphicon glyphicon-camera-retro form-control-feedback" aria-hidden="true"></span -->
+								<span class="icon-chain babelfish form-control-feedback" aria-hidden="true"></span>
 								<span id="search2" class="sr-only">(success)</span>
 							</div>
 						</div>
 						<a class="media-left">
-							<button class="btn btn-xs btn42"><i class="fa fa-cube"></i></button>
+							<button class="btn btn-xs btn42"><span class="icon-cube babelfish"></span></button>
 						</a>
 					</div>
 				</div>
@@ -150,7 +145,7 @@
 	        <div class="input-group">
 		        <input type="password" class="form-control" aria-describedby="search" name="confirm" style="background-color: beige;" value="" placeholder="confirm new password" id="confirm">
 	            <span class="input-group-btn">
-	                <button type="submit" class="btn btn-default btn-twitter gopass"><i class="fa fa-refresh"></i><!-- span class="glyphicon glyphicon-refresh"></span --></button>
+	                <button type="submit" class="btn btn-default btn-twitter gopass"><span class="icon-power babelfish"></span></button>
 	            </span>
             </div>
         
@@ -314,26 +309,26 @@
                       	"webapp": {
                     		"textcolor": "#ffe330",
                     		"background": "rgb(101, 157, 189)",
-                    		"fa":"mobile",
+							"icon":"webapp",
                     		"linkbase":"https://42knots.midrehov.com/42/6x7.php?v=webapp&channel=" // fortytwobase = 'apps/cards.html?channel=';'
                     	},
                       	"rss": {
                     		"textcolor": "#ffffff",
                     		"background":"#ee802f",
-                    		"fa":"rss",
+							"icon":"rss",
                     		"linkbase":"https://42knots.midrehov.com/42/6x7.php?v=rss&channel=" // fortytwobase = '6x7.php?channel=';
 						},
 						"feedly": {
-                    		"textcolor": "#dddddd",
-                    		"background":"#2bb24c",
-                    		"fa":"rss",
+                    		"textcolor": "#2bb24c",
+                    		"background":"#fff",
+							"icon":"feedly babelfish",
                     		"linkbase":"https://feedly.com/i/subscription/feed%2Fhttps%3A%2F%2F42knots.midrehov.com%2F42%2F6x7.php%3Fv%3Drss%26channel%3D"
 						}
 						,
                       	"json": {
                     		"textcolor": "#32CD32",
                     		"background":"#000000",
-                    		"fa":"file-code-o",
+							"icon":"json",
                     		"linkbase":"https://42knots.midrehov.com/42/6x7.php?v=json&channel=" // fortytwobase = '6x7.php?channel=';
 						}
 						/*,
@@ -373,7 +368,7 @@
             };
 		
 		const fbt = {
-			"func" : "drawchannel2",
+			"func" : "drawchannel",
 			"loopsobj" : "feed",
 			"otype" : "fbt",
 			"eventTriggers" : "fbtEventsTriggers",
@@ -382,7 +377,7 @@
 		};
 
 		const flows = {
-			"func" : "drawchannel2",
+			"func" : "drawchannel",
 			"loopsobj" : "feed",
 			"otype" : "fbt", // which elements shold be displayed or hidden - identical to fbt
 			"eventTriggers" : "fbtEventsTriggers",
@@ -400,7 +395,7 @@
 		};
 		
 		const channels = {
-			"func" : "drawchannel2",
+			"func" : "drawchannel",
 			"loopsobj" : "feed",
 			"otype" : "fbt", // which elements shold be displayed or hidden - identical to fbt
 			"eventTriggers" : "fbtEventsTriggers",
@@ -522,135 +517,8 @@
         	loader(ctrlr);
         	//popup = new popupShare(ctrlr.popupParams);
 		}
-		/*
-    	function drawchannel(channel) {
 
-    	    dirclass = 'directionl';
-    	    if (typeof channel.language != 'undefined' && ((channel.language == 'he') || (channel.language == 'ar'))) {
-              dirclass = 'directionr';
-            }
-            
-            if (typeof channel['channel_id'] == 'undefined' || channel['channel_id'] == "null") {
-                channel['channel_id'] = 0;
-            }
-            
-            let whois = 'me';
-            if(channel.owner_type != 'fbt' && channel.owner_id != me) {
-                whois = 'notme';
-            }
-            
-            let flowstring = '<div class="fcwrapper"> <span><a id="achnls_' + channel['channel_id'] + '" class="route2" routeto2="ftype=stream&fid=' + channel['owner_id'] + '" href="#"> Stream </a></span> | <span><a id="achnlf_' + channel['channel_id'] + '" class="route2" routeto2="ftype=flow&fid=' + channel['owner_id'] + '" href="#"> Flow </a></span> | <span><a id="achnlc_' + channel['channel_id'] + '" class="route2" routeto2="ftype=fbt&fid=' + channel['owner_id'] + '" href="#"> Channels </a></span><br> Following <span class="fcounter"><a id="afle_' + channel['channel_id'] + '" class="route2" routeto2="ftype=flows&flowtype=follower&fid=' + channel['owner_id'] + '" href="#">' + channel['followers'] + '</a></span> | Followers <span class="fcounter"><a id="aflr_' + channel['channel_id'] + '" class="route2" routeto2="ftype=flows&flowtype=followee&fid=' + channel['owner_id'] + '" href="#">' + channel['followees'] + '</a></span> </div>';
-            
-           // button bar definitions
-            let btnbar = {};
-            
-            // editbutton
-            btnbar.editbutton = `
-            <li class="twPc-ArrangeSizeFit">
-			<button class="btn btn-link editbtn" id="int_id_${channel['key']}">
-            
-							<span class="twPc-StatLabel twPc-block">Edit</span>
-							<i class="fa fa-wrench"></i>
-						</button>
-					</li>
-            `;
-			
-			// template button
-			
-            btnbar.templatebutton = `
-            <li class="twPc-ArrangeSizeFit">
-			<button class="btn btn-link channel-template${channel.bulk}" id="tmplt_id_${channel['channel_id']}">
-							<span class="twPc-StatLabel twPc-block">Templates</span>
-							<i class="fa fa-picture-o"></i>
-						</button>
-					</li>
-            `;
-
-            // followbutton
-            if (channel.IsFl == 'fl') {
-                channel.ficon = 'fa fa-user-times';
-                channel.fcaption = 'unfollow';
-            } else {
-                channel.ficon = 'fa fa-user-plus';
-                channel.fcaption = 'follow';
-            }
-            btnbar.followbutton = `
-            <li class="twPc-ArrangeSizeFit">
-			<button class="btn btn-link followbtn" id="owner_id_${channel['owner_id']}" isfl="${channel.IsFl}">
-			<span class="twPc-StatLabel twPc-block">${channel.fcaption}</span>
-			<i class="${channel.ficon}">
-            							</i>
-						</button>
-					</li>
-            `;
-    	    let tmplt = '';            
-			tmplt += '<div id="channel_' + channel['key'] + '" class="schannel' + channel.bulk + '" >';
-    	    tmplt += `
-			<div class="twPc-div">
-			<a class="twPc-bg twPc-block">`;
-    
-            tmplt += ' <img id="ch_img_' + channel['key'] + '" src = "' + channel.image_url + '">';
-            tmplt += `
-    </a>`;
-			tmplt += '<div class="twPc-avatarLink"><img alt="" src="' + channel['profile_pic'] +'" style="max-height: 64px; max-width: 64px;"></div>';
-            tmplt += `
-		</a>
-
-		<div class="twPc-divUser">`;
-			tmplt += '<div class="twPc-divName ' + dirclass + ' ">';
-			tmplt += '	<a href="' + channel.link +'"><span id="ch_title_' + channel['key'] + '">' + channel.title +'</span></a>';
-            tmplt += `
-			</div>`;
-			tmplt += '<div class="twPc-desc '+ dirclass +'">';
-			tmplt += '<a href="'+ channel.link + '"><span id="ch_description_' + channel['key'] + '">' + channel.description +'</span></a>';
-            tmplt += `
-            </div>
-
-		<!-- div class="twPc-button">`;
-		    tmplt += '<a class="btn btn-xs btn42" href="' + channelbase + channel['channel_id'] + '"><i class="' + chtypes[whois][channel.owner_type]['icon'] + '"></i></a>';
-            tmplt += `
-		</div -->`;
-		tmplt += flowstring;
-		tmplt += `
-		</div>
-
-		<div class="twPc-divStats">
-			<ul class="twPc-Arrange">`;
-			// buttons bar
-
-			let itemsarr = chtypes[whois][channel.owner_type]['actions'];
-			itemsarr.forEach(actn => tmplt += btnbar[actn]);
-
-            tmplt += `					
-					<li class="twPc-ArrangeSizeFit view view-fbt">
-					`;
-			tmplt += '<button class="btn btn-link openbtn" id="open_ch_id_' + channel['channel_id'] + '" routeto="stream_ch_' + channel['channel_id'] + '">';
-            tmplt += `		<span class="twPc-StatLabel twPc-block">Open</span>
-							<i class="fa fa-film"></i>
-						</button>
-					</li>
-					<li class="twPc-ArrangeSizeFit">`;
-            tmplt += '<button class="btn btn-link viewsbtn channel-share' + channel.bulk + '" id="ch_share_' + channel['channel_id'] +'">';
-            tmplt += `		<span class="twPc-StatLabel twPc-block">Share</span>
-							<i class="fa fa-share" aria-hidden="true"></i>
-						</button>
-					</li>
-					<li class="twPc-ArrangeSizeFit">`;
-            tmplt += '<button class="btn btn-link viewsbtn channel-horn' + channel.bulk + '" id="horn_' + channel['channel_id'] + '">';
-            tmplt += `		<span class="twPc-StatLabel twPc-block">Publish</span>
-							<i class="fa fa-bullhorn" aria-hidden="true"></i>
-						</button>
-					</li>
-				</ul>
-			</div>
-		</div>
-	</div>
-</div>
-    	    `;
-    	    return tmplt;
-    	}
-    	/**/
-    	function drawchannel2(channel,chtypes) {
+    	function drawchannel(channel,chtypes) {
     	    
     	    let tmplt = '';
     	    dirclass = 'directionl';
@@ -664,18 +532,20 @@
             
             // to be imported as a part of channel
             let whois = 'me';
-            if (typeof channel[whois] == 'undefined') {
-                if (channel.owner_type != 'fbt' && channel.owner_id != me) {
+            if (typeof channel['whois'] == 'undefined') {
+                if (channel.owner_id != me && channel.owner_type != 'fbt') {
 					whois = 'notme';
 				}
             } else {
-				whois = channel[whois];
+				whois = channel['whois'];
 			}
 
 			chtview = {
 				"profile":"",
 				"handle":"",
-				"flowstring":""
+				"flowstring":"",
+				"editbtn":"",
+				"templatebtn":""
 			}
 
 			chtview = { ...chtview, ...chtypes[whois][channel.owner_type]['classHidden'] };
@@ -685,33 +555,33 @@
             btnbar.editbutton = {
                 "jsClass" : "editbtn",
                 "idprefix" : "int_id_",
-                "fafa" : "wrench",
+				"icon" : "wrench",
                 "wording" : "edit"
             };
             btnbar.templatebutton = {
                 "jsClass" : "channel-template",
                 "idprefix" : "tmplt_id_",
-                "fafa" : "picture-o",
+				"icon" : "image",
                 "wording" : "templates"
             };
             btnbar.followbutton = {
                 "jsClass" : "followbtn",
                 "idprefix" : "owner_id_",
-                "fafa" : "user-plus",
+				"icon" : "user-plus",
                 "wording" : "follow"
             };
             btnbar.viewsbutton = {
                 "jsClass" : "viewsbtn channel-horn",
                 "idprefix" : "horn_",
-                "fafa" : "user-bullhorn",
+				"icon" : "bullhorn",
                 "wording" : "publish"
             };
     	    let itemsarr = chtypes[whois][channel.owner_type]['actions'];
     	    let btns = {};
 			let btnsstr = '';
-            btns['editbutton'] = `<button class="${btnbar['editbutton'].jsClass}" id="${btnbar['editbutton'].idprefix}${channel.key}"><i class="fa fa-${btnbar['editbutton'].fafa}"></i></button>`;
-            btns['templatebutton'] = `<button class="${btnbar['templatebutton'].jsClass}${channel.bulk}" id="${btnbar['templatebutton'].idprefix}${channel.channel_id}"><i class="fa fa-${btnbar['templatebutton'].fafa}"></i></button>`;
-            btns['followbutton'] = `<button class="${btnbar['followbutton'].jsClass}" id="${btnbar['followbutton'].idprefix}${channel.owner_id}"  isfl="${channel.IsFl}"><i class="fa fa-${btnbar['followbutton'].fafa}"></i></button>`;
+            btns['editbutton'] = `<button class="${btnbar['editbutton'].jsClass}" id="${btnbar['editbutton'].idprefix}${channel.key}"><span class="icon-${btnbar['editbutton'].icon} babelfish"></i></button>`;
+            btns['templatebutton'] = `<button class="${btnbar['templatebutton'].jsClass}${channel.bulk}" id="${btnbar['templatebutton'].idprefix}${channel.channel_id}"><span class="icon-${btnbar['templatebutton'].icon} babelfish"></span></button>`;
+            btns['followbutton'] = `<button class="${btnbar['followbutton'].jsClass}" id="${btnbar['followbutton'].idprefix}${channel.owner_id}"  isfl="${channel.IsFl}"><span class="icon-${btnbar['followbutton'].icon} babelfish"></span></button>`;
     	    itemsarr.forEach(actn => btnsstr += btns[actn]);
     	    // '<div id="channel_' + channel['key'] + '" class="schannel' + channel.bulk + '" >';
     	    tmplt += `
@@ -723,12 +593,12 @@
                     <div class="card-body pt-5">
                         <img src="${channel.profile_pic}" alt="profile-image" class="profile ${chtview.profile}">
                         ${flowstring}
-                        <h4 class="card-title"><a href="${channel.link}"><span style="font-size: 70%; color:#999999; font-style: italic;" class="${chtview.handle}">@${channel.handle} </span><span id="ch_title_${channel['key']}">${channel.title}</span></a></h5>
+                        <h4 class="card-title"><a class="route2" routeto2="ftype=stream&fid=${channel['owner_id']}" href="#"><span style="font-size: 70%; color:#999999; font-style: italic;" class="${chtview.handle}">@${channel.handle} </span><span id="ch_title_${channel['key']}">${channel.title}</span></a></h5>
                         <p class="card-text" id="ch_description_${channel['key']}">${channel.description}</p>
                         <div class="icon-block">
                             <!-- --> ${btnsstr} <!-- -->
-                            <button id="ch_share_${channel['channel_id']}" class="viewsbtn channel-share${channel.bulk}" href="#"> <i class="fa fa-share"></i></button>
-                            <button id="horn_${channel['channel_id']}" class="viewsbtn channel-horn${channel.bulk}" href="#"> <i class="fa fa-bullhorn"></i></button>
+                            <button id="ch_share_${channel['channel_id']}" class="viewsbtn channel-share${channel.bulk}" href="#"> <span class="icon-share babelfish"></span></button>
+                            <button id="horn_${channel['channel_id']}" class="viewsbtn channel-horn${channel.bulk}" href="#"> <span class="icon-bullhorn babelfish"></span></button>
                             
                         </div>
                     </div>
@@ -779,7 +649,7 @@
             if(objsheader.owner_type != 'fbt' && objsheader.owner_id != me) {
                 objsheader.whois = 'notme';
             }
-    	    let header = drawchannel2(objsheader,chtypes);
+    	    let header = drawchannel(objsheader,chtypes);
     	     document.body.style.background = "rgba(3, 67, 120, 1) url('" + objsheader.image_url + "') no-repeat center center fixed"; 
     	     document.body.style['background-size'] = "cover";
     	    $("#" + "main").prepend(header);
@@ -868,7 +738,7 @@
 													<div class="input-group">
 													    <input type="text" class="form-control in_editimg" aria-describedby="search" name="header_image" style="background-color: beige;" value="${channel.image_url}" placeholder="Channel header image url" id="img_for_${channel.owner_id}">
                                                                   <span class="input-group-btn btn42">
-                                                                    <button type="button" class="btn btn-default btn-twitter submitedit btn42"><i class="fa fa-refresh"></i></button>
+                                                                    <button type="button" class="btn btn-default btn-twitter submitedit btn42"><span class="icon-power babelfish"></span></button>
                                                                   </span>
                                                                 </div>
                                                             </form>
@@ -880,20 +750,20 @@
 
 </script>
 <script type="text/javascript">
-    
+    /* to remove !
     function routeto(elemId) {
         // global rounting function
-        if (params != routetos[$("#" + elemId).attr('routeto')]) {
-            params = routetos[$("#" + elemId).attr('routeto')];
+        //if (params != routetos[$("#" + elemId).attr('routeto')]) {
+        //    params = routetos[$("#" + elemId).attr('routeto')];
 
-        /*routeto to hold a json object with parameters: ftype, channel_id if needed*/
-        /*ftype is a must, the rest are not*/
+        //routeto to hold a json object with parameters: ftype, channel_id if needed
+        //ftype is a must, the rest are not
         
             ftype = params.ftype;
             document.getElementById("countdown").style.display = "block";
             let encdParams = laf.objectSerialize(params);
             feedsrc = feedlink + '&' + encdParams;
-            fetch(feedsrc  /*+ '&limstart=' + listlength + '&limend=' + (listlength + displayamount*/, {
+            fetch(feedsrc  /*+ '&limstart=' + listlength + '&limend=' + (listlength + displayamount, {
                   method: 'GET'
                 })
                 .then(function(response) {
@@ -916,7 +786,7 @@
             
         } 
     }
-    
+    */
     /**/
     function routeto2(elemId) {
         // global rounting function
@@ -924,9 +794,8 @@
         let series = $("#" + elemId).attr('routeto2');
         let series2 = series.replace(new RegExp('=', 'g'), '":"');
         series2 = '{"' + series2.replace(new RegExp('&', 'g'), '","') + '"}';
-        desti = JSON.parse(series2);
-        if (params2 != desti) {
-            params2 = desti;
+        if (JSON.stringify(params2) != series2) {
+            params2 = JSON.parse(series2);
 
         
             ftype = params2.ftype;
@@ -958,7 +827,10 @@
                 })
                 //.catch((err) => {                    routeto(rtstream);                });
             
-        }
+        } else if (window.scrollY == 0) {
+			console.log("to refresh!");
+			loadOnRefresh();
+		}
     }
 
 	$('#searchi').focus(function(){
@@ -1037,10 +909,10 @@
 			       } else {
 			           console.log("fetch NOT Json !");
 			       }
-			       console.log(data);
 				   data.item_id = 0;
 				   data.guid = data.url;
 				   data.bulk = antibulk;
+				   data.handle = objsheader.handle; // to  arrive from constants
 				   var newitem = drawitem(data,chtypes);
 				   //$("#main").prepend(newitem);
 				   $(newitem).insertAfter('#channel_-1');
@@ -1115,7 +987,7 @@
 								'whois':'me',
 								'owner_type': 'fbt'
         	                };
-        	               var newitem = drawchannel2(newChannel,chtypes);
+        	               var newitem = drawchannel(newChannel,chtypes);
         	               $("#main").prepend(newitem);
         	               newitem = editChannel(newChannel);
         	               $("#channel_" + newChannel.fbt_id).append(newitem);
@@ -1221,8 +1093,8 @@
                     //popup.updatePopUp($(this).attr('routeto'));
                     return `
                         <ul class="topbar">
-                            <li><button class="btn btn-link popup-share" ><i class="fa fa-key"></i><span class="notmobile">  Settings</span></button></li>
-                            <li><button class="btn btn-link popup-share" ><i class="fa fa-key"></i><span class="notmobile">  Settings</span></button></li>
+                            <li><button class="btn btn-link popup-share" ><span>icon-key</span><span class="notmobile">  Settings</span></button></li>
+                            <li><button class="btn btn-link popup-share" ><span>icon-key</span><span class="notmobile">  Settings</span></button></li>
                         </u>
                     `;
                     }
@@ -1333,7 +1205,7 @@
 	    		    let ths = $(this);
 	    		    let isfl =  $(this).attr('isfl');
 	    		    let spanf = $(this).find("span");
-	    		    let ifl = $(this).find("i");
+	    		    //let ifl = $(this).find("i");
 	    		    /**/
 	    		    
                     fetch('https://42knots.midrehov.com/index.php?route=retailer/flow/AddRemoveFlow', // flwunflow
@@ -1348,15 +1220,15 @@
                         if (data['status'] == 'ok') {
                             if (isfl == 'fl') {
                                 console.log($("aflr_" + followee));
-                                ths.attr('isfl','nfl');
-                                $(ifl).attr( 'class','fa fa-user-plus');
-                                spanf[0].innerHTML = 'follow';
+								ths.attr('isfl','nfl');
+                                $(spanf).attr( 'class','icon-user-plus babelfish');
+                                //spanf[0].innerHTML = 'follow';
                                 $("aflr_" + followee).text += '-1';
                             } else {
                                 console.log($("aflr_" + followee));
-                                ths.attr('isfl','fl');
-                                $(ifl).attr( 'class','fa fa-user-times');
-                                spanf[0].innerHTML = 'unfollow';
+								ths.attr('isfl','fl');
+                                $(spanf).attr( 'class','icon-user-minus babelfish');
+                                //spanf[0].innerHTML = 'unfollow';
                             }
                         } else {
                             console.log("not ok:");
@@ -1517,6 +1389,8 @@
 		loadOnScroll();
 		} //});
 		
+
+
 		function draw() {
 			sliceat = Math.max(Math.min(displayamount,listlength - currentdisplay),0);
 			aggitems = laf.objSlice(objsjson[ctrlr.loopsobj],currentdisplay, currentdisplay + sliceat);
@@ -1574,39 +1448,6 @@
 			}
     	    
     	}
-    	/**/
-    	function loadOnRefresh() {
-			fetch((feedsrc  + '&limstart=0&limend=' + minload) , {
-				method: 'GET'
-			})
-            .then(function(response) {
-				return validateFetch(response);
-            })
-			.then(function(response) { 
-				return response.json();
-			})
-			.then(function(json) {
-				console.log(objsjson['feed'][0].item_id);
-				let arr = [];
-				let de = {};
-				for (let i = 0; i < Object.keys(json['feed']).length; i++) {
-					arr.push(json['feed'][i]['item_id']);
-					de[item_id] = i;
-				}
-				let sat = objectBinSearch(arr,objsjson['feed'][0].item_id,0,Object.keys(json['feed']).length-1);
-				if(sat > 0) {
-					json['feed'].length = de[sat];
-				}
-				objsjson[ctrlr.loopsobj] = laf.objUnionAll(json,objsjson[ctrlr.loopsobj]);
-				tagsarray = laf.objUnionAll(json['tagsarray'],tagsarray,true);
-				listlength = Object.keys(objsjson[ctrlr.loopsobj]).length; // the current length of the list
-				bulk--;
-				
-				$("#main").prepend(loopitems(json,ctrlr.func));
-				window[ctrlr.eventTriggers](bulk);
-			});
-    	}
-		/**/
 	
     	/*https://www.w3schools.com/howto/tryit.asp?filename=tryhow_js_navbar_sticky*/
     	function stickMenu() {
@@ -1648,6 +1489,42 @@ $(window).load(function() {
 
 
 });
+
+    	/**/
+    	function loadOnRefresh() {
+			fetch((feedsrc  + '&limstart=0&limend=' + minload) , {
+				method: 'GET'
+			})
+            .then(function(response) {
+				return validateFetch(response);
+            })
+			.then(function(response) { 
+				return response.json();
+			})
+			.then(function(json) {
+				console.log(objsjson['feed'][0].item_id);
+				let arr = [];
+				let de = {};
+				// convert the received object to an array
+				for (let i = 0; i < Object.keys(json['feed']).length; i++) {
+					arr.push(json['feed'][i]['item_id']);
+					de[item_id] = i; // item_id - the key, i - it;s location, as value
+				}
+				// find the location of a match, if any
+				let sat = objectBinSearch(arr,objsjson['feed'][0].item_id,0,Object.keys(json['feed']).length-1); // sat the item_id that exists
+				if(sat > 0) {
+					json['feed'].length = de[sat]; // cutting the feed at the proper place
+				}
+				objsjson[ctrlr.loopsobj] = laf.objUnionAll(json,objsjson[ctrlr.loopsobj]);
+				tagsarray = laf.objUnionAll(json['tagsarray'],tagsarray,true);
+				listlength = Object.keys(objsjson[ctrlr.loopsobj]).length; // the current length of the list
+				bulk--;
+				
+				$("#main").prepend(loopitems(json,ctrlr.func));
+				window[ctrlr.eventTriggers](bulk);
+			});
+    	}
+		/**/
 
 function setConstants(constants) {
         const getroute = '?route=';

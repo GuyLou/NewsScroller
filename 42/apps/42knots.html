@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+<html dir="direction" lang="code">
+
+<head>
+
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+<base href="https://42knots.midrehov.com/" target="_blank">
+
+<script src="/pub/js/jquery-2.1.1.min.js" type="text/javascript"></script>
+<link href="/pub/css/3.3.5_bootstrap.min.css" rel="stylesheet" media="screen" />
+<script src="/pub/js/3.3.5_bootstrap.min.js" type="text/javascript"></script>
+
+<link href="catalog/view/javascript/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css" />
+<link href="//fonts.googleapis.com/css?family=Open+Sans:400,400i,300,700" rel="stylesheet" type="text/css" />
+
+<link href="/pub/css/twitterstyle.css" type="text/css" rel="stylesheet" media="screen" />
+<link href="/pub/fonts/babelfish/babelfish.css" rel="stylesheet">
+
+<link href="https://42knots.midrehov.com/image/catalog/42/42icon.png" rel="icon" />
+
+<script src="/pub/js/lostandfound.js" type="text/javascript"></script>
+<script src="/pub/js/branches.js"></script>
+<script src="/pub/js/popup-share.js" type="text/javascript"></script>
+
+
+    <!-- default metas -->
+    <title>42 knots - Content streaming</title>
+
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+
+    <!-- default metas end -->
+
+<!-- Matomo -->
+<script type="text/javascript">
+  var _paq = window._paq || [];
+  /* tracker methods like "setCustomDimension" should be called before "trackPageView" */
+  _paq.push(['trackPageView']);
+  _paq.push(['enableLinkTracking']);
+  (function() {
+    var u="//42knots.midrehov.com/analytics/";
+    _paq.push(['setTrackerUrl', u+'piwik.php']);
+    _paq.push(['setSiteId', '1']);
+    var d=document, g=d.createElement('script'), s=d.getElementsByTagName('script')[0];
+    g.type='text/javascript'; g.async=true; g.defer=true; g.src=u+'piwik.js'; s.parentNode.insertBefore(g,s);
+  })();
+</script>
+<!-- End Matomo Code -->
+
+<style>
+    	@media (min-width: 576px) {
+	    .card-columns {
+		-webkit-column-count: 1;
+		-moz-column-count: 1;
+		column-count: 1;
+	    }
+	}
+		
+	@media (min-width: 768px) {
+	    .card-columns {
+		-webkit-column-count: 2;
+		-moz-column-count: 2;
+		column-count: 2;
+	    }
+	}
+
+	@media (min-width: 992px) {
+	    .card-columns {
+		-webkit-column-count: 2;
+		-moz-column-count: 2;
+		column-count: 2;
+	    }
+    }
+    
+	.media-heading {
+	    margin-top: 7px;
+	}
+
+</style>
+
+</head>
+<body>
+<div class="navbar navbar-default navbar-static-top" id="topbar">
+
+    <ul class="topbar" role="navigation">
+        <li><a href="/" class="branches btn" style="color: #FFF2CC; background-color: rgb(101, 157, 189);"><span class="icon-42knots"></span></a></li>
+        <li><a href="{$feedlylink}" class="branches btn" ><span class="icon-feedly"></span></a></li>
+        <li><a href="{$rsslink}" class="branches btn"><span class="icon-rss"></span></a></li>
+        <li><a href="{$opmllink}" class="branches btn"><span class="icon-outlook"></span></a></li>
+        <li><img src="https://www.digitalabs.in/uploaded_files/images/lg_flat-design-broadcast-rss-wifi-signal-preloader-gif.gif" style="max-height: 33px; display: none;" id="countdown"></li>
+
+
+    </ul>
+
+</div>
+
+<div class="container">
+    
+    <div class="row panel panel-info">
+    
+	                <div class="card profile-card-2 channel2 media media-item">
+                    <div class="card-img-block">
+                        <img class="img-fluid branches" src="{$image_url}" alt="Card image cap" style="width: 100%;">
+                    </div>
+                    <div class="card-body pt-5">
+                        <h5 class="card-title branches">{$title}</h5>
+                        <p class="card-text branches">{$description}</p>
+                        <div class="icon-block">
+                            <button id="ch_share_" class="viewsbtn channel-share" href="#"> <span class="icon-share"></i></button>
+                            <button id="horn_" class="viewsbtn channel-horn" href="#"> <span class="icon-bullhorn"></i></button>
+                            
+                        </div>
+                    </div>
+                </div>
+	
+	</div>
+    
+	<div class="card-columns panel panel-info">
+
+		<div class="leaves " id="items">
+			
+			<div class="card ">
+
+				<div class="panel-body">
+				    <div class="media media-item"><a class="media-left" href="undefined"><img alt="" class="media-object img-rounded" src="" style="max-width: 64px;"></a>
+						<div class="media-body">
+						    <h4 class="media-heading">
+						        <a href="{$guid}">
+						            {$title}</a></h4>
+						            <p>{$description}
+						            <img class="media-body-image" src="{$image_url}" onerror="if (this.src != '/image/catalog/42/42knots.png') this.src = '/image/catalog/42/42knots.png';"></p>
+						</div>
+
+					</div>
+
+
+				</div>
+
+            </div>
+
+		</div>
+
+
+<script type="text/javascript">
+        (function(){
+
+        if (location.protocol != 'https:')
+        {
+         location.href = 'https:' + window.location.href.substring(window.location.protocol.length);
+        }
+        
+    	/*https://www.w3schools.com/howto/tryit.asp?filename=tryhow_js_navbar_sticky*/
+        var sticky = 46; //topbar.offsetTop;
+        var navbar = document.getElementById("topbar");
+        
+    	function stickMenu(sticky,navbar) {
+          if (window.pageYOffset >= sticky) {
+              console.log("sticky on!");
+            navbar.classList.add("sticky")
+          } else {
+            navbar.classList.remove("sticky");
+            console.log("sticky off!");
+            }
+    	}
+
+		// on load, set global vars and objects
+		
+		var branch = new branches();
+		const urlParams = new URLSearchParams(window.location.search);
+        const GETp = urlParams.get('p');
+        const GETchannel = urlParams.get('channel');
+		var items = {};
+
+		const displayamount = 10; // the items per 'page'
+		const minload = 20;
+		var currentdisplay = 0; // the total items already displayed
+		var listlength = 0 // Object.keys(cardsjson).length; // the current length of the list
+		var sliceat = 0;
+		var sliced = 0;
+		if (!(!GETchannel)) {
+		    var fetchurl = '/42/6x7.php?channel=' + GETchannel + '&v=json';
+		} else {
+		    var fetchurl = '/42/6x7.php?p=' + GETp + '&v=json';
+		}
+
+		var laf = new lostandfound();
+		
+		branch.plantAttrib('rsslink','/42/6x7.php?p=' + GETp + '&v=rss');
+		
+		// on load function
+		
+        fetch(fetchurl + '&limstart=' + listlength + '&limend=' + minload , { 
+          method: 'GET'
+        })
+        .then(function(response) { return response.json(); })
+        .then(function(json) {
+      	    branch.climbABranch(json);
+			// add json.items to the global object items
+			items = json.items;
+			listlength = json.items.length; // the current length of the list
+			// move to the function
+    	     document.body.style.background = "rgba(3, 67, 120, 1) url('" + json.image_url + "') no-repeat center center fixed"; 
+             document.body.style['background-size'] = "cover";
+             let ttl = document.getElementsByTagName("title")[0];
+             ttl.innerHTML = json.title;
+			addItems(0);
+
+        });
+
+		function addItems(append = 1) {
+			// slice the global items based on the page parameter...?
+			// add the items to the current DOM element
+			sliceat = Math.min(displayamount,listlength);
+			var sliced = laf.objSlice(items, currentdisplay, currentdisplay + sliceat);
+			branch.leavesLuv('items',sliced,append);
+			currentdisplay += sliceat;
+		}
+
+		
+		//on scroll. no jQuery !
+		
+		function draw() {
+    		sliceat = Math.min(displayamount,listlength - currentdisplay);
+    		aggitems = laf.objSlice(items,currentdisplay, currentdisplay + sliceat);
+    		branch.leavesLuv('items',aggitems,1);
+    		currentdisplay += sliceat;
+    		listlength += laf.isError(aggitems.length,0);		    
+		}
+		
+		window.onscroll = function () {
+		    stickMenu(sticky,navbar);
+		    // if the window display, after scrolling down has reached the bottom: the current X axis - (doc height - window height) then
+			if(Math.abs(window.scrollY - (document.documentElement.scrollHeight - window.innerHeight)) < 1) {
+				   // ajax call get data from server and append to the div
+				   var aggitems = {};
+					if (currentdisplay > 0) {
+						if (listlength - currentdisplay < 1) {
+
+                                    fetch(fetchurl + '&limstart=' + listlength + '&limend=' + (listlength + displayamount) , { 
+                                      method: 'GET'
+                                    })
+                                    .then(function(response) { return response.json(); })
+                                    .then(function(json) {
+                            			// add json.items to the global object items
+                            			items = laf.objUnionAll(items,json.items);
+                            			listlength = Object.keys(items).length; // the current length of the list
+						                draw();
+
+                                    });
+						} else if (listlength - currentdisplay > 0) {
+						    draw();
+						}
+					}
+					
+			}    
+        };
+        
+
+        })();
+</script>
+</body>
+</html>

@@ -20,7 +20,7 @@
 
 <link href="//fonts.googleapis.com/css?family=Open+Sans:400,400i,300,700" rel="stylesheet" type="text/css" />
 <!-- link href="catalog/view/theme/default/stylesheet/stylesheet.css" rel="stylesheet" -->
-<link href="../pub/fonts/42font/style.css" rel="stylesheet">
+<!-- link href="../pub/fonts/42font/style.css" rel="stylesheet" -->
 <link href="../pub/fonts/babelfish/babelfish.css" rel="stylesheet">
 
 <link rel="preload" href="/pub/images/tplicons/tmplt_magazine.png" as="image" type="image/png">
@@ -448,10 +448,6 @@
     	    scrolliterations = 0;
 			
 			
-			// loadonscrollfunctionf
-			/*
-			slice objsjson[ctrlr.loopsobj] at listlength, listlength + displayamount
-			*/
 			//loopitems(objsjson[ctrlr.loopsobj],'main',ctrlr.func); /* loop through the sliced*/
 			$("#main").append(loopitems(objsjson[ctrlr.loopsobj],ctrlr.func));
 			window[ctrlr.eventTriggers](bulk);
@@ -516,6 +512,34 @@
     	    antibulk = -1;
         	loader(ctrlr);
         	//popup = new popupShare(ctrlr.popupParams);
+		}
+
+		function inituser() {
+			fetch('https://42knots.midrehov.com/?route=retailer/app/json&ftype=constants', {
+			method: 'GET'
+			})
+			.then(function(response) {
+				return validateFetch(response);
+			})
+			.then(function(response) {
+				return response.json();
+			})
+			.then(function(json) {
+				constants = JSON.parse(JSON.stringify(json));
+				localStorage['42knots,constants'] = JSON.stringify(json);
+				let mecache = true;
+				if(me != constants['me']) {
+					mecache = false;
+				}
+				setConstants(constants);
+				nonRecurringEventsTriggers();
+				if(mecache) {
+					loadOnRefresh();
+				} else {
+					routeto2("start");
+				}
+				
+			});
 		}
 
     	function drawchannel(channel,chtypes) {
@@ -585,7 +609,7 @@
     	    itemsarr.forEach(actn => btnsstr += btns[actn]);
     	    // '<div id="channel_' + channel['key'] + '" class="schannel' + channel.bulk + '" >';
     	    tmplt += `
-    	        <div id="channel_${channel['key']}" class="schannel${channel.bulk}">
+    	        <div id="channel_${channel['key']}" class="channel schannel${channel.bulk}">
                 <div class="card profile-card-2 channel2 media media-item">
                     <div class="card-img-block">
                         <img class="img-fluid" src="${channel.image_url}" alt="Card image cap" id="ch_img_${channel['key']}">
@@ -623,20 +647,18 @@
 			    disViewElems[i].style.display = "block";
 			}
 		}
-		
+
 		function loopitems(itemsjson0,func, isBottom = true) {
     		var itemslist0 = '';
-    		currentdisplay += laf.isError(itemsjson0.length,0);
-    		console.log("currentdisplay: " + currentdisplay + ", itemsjson0.length: " + itemsjson0.length);
+    		currentdisplay += laf.isError(Object.keys(itemsjson0).length,0);
     		for (key in itemsjson0) {
-    		    itemsjson0[key]['key'] = key;
+				itemsjson0[key]['key'] = key;
         	    if (typeof itemsjson0[key]['bulk'] == 'undefined') {
                   itemsjson0[key]['bulk'] = bulk;
                 }
                 
     			itemslist0 += window[func](itemsjson0[key],chtypes);
     		}
-    		//$("#" + elemId).append(itemslist0);
     		return itemslist0;
     	}
     	
@@ -812,7 +834,10 @@
                 })
                 .then(function(json) {
                     // fold the header and the items, case items.
-                    routehistory.push(JSON.parse(JSON.stringify(objsjson0)));
+					json.ftype = ftype;
+					localStorage['42knots,objsjson'] = JSON.stringify(json); // only strings
+                    routehistory.push(JSON.parse(localStorage['42knots,objsjson']));
+					delete json.ftype;
                     //delete objsjson0.ftype;
         			objsjson = json; //JSON.parse(json);
         			init();
@@ -828,8 +853,14 @@
                 //.catch((err) => {                    routeto(rtstream);                });
             
         } else if (window.scrollY == 0) {
-			console.log("to refresh!");
 			loadOnRefresh();
+		} else {
+			$("html, body").animate({
+				scrollTop: 0
+			}, 9000);
+			$("html, body").on("scroll mousedown wheel DOMMouseScroll mousewheel keyup touchmove", function(){
+					$("html, body").stop();
+				});
 		}
     }
 
@@ -1384,10 +1415,9 @@
         var sticky = 46; //topbar.offsetTop;
 	    
 		window.onscroll = function () {
-		//window.addEventListener('onscroll',() => {
 		stickMenu();
 		loadOnScroll();
-		} //});
+		}
 		
 
 
@@ -1465,33 +1495,56 @@
 
 // global functions
 
-$(window).load(function() {
-	// init
+		$(window).ready(function() {
+			// check for cache
+			/**/
+			if (typeof localStorage['42knots,objsjson'] !== 'undefined' && localStorage['42knots,objsjson'].length > 2) {
+				objsjson = JSON.parse(localStorage['42knots,objsjson']);
+				ftype = (' ' + objsjson.ftype).slice(1);
+				delete objsjson['ftype'];
+				init();
+			}
 
-    // get constants
-    fetch('https://42knots.midrehov.com/?route=retailer/app/json&ftype=constants', {
-          method: 'GET'
-        })
-        .then(function(response) {
-			return validateFetch(response);
-        })
-        .then(function(response) {
-            return response.json();
-        })
-        .then(function(json) {
-            constants = JSON.parse(JSON.stringify(json));
-            setConstants(constants);
-            nonRecurringEventsTriggers();
-	        routeto2("start");
-        })
+			if (typeof localStorage['42knots,constants'] !== 'undefined') {
+				constants = localStorage['42knots,constants'];
+				setConstants(constants);
+				}
+
+		//	
+			
+			/**/
+			fetch('/?route=retailer/login/setup',
+				{
+					method: "GET",
+				})
+				.then(function(res){
+					return res.json();
+				})
+				.then(function(json){
+					if(json.status == 'notLogged') {
+						window.location.replace("/");
+					} else {
+						inituser();
+					}
+				});
+		/**/
+			// if cache show cache else show message
+			// set cache via "backbtn"
+			// check for constants cache
+			// if cache consts - load consts
+			// load setup
+			// .then if islogged
+				// if !consts get constants
+				// refresh
+			// else redirect
+
+			// get constants
 
 
+		});
 
-
-});
-
-    	/**/
     	function loadOnRefresh() {
+			document.getElementById("countdown").style.display = "block";
 			fetch((feedsrc  + '&limstart=0&limend=' + minload) , {
 				method: 'GET'
 			})
@@ -1502,29 +1555,30 @@ $(window).load(function() {
 				return response.json();
 			})
 			.then(function(json) {
-				console.log(objsjson['feed'][0].item_id);
 				let arr = [];
 				let de = {};
 				// convert the received object to an array
-				for (let i = 0; i < Object.keys(json['feed']).length; i++) {
-					arr.push(json['feed'][i]['item_id']);
-					de[item_id] = i; // item_id - the key, i - it;s location, as value
+				for (let i = 0; i < json['feed']['items'].length; i++) {
+					arr.push(json['feed']['items'][i]['item_id']);
+					tagsarray[json['feed']['items'][i]['item_id']] = json['tagsarray'][json['feed']['items'][i]['item_id']];
+					de[json['feed']['items'][i]['item_id']] = i; // item_id - the key, i - it;s location, as value
 				}
 				// find the location of a match, if any
-				let sat = objectBinSearch(arr,objsjson['feed'][0].item_id,0,Object.keys(json['feed']).length-1); // sat the item_id that exists
+				let sat = arr.indexOf(objsjson['feed'][0].item_id);
 				if(sat > 0) {
-					json['feed'].length = de[sat]; // cutting the feed at the proper place
+					sliceditems = laf.objSlice(json['feed']['items'],0,sat);
+					objsjson[ctrlr.loopsobj] = laf.objUnionAll(sliceditems,objsjson[ctrlr.loopsobj]);
+					listlength = Object.keys(objsjson[ctrlr.loopsobj]).length; // the current length of the list
+					bulk--;
+					$(loopitems(sliceditems,ctrlr.func)).insertAfter(".channel");
+					window[ctrlr.eventTriggers](bulk);
 				}
-				objsjson[ctrlr.loopsobj] = laf.objUnionAll(json,objsjson[ctrlr.loopsobj]);
-				tagsarray = laf.objUnionAll(json['tagsarray'],tagsarray,true);
-				listlength = Object.keys(objsjson[ctrlr.loopsobj]).length; // the current length of the list
-				bulk--;
-				
-				$("#main").prepend(loopitems(json,ctrlr.func));
-				window[ctrlr.eventTriggers](bulk);
+			document.getElementById("countdown").style.display = "none";
 			});
     	}
-		/**/
+
+    	const timedRefresh = setInterval(loadOnRefresh, 3000000);
+
 
 function setConstants(constants) {
         const getroute = '?route=';

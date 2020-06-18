@@ -1,0 +1,253 @@
+<html>
+<head>
+	<link rel="stylesheet" href="/pub/css/4.0_bootstrap.min.css"> <!-- integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous" -->
+	<script src="/pub/js/jquery-3.2.1.slim.min.js"> <!--  integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous" --></script>
+	<script src="/pub/js/4.0_bootstrap.min.js"> <!-- integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous" --></script>	
+    <link href="/pub/css/searchresults.css" rel="stylesheet">
+    <link href="/pub/css/blocks.css" rel="stylesheet" id="blocks-css">
+
+    <link href="/pub/fonts/babelfish/babelfish.css" rel="stylesheet">
+
+	<script src="/pub/js/branches.js"></script>
+    <script src="/pub/js/lostandfound.js"></script>
+
+    <base href="https://42knots.midrehov.com/" target="_blank">
+
+	<style>
+	body, .container-fluid .topbar {
+	padding-top: 0em;
+	}
+	
+	.topbar .topul {
+        display: flex;
+        padding: 0;
+        list-style: none;
+        height: 46px;
+        align-items: center;
+        margin-bottom: 0rem;
+	}
+	
+	.topbar .topli {
+	    /*
+        margin-left: auto;
+        margin-right: auto;
+        */
+        margin-left: 10px;
+        cursor: pointer;
+    }
+    
+    .sticky {
+        position: fixed;
+        top: 0;
+        width: 100%;
+        z-index: 1;
+    }
+	
+	
+	</style>
+	
+
+    <!-- default metas -->
+
+    <meta name="description" content="Content streaming">
+    
+    <meta name="keywords" content="42 knots, content, streaming, rss, newsfeed">
+    
+    <title class="branches">{$title}</title>
+    <!-- Twitter Card data -->
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:title" content="42 knots">
+    <meta name="twitter:url" content="https://42knots.midrehov.com/">
+    <meta name="twitter:description" content="Content streaming">
+    <meta name="twitter:image" content="https://42knots.midrehov.com/image/catalog/logo.png">
+    
+    <!-- Open Graph data -->
+    <meta property="og:title" content="42 knots">
+    <meta property="og:type" content="article" />
+    <meta property="og:url" content="https://42knots.midrehov.com/">
+    <meta property="og:image" content="https://42knots.midrehov.com/image/catalog/logo.png">
+    <meta property="og:description" content="Content streaming">
+    <meta property="og:site_name" content="42 knots">
+    <!--meta property="fb:admins" content="Facebook numeric ID" / -->
+    <!-- default metas end -->
+
+	
+	<!-- PWA settings -->
+    <link rel="manifest" href="manifest.json">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#eeeeee"/>
+    
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="apple-mobile-web-app-title" content="42 knots">
+    <link rel="apple-touch-icon" href="images/42i152.png">
+    <!-- Tile icon for Windows -->
+    <meta name="msapplication-TileImage" content="images/42i152.png">
+    <meta name="msapplication-TileColor" content="#eeeeee">
+    
+    
+</head>
+<body>
+    <div class="container-fluid topbar" id="navbar">
+        <ul class="topul">
+            <li class="topli"><a href="/" class="branches btn" style="color: #FFF2CC; background-color: rgb(101, 157, 189);"><span class="icon-42knots"></span></a></li>
+            <li class="topli"><a href="{$feedlylink}" class="branches btn" style="background-color:#ffffff;"><span class="icon-feedly"></span></a></li>
+            <li class="topli"><a href="{$rsslink}" class="branches btn" style="color: #ffffff; background-color: #f16522;"><span class="icon-rss"></span></a></li>
+            <li class="topli"><a href="{$opmllink}" class="branches btn" style="background-color:#ffffff;"><span class="icon-outlook"></span></a></li>
+        </ul>
+    </div>
+<section id="team" class="pb-5">
+
+    
+    <div class="container" id="jumbainer">
+      <div class="jumbotron branches" style="background-repeat: no-repeat; background-size: 100%; background-position: center; background-image: url('{$image_url}');">
+        <h1></h1>      
+        <p></p>
+    	  
+      </div>
+      <!-- div class="jumbody">
+            <img class="ProfileAvatar-image branches" src="{$image_url}" alt="" >
+
+      </div -->
+      <div class="jumbottom">
+            <h1 class="branches">{$title}</h1>     
+            <p><small><a class="branches">{$description}</a></small> <!-- button class="btn btn-info popup-share"></button --></p>
+      </div>
+    </div>
+    
+		<div class="container" id="container-main">
+        <div class="card-columns leaves" id="items">
+
+
+                            <div class="card">
+								<img class="card-img-top" src="{$image_url}" alt="" onerror="if (this.src != '/image/catalog/42/42knots.png') this.src = '/image/catalog/42/42knots.png';">
+								<div class="card-body">
+									<h5 class="card-title">{$title}</h5>
+									<p class="card-text">{$description}</p>
+									<div class="text-center">
+									    <a href="{$guid}" class="btn btn-info"><span class="icon-power"></span></a>
+									</div>
+								</div>
+                            </div>
+ 		</div>	
+        </div>
+
+</section>
+
+
+<script type="text/javascript">
+        (function(){
+
+        if (location.protocol != 'https:')
+        {
+         location.href = 'https:' + window.location.href.substring(window.location.protocol.length);
+        }
+
+		// on load, set global vars and objects
+		
+		var branch = new branches();
+        const urlParams = new URLSearchParams(window.location.search);
+        // const answer = x > 10 ? "greater than 10" : "less than 10";
+        const GET0 = (!urlParams.get('p')) ? urlParams.get('channel') : urlParams.get('p');
+		var items = {};
+
+		const displayamount = 10; // the items per 'page'
+		const minload = 20;
+		var currentdisplay = 0; // the total items already displayed
+		var listlength = 0 // Object.keys(cardsjson).length; // the current length of the list
+		var sliceat = 0;
+        var sliced = 0;
+        var fetchurl = '/42/6x7.php?channel=' + GET0 + '&v=json';
+
+		var laf = new lostandfound();
+		
+        branch.plantAttrib('rsslink','/42/6x7.php?channel=' + GET0 + '&v=rss');
+        branch.plantAttrib('opmllink','/42/6x7.php?channel=' + GET0 + '&v=opml');
+        branch.plantAttrib('feedlylink','https://feedly.com/i/subscription/feed%2Fhttps%3A%2F%2F42knots.midrehov.com%2F42%2F6x7.php%3Fv%3Drss%26channel%3D' + GET0);
+
+		
+		// on load function
+		
+        fetch(fetchurl + '&limstart=' + listlength + '&limend=' + minload , { 
+          method: 'GET'
+        })
+        .then(function(response) { return response.json(); })
+        .then(function(json) {
+      	    branch.climbABranch(json);
+			// add json.items to the global object items
+			items = json.items;
+			listlength = json.items.length; // the current length of the list
+			// move to the function
+			addItems(0);
+
+        });
+
+		function addItems(append = 1) {
+			// slice the global items based on the page parameter...?
+			// add the items to the current DOM element
+			sliceat = Math.min(displayamount,listlength);
+			var sliced = laf.objSlice(items, currentdisplay, currentdisplay + sliceat);
+			branch.leavesLuv('items',sliced,append);
+			currentdisplay += sliceat;
+		}
+
+		//on scroll. no jQuery !
+		function draw() {
+    		sliceat = Math.min(displayamount,listlength - currentdisplay);
+    		aggitems = laf.objSlice(items,currentdisplay, currentdisplay + sliceat);
+    		branch.leavesLuv('items',aggitems,1);
+    		currentdisplay += sliceat;
+    		listlength += laf.isError(aggitems.length,0);		    
+        }
+        
+        var navbar = document.getElementById("navbar");
+		window.onscroll = function () {
+		stickMenu();
+		loadOnScroll();
+        }
+        
+    	/*https://www.w3schools.com/howto/tryit.asp?filename=tryhow_js_navbar_sticky*/
+    	function stickMenu() {
+          if (window.pageYOffset >= 46) {
+            navbar.classList.add("sticky")
+          } else {
+            navbar.classList.remove("sticky");
+            }
+    	}
+		
+		function loadOnScroll() {
+		    // if the window display, after scrolling down has reached the bottom: the current X axis - (doc height - window height) then
+			if(Math.abs(window.scrollY - (document.documentElement.scrollHeight - window.innerHeight)) < 1) {
+			    console.log("listlength: " + listlength);
+			    console.log("displayamount: " + displayamount);
+			    console.log("currentdisplay: " + currentdisplay);
+				   // ajax call get data from server and append to the div
+				   var aggitems = {};
+					if (currentdisplay > 0) {
+						if (listlength - currentdisplay < 1) {
+                                    fetch(fetchurl + '&limstart=' + listlength + '&limend=' + (listlength + displayamount) , { 
+                                      method: 'GET'
+                                    })
+                                    .then(function(response) { return response.json(); })
+                                    .then(function(json) {
+                            			// add json.items to the global object items
+                            			items = laf.objUnionAll(items,json.items);
+                            			listlength = Object.keys(items).length; // the current length of the list
+                            			draw();
+
+                                    });
+						} else if (listlength - currentdisplay > 0) {
+						    draw();
+						}
+
+					}
+					
+			}    
+        };
+        
+
+        })();
+</script>
+<script src="main.js"></script>
+</body>
+</html>

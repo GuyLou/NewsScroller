@@ -29,23 +29,24 @@ class lostandfound {
 	}
 	
 	objUnionAll (obj1,obj2, haskey = false) {
+        let returnObject = JSON.parse(JSON.stringify(obj1));
 	    // obj1 will go 1st
 	    
 	    if (haskey) {
             for (var key in obj2) {
-    	      obj1[key] = obj2[key];
+                returnObject[key] = obj2[key];
     	    }
 	    } else {
-    	    var i = Object.keys(obj1).length;
+    	    var i = Object.keys(returnObject).length;
     	    for (var key in obj2) {
-    	      obj1[i] = obj2[key];
+                returnObject[i] = obj2[key];
     	      i++;
     	    }	        
 	    }
 
 	    
 
-	    return obj1;
+	    return returnObject;
 	}
 
     objectSerialize(object) {

@@ -1,0 +1,533 @@
+<html>
+<head>
+<!--
+    https://www.free-css.com/free-css-templates/page197/the-news-reporter
+-->
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<link rel="stylesheet" type="text/css" href="/pub/assets/css/news-reporter/font-awesome.min.css" />
+<link rel="stylesheet" type="text/css" href="/pub/assets/css/news-reporter/bootstrap.min.css" media="screen" />
+<link href="/pub/fonts/babelfish/babelfish.css" rel="stylesheet">
+<link href="/pub/fonts/oldstandard/oldstandard.css" rel="stylesheet">
+<link rel="stylesheet" type="text/css" href="/pub/assets/css/news-reporter/style.css" media="screen" />
+<link rel="stylesheet" type="text/css" href="/pub/assets/css/news-reporter/responsive.css" media="screen" />
+<link rel="stylesheet" type="text/css" href="/pub/assets/css/news-reporter/jquery.bxslider.css" media="screen" />
+
+<base target="_blank">
+
+    <!-- default metas -->
+
+<title>42 knots</title>    
+    <meta name="description" content="Content streaming">
+    
+    <meta name="keywords" content="42 knots, content, streaming, rss, newsfeed">
+
+    <!-- Twitter Card data -->
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:title" content="42 knots">
+    <meta name="twitter:url" content="https://42knots.midrehov.com/">
+    <meta name="twitter:description" content="Content streaming">
+    <meta name="twitter:image" content="https://42knots.midrehov.com/image/catalog/logo.png">
+    
+    <!-- Open Graph data -->
+    <meta property="og:title" content="42 knots">
+    <meta property="og:type" content="article" />
+    <meta property="og:url" content="https://42knots.midrehov.com/">
+    <meta property="og:image" content="https://42knots.midrehov.com/image/catalog/logo.png">
+    <meta property="og:description" content="Content streaming">
+    <meta property="og:site_name" content="42 knots">
+    <!--meta property="fb:admins" content="Facebook numeric ID" / -->
+    <!-- default metas end -->
+
+
+<script src="/pub/js/branches3.js"></script>
+<script src="/pub/js/lostandfound.js"></script>
+<style>
+    .single_cat_spread_content {
+        max-width: 342px;
+        float: left;
+        margin: 10px;
+        padding: 10px;
+    }
+    
+    .moreitems {
+        width: 1096px;
+        position: relative;
+    }
+    
+    .sliderfix {
+        max-height: 340px;
+    }
+    
+    .bxslider img {
+        width: 100%;
+    }
+
+    .hdr {
+        font-family: 'old_standard_ttregular';
+        font-weight: bold;
+    }
+
+</style>
+
+</head>
+<body>
+<div class="body_wrapper">
+  <div class="center">
+<div class="header_area row">
+  <div class="col-md-2"></div>
+  <div class="col-md-8 hdttl" style="margin: -10px;" id="header">
+    <h1 class="branch hdr" style="text-transform: uppercase;">{$title}</h1>
+    <h2 class="branch hdr">{$description}</h2>
+  </div>
+  <div class="col-md-2 hdttl" style="padding: 5.5em 0 0 0;" id="sharebar">
+  <div>
+      <ul style="list-style: none; padding: 2px; float: right;">
+  <li style="display: inline-block; zoom: 1; *display: inline; vertical-align: middle;"><a href="https://42knots.midrehov.com/" style="background: rgb(101, 157, 189); color: #ffe330; " class="btn undefined"><span class="icon-42knots"></span></a></li><li style="display: inline-block; zoom: 1; *display: inline; vertical-align: middle;"><a href="https://42knots.midrehov.com/42/6x7.php?v=rss&amp;channel={$channel_id}" style="background: #ee802f; color: #ffffff; " class="btn undefined"><span class="icon-rss"></span></a></li><li style="display: inline-block; zoom: 1; *display: inline; vertical-align: middle;"><a href="https://feedly.com/i/subscription/feed%2Fhttps%3A%2F%2F42knots.midrehov.com%2F42%2F6x7.php%3Fv%3Drss%26channel%3D{$channel_id}" style="background: #fff; color: #2bb24c; " class="btn undefined"><span class="icon-feedly babelfish"></span></a></li><li style="display: inline-block; zoom: 1; *display: inline; vertical-align: middle;"><a href="https://42knots.midrehov.com/42/6x7.php?v=json&amp;channel={$channel_id}" style="background: #000000; color: #32CD32; " class="btn undefined"><span class="icon-json"></span></a></li></ul>
+        </div>
+  </div>
+    </div>
+
+    <div class="main_menu_area">
+      <ul id="nav">
+        <li><a href="#section1">Section 1</a>
+          <!-- ul>
+            <li><a href="#">Single item</a></li>
+            <li><a href="#">Single item</a></li>
+            <li><a href="#">Single item</a>
+              <ul>
+                <li><a href="#">Single item</a></li>
+                <li><a href="#">Single item</a></li>
+                <li><a href="#">Single item</a></li>
+                <li><a href="#">Single item</a></li>
+                <li><a href="#">Single item</a></li>
+              </ul>
+            </li>
+            <li><a href="#">Single item</a></li>
+            <li><a href="#">Single item</a></li>
+          </ul -->
+        </li>
+        <li><a href="#section2">Section 2</a></li>
+        <li><a href="#section3">Section 3</a>
+          <!-- ul>
+            <li><a href="#">Single item</a></li>
+            <li><a href="#">Single item</a></li>
+            <li><a href="#">Single item</a></li>
+            <li><a href="#">Single item</a></li>
+            <li><a href="#">Single item</a></li>
+          </ul -->
+        </li>
+        <li><a href="#">Section 4</a></li>
+        <li><a href="#">Section 5</a>
+          <!-- ul>
+            <li><a href="#">Single item</a></li>
+            <li><a href="#">Single item</a></li>
+            <li><a href="#">Single item</a>
+              <ul>
+                <li><a href="#">Single item</a></li>
+                <li><a href="#">Single item</a></li>
+                <li><a href="#">Single item</a></li>
+                <li><a href="#">Single item</a></li>
+                <li><a href="#">Single item</a></li>
+              </ul>
+            </li>
+            <li><a href="#">Single item</a></li>
+            <li><a href="#">Single item</a></li>
+          </ul -->
+        </li>
+        <li><a href="#">Section 6</a></li>
+        <li><a href="#" class="notmobile">Section 7</a></li>
+        <li><a href="https://memory-alpha.fandom.com/wiki/Section_31" style="color: black;">Section 31</a></li>
+        <!-- li><a href="#">Books</a>
+          <ul>
+            <li><a href="#">Single item</a></li>
+            <li><a href="#">Single item</a></li>
+            <li><a href="#">Single item</a></li>
+            <li><a href="#">Single item</a></li>
+            <li><a href="#">Single item</a></li>
+          </ul>
+        </li>
+        <li><a href="#">blogs</a></li -->
+      </ul>
+    </div>
+    <div class="sliderbranch">
+    <div class="slider_area">
+      <div class="slider">
+    <div class="slider_area">
+      <div class="slider">
+        <ul class="bxslider">
+          <li class="sliderfix" id="slider1"><a href="{$guid}"><img src="{$image_url}" alt="" title="{$title}"></a></li>
+          <li class="sliderfix" id="slider2"><a href="{$guid}"><img src="{$image_url}" alt="" title="{$title}"></a></li>
+          <li class="sliderfix" id="slider3"><a href="{$guid}"><img src="{$image_url}" alt="" title="{$title}"></a></li>
+        </ul>
+      </div>
+    </div>
+    <!-- -->
+      </div>
+    </div>
+    </div>
+    <div class="content_area"  id="items">
+      <div class="main_content floatleft">
+        <div class="left_coloum floatleft">
+          <div class="single_left_coloum_wrapper">
+            <h2 class="title">Section 1</h2>
+            <!-- a class="more" href="#">more</a -->
+			<div class="leaves0" id="l1">
+            <div class="single_left_coloum floatleft leaves" id="lcol1"> <img class="branch" src="{$image_url}" alt="" onerr="" />
+              <h3>{$title}</h3>
+              <p>{$description}</p>
+              <a class="readmore" href="{$guid}">read more</a> </div>
+			</div>
+          </div>
+          <div class="single_left_coloum_wrapper">
+            <h2 class="title">Section 2</h2>
+            <!-- a class="more" href="#">more</a -->
+            <div class=" leaves0"  id="l2">
+            <div class="single_left_coloum floatleft"> <img src="{$image_url}" alt="" onerr="">
+              <h3 class="branch">{$title}</h3>
+              <p class="branch">{$description}</p>
+              <a class="readmore branch" href="{$guid}">read more</a> </div>
+             </div>
+          </div>
+          <!-- div class="single_left_coloum_wrapper gallery">
+            <h2 class="title">gallery</h2>
+            <a class="more" href="#">more</a> <img src="images/single_featured.png" alt="" /> <img src="images/single_featured.png" alt="" /> <img src="images/single_featured.png" alt="" /> <img src="images/single_featured.png" alt="" /> <img src="images/single_featured.png" alt="" /> <img src="images/single_featured.png" alt="" /> </div -->
+          <div class="single_left_coloum_wrapper single_cat_left">
+            <h2 class="title">Section 3</h2>
+            <!-- a class="more" href="#">more</a -->
+            <div class="leaves0" id="l3">
+                <div class="single_cat_left_content floatleft"> <img class="branch" src="{$image_url}" alt="" onerr="" />
+                  <h3 class="branch">{$title}</h3>
+                  <p class="branch">{$description}</p>
+    			  <a class="readmore branch" href="{$guid}">read more</a> 
+                  <p class="single_cat_left_content_meta"><span class="branch">{$author}</span></p>
+                </div>
+            </div>
+          </div>
+        </div>
+        <!-- -->
+        <div class="right_coloum floatright">
+          <div class="single_right_coloum">
+            <h2 class="title">Section 4</h2>
+            <ul class="leaves0" id="l4">
+              <li>
+                <div class="single_cat_right_content">
+					<img class="branch" src="{$image_url}" alt="" onerr="" />
+                  <h3 class="branch">{$title}</h3>
+                  <p class="branch">{$description}</p>
+                  <p class="single_cat_right_content_meta"><a href="{$guid}" class="branch"><span>read more</span></a> 3 hours ago</p>
+                </div>
+              </li>
+            </ul>
+            <!-- a class="popular_more" href="#">more</a --> </div>
+          <div class="single_right_coloum">
+            <h2 class="title">Section 5</h2>
+            <div class="leaves0" id="l5">
+                <div class="single_cat_right_content editorial"> <img class="branch" src="{$image_url}" alt="" />
+                  <h3 class="branch">{$title}</h3>
+    			  <p class="branch">{$description}</p>
+    			  <p class="single_cat_right_content_meta"><a href="{$guid}" class="branch"><span>read more</span></a> 3 hours ago</p>
+                </div>
+            </div>
+
+          </div>
+        </div>
+      </div>
+      <div class="sidebar floatright">
+        <div class="single_sidebar"> <img src="images/add1.png" alt="" /> </div>
+        <div class="single_sidebar">
+          <div class="news-letter">
+            <h2>Quick Sign Up / Login</h2>
+            <p>Sign up to receive our free newsletters!</p>
+            <form action="#" method="post">
+              <input type="text" value="Name" id="name" />
+              <input type="text" value="Email Address" id="email" />
+              <input type="submit" value="SUBMIT" id="form-submit" />
+            </form>
+            <p class="news-letter-privacy">We do not spam. We value your privacy!</p>
+          </div>
+        </div>
+        <div class="single_sidebar">
+          <div class="popular">
+            <h2 class="title notmobile">Section 6</h2>
+            <ul>
+                <div  class="leaves0" id="l7">
+                  <li>
+                    <div class="single_popular">
+                      <p>{$title}</p>
+                      <h3>{$description} <a href="#" class="readmore">Read More</a></h3>
+                    </div>
+                  </li>                    
+                </div>
+                <!-- to erase
+              <li>
+                <div class="single_popular">
+                  <p>Sept 24th 2045</p>
+                  <h3>Lorem ipsum dolor sit amet conse ctetur adipiscing elit <a href="#" class="readmore">Read More</a></h3>
+                </div>
+              </li>
+              <li>
+                <div class="single_popular">
+                  <p>Sept 24th 2045</p>
+                  <h3>Lorem ipsum dolor sit amet conse ctetur adipiscing elit <a href="#" class="readmore">Read More</a></h3>
+                </div>
+              </li>
+              <li>
+                <div class="single_popular">
+                  <p>Sept 24th 2045</p>
+                  <h3>Lorem ipsum dolor sit amet conse ctetur adipiscing elit <a href="#" class="readmore">Read More</a></h3>
+                </div>
+              </li>
+              <li>
+                <div class="single_popular">
+                  <p>Sept 24th 2045</p>
+                  <h3>Lorem ipsum dolor sit amet conse ctetur adipiscing elit <a href="#" class="readmore">Read More</a></h3>
+                </div>
+              </li>
+              <li>
+                <div class="single_popular">
+                  <p>Sept 24th 2045</p>
+                  <h3>Lorem ipsum dolor sit amet conse ctetur adipiscing elit <a href="#" class="readmore">Read More</a></h3>
+                </div>
+              </li>
+              <!-- to erase up to here -->
+            </ul>
+            <!-- a class="popular_more">more</a --> </div>
+        </div>
+        <div class="single_sidebar"> <img src="images/add1.png" alt="" /> </div>
+        <div class="single_sidebar">
+          <h2 class="title">ADs</h2>
+          <img src="images/add2.png" alt="" /> </div>
+      </div>
+        <div class="moreitems">
+            <h2 class="title">Section 7</h2>
+            <div  class="leaves0" id="l6">
+                <div class="single_cat_spread_content"> <img class="branch" src="{$image_url}" alt="" onerr="" />
+                  <h3 class="branch">{$title}</h3>
+                  <p class="branch">{$description}</p>
+        		  <a class="readmore branch" href="{$guid}">read more</a> 
+                  <p class="single_cat_left_content_meta"><span class="branch">{$author}</span> |  29 comments</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="footer_top_area">
+      <div class="inner_footer_top"> <!-- img src="images/add3.png" alt="" --> </div>
+    </div>
+    <div class="footer_bottom_area">
+        <!-- 
+      <div class="footer_menu">
+          
+        <ul id="f_menu">
+          <li><a href="#">world news</a></li>
+          <li><a href="#">sports</a></li>
+          <li><a href="#">tech</a></li>
+          <li><a href="#">business</a></li>
+          <li><a href="#">Movies</a></li>
+          <li><a href="#">entertainment</a></li>
+          <li><a href="#">culture</a></li>
+          <li><a href="#">Books</a></li>
+          <li><a href="#">classifieds</a></li>
+          <li><a href="#">blogs</a></li>
+        </ul>
+      </div>
+      <!-- -->
+      <div class="copyright_text">
+        <p>Copyright &copy; Guy Louzon. All rights reserved | Design by <a target="_blank" rel="nofollow" href="http://www.graphicsfuel.com/2045/10/wp-magazine-theme-template-psd/">Rafi MD</a></p>
+        <p>Trade marks and images used in the design are the copyright of their respective owners and are used for demo purposes only.</p>
+      </div>
+    </div>
+  </div>
+</div>
+<script type="text/javascript" src="/pub/assets/js/news-reporter/jquery-min.js"></script> 
+<script type="text/javascript" src="/pub/assets/js/news-reporter/bootstrap.min.js"></script> 
+<script type="text/javascript" src="/pub/assets/js/news-reporter/jquery.bxslider.js"></script> 
+<script type="text/javascript" src="/pub/assets/js/news-reporter/selectnav.min.js"></script> 
+<script type="text/javascript">
+
+$(window).load(function() {
+
+		var items = {};
+		var headerdata = {};
+		
+
+		const displayamount = 10; // the items per 'page'
+		const minload = 40;
+		var currentdisplay = 0; // the total items already displayed.
+		var listlength = 0 // Object.keys(cardsjson).length; // the current length of the list
+		var sliceat = 0;
+		var sliced = 0;
+		var lvdiv0 = new branches({"masterNode":"#items","masterClass":"leaves0","type":"leaves"});
+		//var headerleaf = new branches({"masterNode":".header_area","masterClass":"branch","type":"branches"});
+		var headerleaf = new branches({"masterNode":".header_area","masterClass":"hdttl","type":"leaves"});
+		var sliderleaf = 3;
+		currentdisplay += sliderleaf;//set to 3 to keep the 1st 3 to the slider
+
+	var laf = new lostandfound();
+		const urlParams = new URLSearchParams(window.location.search);
+        const GETchannel = urlParams.get('channel');
+	if (!(!GETchannel)) {
+		    var fetchurl = 'https://42knots.midrehov.com/42/6x7.php?channel=' + GETchannel + '&v=json';
+		}
+		
+		var laf = new lostandfound();
+		var numOfLeaves = {
+		    // id : number of leaves
+		    //"l0" : 3,
+		    "l1" : 3,
+		    "l2" : 3,
+		    "l4" : 3,
+		    "l5" : 4,
+		    "l3" : 6,
+		    "l6" : 7
+		};
+
+	
+		// on load functions
+        fetch(fetchurl + '&limstart=' + listlength + '&limend=' + minload , { 
+          method: 'GET'
+        })
+        .then(function(response) { return response.json(); })
+        .then(function(json) {
+
+            
+            headerdata = JSON.parse(JSON.stringify(json));
+            delete headerdata.items;
+
+			// add json.items to the global object items
+			items = JSON.parse(JSON.stringify(json.items));
+			listlength = items.length; // test.items.length //json.items.length; // the current length of the list
+			for (var key in numOfLeaves) {
+    			let sliced = laf.objSlice(items, currentdisplay, Math.min(listlength,currentdisplay + numOfLeaves[key]));
+    			currentdisplay = currentdisplay + Math.min(listlength - currentdisplay,numOfLeaves[key]); 
+    			lvdiv0.leavesLuv(key,sliced,0);
+			}
+			let sliced = laf.objSlice(items, 0, Math.min(listlength,6));
+			lvdiv0.leavesLuv('l7',sliced,0);
+
+		});
+
+		function addItems(append = 1) {
+			// slice the global items based on the page parameter...?
+			// add the items to the current DOM element
+			sliceat = Math.min(displayamount,listlength);
+			let sliced = laf.objSlice(items, currentdisplay, currentdisplay + sliceat);
+			lvdiv0.leavesLuv('l6',sliced,append);
+			currentdisplay += sliceat;
+		}
+
+		
+		//on scroll. no jQuery !
+		function draw() {
+    		sliceat = Math.min(displayamount,listlength - currentdisplay);
+			aggitems = laf.objSlice(items,currentdisplay, currentdisplay + sliceat);
+			lvdiv0.leavesLuv('l6',aggitems,1);
+			currentdisplay += sliceat;
+			listlength = Object.keys(items).length;	    
+		}
+		
+		window.onscroll = function () {
+		    // if the window display, after scrolling down has reached the bottom: the current X axis - (doc height - window height) then
+			if(Math.abs(window.scrollY - (document.documentElement.scrollHeight - window.innerHeight)) < 1) {
+				   // ajax call get data from server and append to the div
+				   var aggitems = {};
+					if (currentdisplay > 0) {
+						if (listlength - currentdisplay <= 0) {
+                                    fetch(fetchurl + '&limstart=' + listlength + '&limend=' + (listlength + displayamount) , { 
+                                      method: 'GET'
+                                    })
+                                    .then(function(response) { return response.json(); })
+                                    .then(function(json) {
+                            			// add json.items to the global object items
+                            			items = laf.objUnionAll(items,json.items);
+                            			listlength = Object.keys(items).length; // the current length of the list
+                            			// move to the function
+                            			draw();
+
+                                    });
+						} else if (listlength - currentdisplay > 0) {
+						    draw();
+						}
+
+					}
+					
+			}    
+        };
+    var i = setInterval(function ()
+        {
+            if ($('.bx-caption').length && !(Object.keys(items).length === 0 && items.constructor === Object)) //  only after the silder was loaded and the item fetch promise was kept // && !$('.bx-loading').length
+            {
+                clearInterval(i);
+                console.log('cleared!');
+                // safe to execute your code here
+                var brnslider = new branches({"masterNode":".bx-wrapper","masterClass":"sliderfix","type":"leaves"});
+                
+                let items2 = {};
+                for (let j = 0; j < sliderleaf; j++) {
+                    items2 = laf.objSlice(items, j, j +1);
+
+                    if (items2[Object.keys(items2)[0]].image_url == '') {
+                       items2[Object.keys(items2)[0]].image_url = '/pub/images/newsheader.jpg';
+
+                    }
+                    brnslider.leavesLuv('slider' + (j +1),items2,0);
+                }
+                
+                $(".bx-viewport").css("height","100%");
+                $(".bx-loading").css("z-index","-100");
+
+                let wrapper = {};
+                wrapper.headerdata = headerdata;
+                headerleaf.leavesLuv("header",wrapper,0);
+                headerleaf.leavesLuv("sharebar",wrapper,0);
+    
+                document.body.style.background = "url('" + headerdata.image_url + "') no-repeat fixed center center / cover";
+                
+                /*
+                let headerimg = new Image();
+                headerimg.onload = function() {
+                    let element = document.getElementById("himg");
+                    // alert(this.width + 'x' + this.height);
+                    if( this.width / this.height > 1.5) {
+                        c2add = 'widehimg';
+                        c2remove = 'longhimg';
+                    } else {
+                        c2add = 'longhimg';
+                        c2remove = 'widehimg';
+                    }
+                    element.classList.add(c2add);
+                    element.classList.remove(c2remove);
+                }
+                headerimg.src = headerdata.image_url;
+                */
+                
+                let ttl = document.getElementsByTagName("title")[0];
+                ttl.innerHTML = headerdata.title;
+                
+            }
+        }, 100);
+    
+
+ 
+});
+
+</script>
+<script type="text/javascript">
+selectnav('nav', {
+    label: '-Navigation-',
+    nested: true,
+    indent: '-'
+});
+selectnav('f_menu', {
+    label: '-Navigation-',
+    nested: true,
+    indent: '-'
+});
+$('.bxslider').bxSlider({
+    mode: 'fade',
+    captions: true
+});
+</script>
+</body>
+</html>

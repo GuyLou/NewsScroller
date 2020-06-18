@@ -27,7 +27,7 @@
         let isme = 0;
         if (item.retailer_id == me) {
             isme = 1;
-            tgsme = `<li><button class="btn btn-link item-trash${item.bulk}" id="trash_item_${item.item_id}"><i class="fa fa-trash"></i></button></li>`;
+            tgsme = `<li><button class="btn btn-link item-trash${item.bulk}" id="trash_item_${item.item_id}"><span class="icon-bin"></span></button></li>`;
         }
     var tmplt = `<div id ="item_${item.item_id}" class="sitem${item.bulk}">
                     <div class="media media-item"><div class="media-heading">
@@ -37,9 +37,9 @@
                     <h4 class="media-heading"><a href="${item['link']}">${item.title}</a></h4>`;
         tmplt += `<p>${item.description}<img class="media-body-image" src="${item.image_url}" onerror="if (this.src != '/image/catalog/42/42knots.png') this.src = '/image/catalog/42/42knots.png';"></p>
                     <ul class="nav nav-pills nav-pills-custom">
-                    <li><button class="btn btn-link item-share${item.bulk}" id="share_item_${item.item_id}" routeto="${item['link']}"><i class="fa fa-share"></i></button></li>
-                    <li><button class="btn btn-link item-star${item.bulk}" id="star_item_${item.item_id}"><i class="fa fa-star"></i></button></li>
-                    <li><button class="btn btn-link item-tag${item.bulk}" id="${isme}_tag_item_${item.item_id}"><i class="fa fa-tags"></i></button></li>
+                    <li><button class="btn btn-link item-share${item.bulk}" id="share_item_${item.item_id}" routeto="${item['link']}"><span class="icon-share"></span></button></li>
+                    <li><button class="btn btn-link item-star${item.bulk}" id="star_item_${item.item_id}"><span class="icon-star"></span></button></li>
+                    <li><button class="btn btn-link item-tag${item.bulk}" id="${isme}_tag_item_${item.item_id}"><span class="icon-tags"></span></button></li>
                     ${tgsme}
                     </ul>
                     </div>

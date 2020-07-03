@@ -21,7 +21,8 @@ class lostandfound {
 	isError(param,retvar) {
 	    
 	    var ret = param;
-	    if (typeof param === "undefined") {
+	    //if (typeof param === "undefined") {
+        if(!(param)) {
 	        ret = retvar;
 	    }
 	    return ret;

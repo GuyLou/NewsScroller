@@ -25,8 +25,6 @@
         
         let tgsme = '';
         let isme = 0;
-        console.log("me: " + me);
-        console.log("item.retailer_id: " + item.retailer_id);
         if (item.retailer_id == me) {
             isme = 1;
             tgsme = `<li><button class="btn btn-link item-trash${item.bulk}" id="trash_item_${item.item_id}"><span class="icon-bin"></span></button></li>`;

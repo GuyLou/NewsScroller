@@ -107,20 +107,22 @@
 			    
 				<div class="panel-heading view view-item">
 					<div class="media">
-						<div class="media-body">
-							<div class="form-group has-feedback">
-								<label class="control-label sr-only" for="inputSuccess5">Hidden label</label>
-								<form action="" method="post" enctype="multipart/form-data" id="fetchform">
-								    <input type="hidden" name="iaction" value="fetchurl">
-								    <input type="text" class="form-control in42" id="fetch" aria-describedby="search" name="fetchurl" placeholder="paste a url...">
-								</form>
-								<span class="icon-chain babelfish form-control-feedback" aria-hidden="true"></span>
-								<span id="search2" class="sr-only">(success)</span>
+						<form action="" method="post" enctype="multipart/form-data" id="fetchform">
+							<div class="media-body">
+								<div class="form-group has-feedback">
+									<label class="control-label sr-only" for="inputSuccess5">Hidden label</label>
+
+										<input type="hidden" name="iaction" value="fetchurl">
+										<input type="text" class="form-control in42" id="fetch" aria-describedby="search" name="fetchurl" placeholder="paste a url...">
+
+									<span class="icon-chain babelfish form-control-feedback" aria-hidden="true"></span>
+									<span id="search2" class="sr-only">(success)</span>
+								</div>
 							</div>
-						</div>
-						<a class="media-left">
-							<button class="btn btn-xs btn42"><span class="icon-cube babelfish"></span></button>
-						</a>
+							<a class="media-left">
+								<button class="btn btn-xs btn42"><span class="icon-cube babelfish"></span></button>
+							</a>
+					</form>
 					</div>
 				</div>
 				<div class="panel-body" id="main">
@@ -144,7 +146,7 @@
 	</div>
 </div>
 <template id="start" routeto2="ftype=flow"></template>
-<template id="change_password0">
+<div id="change_password0"  style="display:none;">
     <form action="" method="post" enctype="multipart/form-data" class="change_password" id="change_password">
         <input type="hidden" name="iaction" value="password">
 	    <input type="password" class="form-control" aria-describedby="search" name="curpass" style="background-color: beige;" value="" placeholder="current password">
@@ -158,7 +160,7 @@
         
 	</form>
     <span style="color: red;" id="errormsg"></span>
-</template>
+</div>
 <div id="template-selector" style="display:none;">
     <div class="social-icons" style="text-align: center; font-weight: 300; background-image: linear-gradient(rgb(255, 255, 255), rgb(240, 240, 240))">
         <ul style="list-style: none; margin: 0px 0px 5px 0px; padding: 2px; float: right;">
@@ -630,7 +632,7 @@
                     <div class="card-body pt-5">
                         <img src="${channel.profile_pic}" alt="profile-image" class="profile ${chtview.profile}">
                         ${flowstring}
-                        <h4 class="card-title"><a class="route2" routeto2="ftype=stream&fid=${channel['owner_id']}" href="#"><span style="font-size: 70%; color:#999999; font-style: italic;" class="${chtview.handle}">@${channel.handle} </span><span id="ch_title_${channel['key']}">${channel.title}</span></a></h5>
+                        <h4 class="card-title"><a id="hdlink_${channel['key']}" class="route2" routeto2="ftype=stream&fid=${channel['owner_id']}" href="#"><span style="font-size: 70%; color:#999999; font-style: italic;" class="${chtview.handle}">@${channel.handle} </span><span id="ch_title_${channel['key']}">${channel.title}</span></a></h5>
                         <p class="card-text" id="ch_description_${channel['key']}">${channel.description}</p>
                         <div class="icon-block">
                             <!-- --> ${btnsstr} <!-- -->
@@ -663,7 +665,9 @@
 
 		function loopitems(itemsjson0,func, isBottom = true) {
     		var itemslist0 = '';
-    		currentdisplay += laf.isError(Object.keys(itemsjson0).length,0);
+			if (typeof itemsjson0 === 'object' && itemsjson0 !== null) {
+				currentdisplay += laf.isError(Object.keys(itemsjson0).length,0);
+			}
     		for (key in itemsjson0) {
 				itemsjson0[key]['key'] = key;
         	    if (typeof itemsjson0[key]['bulk'] == 'undefined') {
@@ -759,7 +763,7 @@
 			}
 			chtview = { ...chtview, ...chtypes['me'][channel.owner_type]['classHidden'] };
 			if (channel.owner_type == 'fbt') {
-                tagsinput = `<input type="text" class="form-control in_editchannel" aria-describedby="search" name="tags" style="background-color: beige;" value="${tags}" placeholder="tags names, comma seperated">`;
+                tagsinput = `<input type="text" class="form-control" aria-describedby="search" name="tags" style="background-color: beige;" value="${tags}" placeholder="tags names, comma seperated">`;
 			}
 			tmplt += `<div style="margin-top: 2px;box-shadow: 1px 1px 2px #888888;" class="" id="edit_channel_${channel.obj_id}">
 				<div class="form-group has-feedback">
@@ -1031,7 +1035,8 @@
         	                    'bulk' : antibulk,
         	                    'chaction': actobj,
 								'whois':'me',
-								'owner_type': 'fbt'
+								'owner_type': 'fbt',
+								'owner_id' : -1,
         	                };
         	               var newitem = drawchannel(newChannel,chtypes);
         	               $("#main").prepend(newitem);
@@ -1336,7 +1341,7 @@
 		 });
 		 
                 $(".channel-horn" + bulk).popover({
-                      placement: 'left',
+                      placement: 'bottom',
                       container: 'body',
                       html: true,
                       content: function() {

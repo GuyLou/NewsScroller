@@ -105,6 +105,19 @@
 	     color: #000;
 	}
 	
+	.imgsel::-webkit-input-placeholder {
+		font-size: 12px;
+	}
+	.imgsel::-moz-placeholder {
+		font-size: 12px;
+	}
+	.imgsel:-ms-input-placeholder {
+		font-size: 12px;
+	}
+	.imgsel::placeholder {
+		font-size: 12px;
+	}
+
 	</style>
 	
     <!-- Matomo -->
@@ -196,10 +209,10 @@
 
 		<div class="form-row tab">
 			<div class="col-lg-4 col-md-4 col-sm-6 mb-2 mb-md-0">
-				<input type="text" id="title_for_0" name="retailername" class="form-control form-control-lg in_editretailername" placeholder="Your name" value="42 knots">
+				<input type="text" id="title_for_0" name="retailername" class="form-control form-control-lg in_editretailername" placeholder="Your name" value="">
 			</div>
 			<div class="col-lg-4 col-md-4 col-sm-6 mb-2 mb-md-0">
-				<input type="text" id="description_for_0" name="description" class="form-control form-control-lg in_editdescription" placeholder="Description" value="create your own content stream">
+				<input type="text" id="description_for_0" name="description" class="form-control form-control-lg in_editdescription" placeholder="Description" value="">
 			</div>
 		</div>
 
@@ -208,13 +221,13 @@
 		<div class="form-row tab">
 			<div class="col-lg-4 col-md-4 col-sm-6 mb-2 mb-md-0">
 				<div class="input-group">
-					<input type="text" id="profile_for_0" name="profile_pic" class="form-control form-control-lg in_editppic" placeholder="avatar icon image url" value="https://42knots.midrehov.com/pub/images/Hitchhiker-Symbol-icon.png" valfunction="valurl">
-					<button class=" btn btn-info"><i class="far fa-user-circle"></i> </button>
+					<input type="text" id="profile_for_0" name="profile_pic" class="form-control form-control-lg in_editppic imgsel" placeholder="avatar icon url, or ->" value="" valfunction="valurl">
+					<button id="profile_pic_btn" class=" btn btn-info"><i class="far fa-user-circle"></i> </button>
 				</div>
  		   </div>
 			<div class="col-lg-4 col-md-4 col-sm-6 mb-2 mb-md-0">
 				<div class="input-group">
-						<input type="text" id="img_for_0" name="header_image" class="form-control form-control-lg in_editimg" placeholder="Channel header image url" value="https://42knots.midrehov.com/pub/images/sblanding/bg-masthead.jpg" valfunction="valurl">
+						<input type="text" id="img_for_0" name="header_image" class="form-control form-control-lg in_editimg imgsel" placeholder="Header image url, or ->" value="" valfunction="valurl">
 							<button id="altcover" class=" btn btn-info"><i class="far fa-image"></i> </button>
 				</div>
 			</div>
@@ -231,7 +244,7 @@
                     <div class="col-lg-4 col-md-4 col-sm-4 mb-2 mb-md-0">
                     						<div class="custom-control custom-checkbox">
                       <input type="checkbox" class="custom-control-input" id="customCheck1" name="agree">
-                      <label class="custom-control-label" for="customCheck1">I have read and agreed to the <a href="https://42knots.midrehov.com/pub/html/terms.html">terms and conditions</a></label>
+                      <label class="custom-control-label" for="customCheck1">I have read and agreed to the <a href="https://42knots.midrehov.com/pub/html/terms.html" target="_blank">terms and conditions</a></label>
                     </div>
                     </div>
 		</div>
@@ -474,6 +487,7 @@
 		var currentTab = 0; // Current tab is set to be the first tab (0)
 		var x = document.getElementsByClassName("tab");
 		const altcovers = ['https://live.staticflickr.com/4222/34426687780_8b26fa1efb_b.jpg','https://live.staticflickr.com/4175/34811722055_42e9b1b519_b.jpg','https://live.staticflickr.com/4273/34734596996_a4549d7600_b.jpg','https://live.staticflickr.com/4165/33910368824_e597fa1dac_b.jpg','https://live.staticflickr.com/4156/34679916551_f4a7177442_b.jpg','https://webdesignerdepot.s3.amazonaws.com/default-images/45.jpg','https://www.iphonetricks.org/wp-content/uploads/2016/09/Harbor-Sunset-Wide-Gamut.jpg','https://exoplanets.nasa.gov/system/news_items/main_images/243_nyeheader.jpg','https://www.nps.gov/common/uploads/grid_builder/hfc/crop16_9/7E9AE9B6-1DD8-B71B-0BD2CA3A36AEBEC4.png','https://42knots.midrehov.com/pub/images/sblanding/bg-masthead.jpg','https://www.goodfreephotos.com/albums/italy/other-italy/beautiful-landscape-with-mountains-and-lakes-with-sky-in-italy.jpg','https://www.goodfreephotos.com/albums/italy/other-italy/high-mountains-landscape-of-dolomites-italy.jpg','https://www.goodfreephotos.com/albums/other-landscapes/beautiful-landscape-with-mountain-and-lake-scenic.jpg'];
+		const profilepics = ['https://42knots.midrehov.com/pub/images/Hitchhiker-Symbol-icon.png','https://www.pngitem.com/pimgs/m/78-785878_batman-icon-batman-avatar-icon-hd-png-download.png','https://gamepedia.cursecdn.com/worldofmayhem_gamepedia_en/thumb/7/79/Tweety.png/1200px-Tweety.png','https://apkpure.com/save-zuckerberg-%F0%9F%98%87-fb-saviour/com.comicalinteractive.savezuck','https://upload.wikimedia.org/wikipedia/en/thumb/e/ea/Superman_shield.svg/220px-Superman_shield.svg.png'];
 
         fetch('/?route=retailer/login/setup',
         {
@@ -512,6 +526,15 @@
 		    document.getElementById("img_for_0").value = chosen;
 		    
 		});
+
+		$("#profile_pic_btn").on('click',function(e){
+		    e.preventDefault();
+		    let chosen = profilepics[Math.floor(Math.random() * 5)];
+		    //document.getElementById("sbheader").setAttribute("style", "background:url("  + chosen + ") no-repeat center center;  background-size:cover;");
+		    document.getElementById("profile_for_0").value = chosen;
+		    
+		});
+
 		
 		$('#regform').on('submit',function(e) {
 			e.preventDefault();

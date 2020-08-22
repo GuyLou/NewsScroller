@@ -11,14 +11,14 @@
   <title>42 knots - Share your content</title>
 
   <!-- Bootstrap core CSS -->
-  <link href="/pub/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+  <link href="../pub/bootstrap/css/bootstrap.min.css" rel="stylesheet">
 
   <!-- Custom fonts for this template -->
-  <link href="/pub/fontawesome-free/css/all.min.css" rel="stylesheet">
-  <link href="/pub/simple-line-icons/css/simple-line-icons.css" rel="stylesheet" type="text/css">
+  <link href="../pub/fontawesome-free/css/all.min.css" rel="stylesheet">
+  <link href="../pub/simple-line-icons/css/simple-line-icons.css" rel="stylesheet" type="text/css">
   <link href="https://fonts.googleapis.com/css?family=Lato:300,400,700,300italic,400italic,700italic" rel="stylesheet" type="text/css">
   
-  <!-- link rel="stylesheet" href="/pub/fonts/42font/style.css" -->
+  <!-- link rel="stylesheet" href="../pub/fonts/42font/style.css" -->
 
   <!-- Custom styles for this template -->
   <link href="../pub/css/templates/sblanding/landing-page.min.css" rel="stylesheet">
@@ -161,7 +161,7 @@
         </div>
 		<div class="showlogin view-login col-md-10 col-lg-8 col-xl-7 mx-auto">
 
-			<form action="/?route=retailer/login/ajax" method="post" enctype="multipart/form-data" id="loginform">
+			<form action="../?route=retailer/login/ajax" method="post" enctype="multipart/form-data" id="loginform">
 			    <input type="hidden" name="actiontype" value="login">
 				<!-- log in -->
 				<div class="form-row">
@@ -189,7 +189,7 @@
 
 		<div class="showlogin view-register col-md-10 col-lg-8 col-xl-7 mx-auto">
 		<!-- sign up -->
-		<form action="/?route=retailer/login/ajax" method="post" enctype="multipart/form-data" class="editchform" id="regform">
+		<form action="../?route=retailer/login/ajax" method="post" enctype="multipart/form-data" class="editchform" id="regform">
 							<input type="hidden" name="actiontype" value="register">
 		<div class="form-row tab opentab">
 
@@ -439,8 +439,8 @@
   </footer>
 
   <!-- Bootstrap core JavaScript -->
-  <script src="/pub/jquery/jquery.min.js"></script>
-  <script src="/pub/bootstrap/js/bootstrap.bundle.min.js"></script>
+  <script src="../pub/jquery/jquery.min.js"></script>
+  <script src="../pub/bootstrap/js/bootstrap.bundle.min.js"></script>
   <script type="text/javascript">
 	
 	/**/
@@ -666,7 +666,7 @@
             e.preventDefault();
             $.ajax({
                type: "POST",
-               url: '/?route=retailer/login/ajax',
+               url: '../?route=retailer/login/ajax',
                data: $(this).serialize(),
                success: function(data)
                {

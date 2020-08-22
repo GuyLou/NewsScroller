@@ -112,7 +112,8 @@
 								<div class="form-group has-feedback">
 									<label class="control-label sr-only" for="inputSuccess5">Hidden label</label>
 
-										<input type="hidden" name="iaction" value="fetchurl">
+										<input type="hidden" name="iaction" value="fetchnadd">
+										<input type="hidden" name="tags" value="">
 										<input type="text" class="form-control in42" id="fetch" aria-describedby="search" name="fetchurl" placeholder="paste a url...">
 
 									<span class="icon-chain babelfish form-control-feedback" aria-hidden="true"></span>
@@ -205,7 +206,6 @@
 		var objsjson = {}; // 'https://42knots.midrehov.com/index.php?route=retailer/app/json&ftype=flow' // <b>Notice</b>: Undefined variable: feed in <b>/home/midrehov/public_html/42knots/catalog/view/theme/default/template/retailer/app.tpl</b> on line <b>197</b>;
 		var objsjson0 = {};
 		me = 0; // 1;
-		/**/
 		var chtypes = {
 
 		        "me": {
@@ -269,7 +269,6 @@
 		        }
 		    
 		};
-		/**/
 		var objsheader = {};
 		var tagsarray = {};
 		var laf = new lostandfound();
@@ -293,16 +292,15 @@
 
 		var params = routetos.stream; //  a global var, holding the current page info
 		var params2 = routetos.stream; //  a global var, holding the current page info
-
 		var itemslist = '';
-		var feedlink = 'https://42knots.midrehov.com/index.php?route=retailer/app/json'; //'<b>Notice</b>: Undefined variable: feedlink in <b>/home/midrehov/public_html/42knots/catalog/view/theme/default/template/retailer/app.tpl</b> on line <b>272</b>';
-		var feedsrc = feedlink + '&ftype=' + ftype;
 		var faction = '';
 		var actbase = '';
 		var actobj = '';
 		var retaileredit = '';
 		var tagsaction = '';
-		const channelbase = 'https://42knots.midrehov.com/42/6x7.php?v=webapp&channel='; // baseurl + '/42/apps/cards.html?channel=';
+		var feedlink = '';
+		var feedsrc = '';
+
 		var ctrlr = {};
 		const webshare = (navigator.share !== undefined);
 		//const popupShareItem5 = {"attachment":"main","tmpltId" : "itemSharer"};
@@ -521,7 +519,7 @@
 		}
 
 		function inituser() {
-			fetch('https://42knots.midrehov.com/?route=retailer/app/json&ftype=constants', {
+			fetch(baseurl + '?route=retailer/app/json&ftype=constants', {
 			method: 'GET'
 			})
 			.then(function(response) {
@@ -539,7 +537,7 @@
 				if (typeof constants !== 'undefined') {
 					tempcnts = constants2;
 				}
-				if(tempcnts.me != constants['me']) {
+				if(tempcnts.me !== constants.me) {
 					mecache = false;
 				}
 				setConstants(constants2);
@@ -959,18 +957,23 @@
 			       } else {
 			           console.log("fetch NOT Json !");
 			       }
-				   data.item_id = 0;
+				   data.item_id = data['obj_id'];
 				   data.guid = data.url;
 				   data.bulk = antibulk;
 				   data.handle = objsheader.handle; // to  arrive from constants
+				   data.otype = 'item';
+				   data.retailer_id = me;
 				   var newitem = drawitem(data,chtypes);
 				   //$("#main").prepend(newitem);
 				   $(newitem).insertAfter('#channel_-1');
-				   data.otype = 'item';
-				   data.isme = '1';
-				   newitem = addform(data);
-				   $("#item_0").append(newitem);
-					$("#item_0").addClass("newObj");
+					itemEventsTriggers(antibulk--,'itemSharer');
+					tagsarray[data['obj_id']] = '';
+					$("#fetch").val("");
+
+				   //newitem = addform(data);
+				   //$("#item_0").append(newitem);
+					//$("#item_0").addClass("newObj");
+				   	/*
 				   $("#tagsform_id_0").submit( function(e) {
     					let tags0 = $("#tagsform_id_0").find('input[name="tags"]').val();
 						e.preventDefault();
@@ -998,7 +1001,7 @@
 						   });
 
 				   });
-				   
+				   */
 				},
 				error: function(data) {
 					console.log(data.responseText);
@@ -1259,7 +1262,7 @@
 	    		    //let ifl = $(this).find("i");
 	    		    /**/
 	    		    
-                    fetch('https://42knots.midrehov.com/index.php?route=retailer/flow/AddRemoveFlow', // flwunflow
+                    fetch(baseurl + 'index.php?route=retailer/flow/AddRemoveFlow', // flwunflow
                     {
                         method: "POST",
                         body: "followee=" + followee
@@ -1551,12 +1554,11 @@
 				objsjson = JSON.parse(localStorage['42knots,objsjson']);
 				ftype = (' ' + objsjson.ftype).slice(1);
 				delete objsjson['ftype'];
-				constants = localStorage['42knots,constants'];
-				setConstants(JSON.parse(constants));
+				constants = JSON.parse(localStorage['42knots,constants']);
+				setConstants(constants);
 				init();
 			}
 
-			/**/
 			fetch('/?route=retailer/login/setup',
 				{
 					method: "GET",
@@ -1633,6 +1635,12 @@ function setConstants(constants) {
         $("html").attr('dir',constants['direction']);
         $("html").attr('lang',constants['lang']);
 		$("base").attr('href',baseurl);
+
+		//
+		feedlink = baseurl + 'index.php?route=retailer/app/json';
+		feedsrc = feedlink + '&ftype=' + ftype;
+		const channelbase = baseurl + '42/6x7.php?v=webapp&channel=';
+
 
 }
 

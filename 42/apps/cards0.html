@@ -1,0 +1,151 @@
+<html>
+<head>
+    <title>42 knots - search results webapp</title>
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+
+	<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+
+
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>	
+	
+    <link href="css/searchresults.css" rel="stylesheet">
+	<script src="js/branches.js"></script>
+    <script src="js/lostandfound.js"></script>
+
+	<style>
+	body, .container-fluid {
+	padding-top: 1em;
+	}	
+	</style> 	
+
+</head>
+<body>
+
+    <hgroup class="mb20">
+	    <div class="row" id="header">
+				<div class="col-xs-12 col-sm-12 col-md-3">
+				<a class="thumbnail"><img class="branches" src="{$image_url}"></a>
+			</div>
+			<div class="col-xs-12 col-sm-12 col-md-9 excerpet">
+				<h1 class="branches">{$title}</h1>
+				<h2 class="lead branches">{$description}</h2>
+				
+				
+				<div class="social-icons">
+                    <ul>
+                        <li style="text-align: justify;"><a href="#"><em></em><img src="https://www.cloudroya.com/apps/webapp/images/app_icon_256.png" alt="web app"></a></li>
+                        <li><a href="/42"><img src="icons/rss.jpg" alt="rss"></a></li>
+                        <li><a href="/42"><img src="icons/json.png" alt="json"></a></li>
+                        <li><a href="https://feedly.com/i/subscription/feed/" target="_blank"><img src="icons/feedly.png" alt="follow us in feedly"></a></li>
+                    </ul>
+                </div>
+				
+
+			</div>
+		</div>	
+	</hgroup>    
+
+<div class="container-fluid">
+	<div class="card-columns">
+
+	<div class="leaves" id="items">
+		<div class="card">
+			<img class="card-img-top" src="{$image_url}" alt="">
+			<div class="card-body">
+				<h5 class="card-title"><a href="{$guid}">{$title}</a></h5>
+				<p class="card-text">{$description}, {$pubDate}</p>
+			</div>
+		</div>
+	</div>
+	
+	</div>
+</div>
+<script type="text/javascript">
+        (function(){
+		// on load, set global vars and objects
+		
+		var branch = new branches();
+		const urlParams = new URLSearchParams(window.location.search);
+        const GETp = urlParams.get('p');
+		var items = {};
+
+		const displayamount = 10; // the items per 'page'
+		const minload = 20;
+		var currentdisplay = 0; // the total items already displayed
+		var listlength = 0 // Object.keys(cardsjson).length; // the current length of the list
+		var sliceat = 0;
+		var sliced = 0;
+		
+		var laf = new lostandfound();
+		
+		// on load function
+		
+        fetch('/42/6x7.php?p=' + GETp + '&v=json' + '&limstart=' + listlength + '&limend=' + minload , { 
+          method: 'GET'
+        })
+        .then(function(response) { return response.json(); })
+        .then(function(json) {
+      	    branch.climbABranch(json);
+			// add json.items to the global object items
+			items = json.items;
+			listlength = json.items.length; // the current length of the list
+			// move to the function
+			addItems(0);
+
+        });
+
+		function addItems(append = 1) {
+			// slice the global items based on the page parameter...?
+			// add the items to the current DOM element
+			sliceat = Math.min(displayamount,listlength);
+			var sliced = laf.objSlice(items, currentdisplay, currentdisplay + sliceat);
+			branch.leavesLuv('items',sliced,append);
+			currentdisplay += sliceat;
+		}
+
+		
+		//on scroll. no jQuery !
+		window.onscroll = function () {
+		    // if the window display, after scrolling down has reached the bottom: the current X axis - (doc height - window height) then
+			if(Math.abs(window.scrollY - (document.documentElement.scrollHeight - window.innerHeight)) < 1) {
+			    console.log("listlength: " + listlength);
+			    console.log("displayamount: " + displayamount);
+			    console.log("currentdisplay: " + currentdisplay);
+				   // ajax call get data from server and append to the div
+				   var aggitems = {};
+					if (currentdisplay > 0) {
+						if (listlength - currentdisplay <= 0) {
+                            console.log("ajax!");
+                                    fetch('/42/6x7.php?p=' + GETp + '&v=json' + '&limstart=' + listlength + '&limend=' + (listlength + displayamount) , { 
+                                      method: 'GET'
+                                    })
+                                    .then(function(response) { return response.json(); })
+                                    .then(function(json) {
+                            			// add json.items to the global object items
+                            			console.log('json.items:');
+                            			console.log(json.items);
+                            			items = laf.objUnionAll(items,json.items);
+                            			console.log('items:');
+                            			console.log(items);
+                            			listlength = Object.keys(items).length; // the current length of the list
+                            			// move to the function
+
+                                    });
+						}
+							sliceat = Math.min(displayamount,listlength - currentdisplay);
+							aggitems = laf.objSlice(items,currentdisplay, currentdisplay + sliceat);
+						
+						console.log('listlength:' + listlength);
+						branch.leavesLuv('items',aggitems,1);
+						currentdisplay += sliceat;
+						listlength += laf.isError(aggitems.length,0);
+					}
+					
+			}    
+        };
+        
+
+        })();
+</script>
+</body>
+</html>

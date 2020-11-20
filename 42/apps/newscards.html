@@ -1,0 +1,335 @@
+<html lang="en"><head>
+    <!-- https://codepen.io/choogoor/pen/YWBxAg -->
+        <link rel="stylesheet" type="text/css" href="/pub/css/4.7_font-awesome.min.css">
+    	<script src="js/branches.js"></script>
+        <script src="js/lostandfound.js"></script>
+        <base target="_blank">
+<style>
+    @import url(https://fonts.googleapis.com/css?family=Open+Sans:300,400,700);
+* {
+  box-sizing: border-box;
+}
+
+body {
+  background-image: linear-gradient(to bottom, #659DBD, #034378);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  height: 100vh;
+  font-family: "Open Sans", sans-serif;
+}
+
+a {
+  text-decoration: none;
+}
+
+h1 {
+  font-family: "Open Sans", sans-serif;
+  font-weight: 300;
+}
+
+.row {
+  max-width: 1600px;
+  margin: 50px auto 0;
+}
+
+.card {
+  float: left;
+  padding: 0.7rem 1.7rem;
+  width: 30%;
+  min-width: 400px;
+}
+.card .menu-content {
+  margin: 0;
+  padding: 0;
+  list-style-type: none;
+}
+.card .menu-content::before, .card .menu-content::after {
+  content: '';
+  display: table;
+}
+.card .menu-content::after {
+  clear: both;
+}
+.card .menu-content li {
+  display: inline-block;
+}
+.card .menu-content a {
+  color: #fff;
+}
+.card .menu-content span {
+  position: absolute;
+  left: 50%;
+  top: 0;
+  font-size: 10px;
+  font-weight: 700;
+  font-family: 'Open Sans';
+  -webkit-transform: translate(-50%, 0);
+          transform: translate(-50%, 0);
+}
+.card .wrapper {
+  background-color: #fff;
+  min-height: 540px;
+  position: relative;
+  overflow: hidden;
+  box-shadow: 0 19px 38px rgba(0, 0, 0, 0.3), 0 15px 12px rgba(0, 0, 0, 0.2);
+}
+.card .wrapper:hover .data {
+  -webkit-transform: translateY(0);
+          transform: translateY(0);
+}
+.card .data {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  -webkit-transform: translateY(calc(70px + 1em));
+          transform: translateY(calc(70px + 1em));
+  transition: -webkit-transform 0.3s;
+  transition: transform 0.3s;
+  transition: transform 0.3s, -webkit-transform 0.3s;
+}
+.card .data .content {
+  padding: 1em;
+  position: relative;
+  z-index: 1;
+}
+.card .author {
+  font-size: 12px;
+}
+.card .title {
+  margin-top: 10px;
+}
+.card .text {
+  height: 70px;
+  margin: 0;
+  text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;
+}
+.card input[type='checkbox'] {
+  display: none;
+}
+.card input[type='checkbox']:checked + .menu-content {
+  -webkit-transform: translateY(-60px);
+          transform: translateY(-60px);
+}
+
+.type2 .wrapper {
+  
+}
+.type2 .wrapper:hover .menu-content span {
+  -webkit-transform: translate(-50%, -10px);
+          transform: translate(-50%, -10px);
+  opacity: 1;
+}
+.type2 .header {
+  color: #fff;
+  padding: 1em;
+}
+.type2 .header::before, .type2 .header::after {
+  content: '';
+  display: table;
+}
+.type2 .header::after {
+  clear: both;
+}
+.type2 .header .date {
+  float: left;
+  font-size: 12px;
+  text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;
+}
+.type2 .menu-content {
+  float: right;
+}
+.type2 .menu-content li {
+  margin: 0 5px;
+  position: relative;
+}
+.type2 .menu-content span {
+  transition: all 0.3s;
+  opacity: 0;
+}
+.type2 .data {
+  color: #fff;
+  -webkit-transform: translateY(calc(70px + 4em));
+          transform: translateY(calc(70px + 4em));
+}
+.type2 .title a {
+  color: #fff;
+  text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;
+}
+.type2 .button {
+  display: block;
+  width: 100px;
+  margin: 2em auto 1em;
+  text-align: center;
+  font-size: 12px;
+  color: #fff;
+  line-height: 1;
+  position: relative;
+  font-weight: 700;
+}
+.type2 .button::after {
+  content: '\2192';
+  opacity: 0;
+  position: absolute;
+  right: 0;
+  top: 50%;
+  -webkit-transform: translate(0, -50%);
+          transform: translate(0, -50%);
+  transition: all 0.3s;
+}
+.type2 .button:hover::after {
+  -webkit-transform: translate(5px, -50%);
+          transform: translate(5px, -50%);
+  opacity: 1;
+}
+
+  </style>
+<script>
+  window.console = window.console || function(t) {};
+</script>
+<script>
+  if (document.location.search.match(/type=embed/gi)) {
+    window.parent.postMessage("resize", "*");
+  }
+</script>
+</head>
+<body translate="no">
+    
+    <div class="row">
+        <div class="type2">
+            
+        </div>
+    </div>
+    
+    <div class="row leaves" id="items">
+    
+        <div class="type2 card">
+            <div class="wrapper" style="background: url({$image_url}) center/cover no-repeat;">
+                <div class="header">
+                    <div class="date">
+                        <span class="year">{$creation_date}</span>
+                    </div>
+                    <ul class="menu-content">
+                        <li>
+                        <a href="#" class="fa fa-bookmark-o"></a>
+                        </li>
+                        <li><a href="#" class="fa fa-heart-o"><span>18</span></a></li>
+                        <li><a href="#" class="fa fa-comment-o"><span>3</span></a></li>
+                    </ul>
+                    </div>
+                    <div class="data">
+                        <div class="content">
+                            <span class="author">{$author}</span>
+                            <h1 class="title"><a href="{$guid}">{$title}</a></h1>
+                            <p class="text">{$description}</p>
+                            <a href="{$guid}" class="button">Read more</a>
+                        </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+<script type="text/javascript">
+        (function(){
+
+        if (location.protocol != 'https:')
+        {
+         location.href = 'https:' + window.location.href.substring(window.location.protocol.length);
+        }
+
+		// on load, set global vars and objects
+		
+		var branch = new branches();
+		const urlParams = new URLSearchParams(window.location.search);
+        const GETp = urlParams.get('p');
+        const GETchannel = urlParams.get('channel');
+		var items = {};
+
+		const displayamount = 10; // the items per 'page'
+		const minload = 20;
+		var currentdisplay = 0; // the total items already displayed
+		var listlength = 0 // Object.keys(cardsjson).length; // the current length of the list
+		var sliceat = 0;
+		var sliced = 0;
+		if (!(!GETchannel)) {
+		    var fetchurl = '/42/6x7.php?channel=' + GETchannel + '&v=json';
+		} else {
+		    var fetchurl = '/42/6x7.php?p=' + GETp + '&v=json';
+		}
+		console.log('fetchurl: ' + fetchurl);
+
+		
+		var laf = new lostandfound();
+		
+		// on load function
+		
+        fetch(fetchurl + '&limstart=' + listlength + '&limend=' + minload , { 
+          method: 'GET'
+        })
+        .then(function(response) { return response.json(); })
+        .then(function(json) {
+      	    branch.climbABranch(json);
+			// add json.items to the global object items
+			items = json.items;
+			listlength = json.items.length; // the current length of the list
+			// move to the function
+			addItems(0);
+
+        });
+
+		function addItems(append = 1) {
+			// slice the global items based on the page parameter...?
+			// add the items to the current DOM element
+			sliceat = Math.min(displayamount,listlength);
+			var sliced = laf.objSlice(items, currentdisplay, currentdisplay + sliceat);
+			branch.leavesLuv('items',sliced,append);
+			currentdisplay += sliceat;
+		}
+
+		
+		//on scroll. no jQuery !
+		window.onscroll = function () {
+		    // if the window display, after scrolling down has reached the bottom: the current X axis - (doc height - window height) then
+			if(Math.abs(window.scrollY - (document.documentElement.scrollHeight - window.innerHeight)) < 1) {
+			    console.log("listlength: " + listlength);
+			    console.log("displayamount: " + displayamount);
+			    console.log("currentdisplay: " + currentdisplay);
+				   // ajax call get data from server and append to the div
+				   var aggitems = {};
+					if (currentdisplay > 0) {
+						if (listlength - currentdisplay <= 0) {
+                            console.log("ajax!");
+                                    fetch(fetchurl + '&limstart=' + listlength + '&limend=' + (listlength + displayamount) , { 
+                                      method: 'GET'
+                                    })
+                                    .then(function(response) { return response.json(); })
+                                    .then(function(json) {
+                            			// add json.items to the global object items
+                            			console.log('json.items:');
+                            			console.log(json.items);
+                            			items = laf.objUnionAll(items,json.items);
+                            			console.log('items:');
+                            			console.log(items);
+                            			listlength = Object.keys(items).length; // the current length of the list
+                            			// move to the function
+
+                                    });
+						}
+							sliceat = Math.min(displayamount,listlength - currentdisplay);
+							aggitems = laf.objSlice(items,currentdisplay, currentdisplay + sliceat);
+						
+						console.log('listlength:' + listlength);
+						branch.leavesLuv('items',aggitems,1);
+						currentdisplay += sliceat;
+						listlength += laf.isError(aggitems.length,0);
+					}
+					
+			}    
+        };
+        
+
+        })();
+</script>
+
+
+</body></html>

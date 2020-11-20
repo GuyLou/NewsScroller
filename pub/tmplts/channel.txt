@@ -1,0 +1,65 @@
+<div id="wrapper" class="branches">
+<div id="channel_{$key}" class="schannel{$bulk}" >
+    	    
+			<div class="twPc-div">
+			<a class="twPc-bg twPc-block">
+    
+             <img id="ch_img_{$key}" src = "{$image_url}">
+            
+    </a>
+
+	<div>
+		<div class="twPc-button">
+		    <button class="btn btn-xs btn42"><i class="fa fa-rss"></i></button>
+            <!-- Twitter Button | you can get from: https://about.twitter.com/tr/resources/buttons#follow -->
+            <!-- a href="https://twitter.com/mertskaplan" class="twitter-follow-button" data-show-count="false" data-size="large" data-show-screen-name="false" data-dnt="true">Follow @mertskaplan</a -->
+            <!-- Twitter Button -->   
+		</div>
+
+
+		<div class="twPc-divUser">
+			<div class="twPc-divName dirclass ">
+				<a href="{$link}"><span id="ch_title_{$key}">{$title}</span></a>
+            
+			</div>
+			<div class="twPc-desc dirclass">
+			<a href="{$link}"><span id="ch_description_{$key}">{$description}</span></a>
+            
+            </div>
+		</div>
+
+		<div class="twPc-divStats">
+			<ul class="twPc-Arrange">
+				<li class="twPc-ArrangeSizeFit">
+			<button class="btn btn-link editbtn" id="int_id_{$key}">
+            
+							<span class="twPc-StatLabel twPc-block">Edit</span>
+							<span class="glyphicon glyphicon-wrench"></span>
+						</button>
+					</li>
+            					
+					<li class="twPc-ArrangeSizeFit">
+					
+			<button class="btn btn-link openbtn" id="open_ch_id_{$channel_id}" routeto="stream_ch_{$channel_id}">
+            		<span class="twPc-StatLabel twPc-block">Open</span>
+							<span class="glyphicon glyphicon-film"></span>
+						</button>
+					</li>
+					<li class="twPc-ArrangeSizeFit">
+            <button class="btn btn-link viewsbtn channel-share{$bulk}" id="ch_share_{$key}">
+            		<span class="twPc-StatLabel twPc-block">Share</span>
+							<i class="fa fa-share" aria-hidden="true"></i>
+						</a>
+					</li>
+					<li class="twPc-ArrangeSizeFit">
+            <button class="btn btn-link viewsbtn channel-horn{$bulk}" id="horn_{$key}">
+            		<span class="twPc-StatLabel twPc-block">Horn</span>
+							<i class="fa fa-bullhorn" aria-hidden="true"></i>
+						</a>
+					</li>
+				</ul>
+			</div>
+		</div>
+	</div>
+</div>
+</div>

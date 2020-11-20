@@ -1,0 +1,317 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="">
+  <meta name="author" content="">
+
+  <title>42 knots - Content streaming</title>
+
+  <!-- Bootstrap core CSS -->
+  <link href="/pub/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+
+  <!-- Custom fonts for this template -->
+  <link href="/pub/fontawesome-free/css/all.min.css" rel="stylesheet">
+  <link href="/pub/simple-line-icons/css/simple-line-icons.css" rel="stylesheet" type="text/css">
+  <link href="https://fonts.googleapis.com/css?family=Lato:300,400,700,300italic,400italic,700italic" rel="stylesheet" type="text/css">
+
+  <!-- Custom styles for this template -->
+  <link href="/pub/css/templates/sblanding/landing-page.min.css" rel="stylesheet">
+  
+  <!-- https://www.w3schools.com/howto/howto_js_form_steps.asp -->
+
+	<script src="/pub/js/branches.js"></script>
+    <script src="/pub/js/lostandfound.js"></script>
+
+	<style>
+		/* css form row padding - to work on the input obj */
+	.form-row {
+		padding-bottom: 10px;
+	}
+	/* css form row padding */
+	
+	.view-register.login {
+        display : none;
+    }
+    
+    .view-login.login {
+        display : block;
+    }
+    
+    .view-register {
+        display : block;
+    }
+    
+    .view-login {
+        display : none;
+    }
+	
+	/* Mark input boxes that gets an error on validation: */
+	.form-row input.invalid {
+	  background-color: #ffdddd;
+	}
+	
+	/* Hide all steps by default: */
+	.tab {
+	  display: none;
+	}
+	
+	.opentab {
+		display: flex !important;
+	}
+
+	/* Make circles that indicate the steps of the form: */
+	.step {
+	  height: 15px;
+	  width: 15px;
+	  margin: 0 2px;
+	  background-color: #bbbbbb;
+	  border: none;
+	  border-radius: 50%;
+	  display: inline-block;
+	  opacity: 0.5;
+	}
+
+	/* Mark the active step: */
+	.step.active {
+	  opacity: 1;
+	}
+
+	/* Mark the steps that are finished and valid: */
+	.step.finish {
+	  background-color: #4CAF50;
+	}
+	
+	.form-row {
+		padding: 15px;
+	}
+	
+/*	header.masthead {
+		background:url(/pub/images/sblanding/bg-masthead.jpg) no-repeat center center;
+	}
+*/	
+	</style>
+</head>
+
+<body>
+
+  <!-- Navigation -->
+  <nav class="navbar navbar-light bg-light static-top">
+    <div class="container">
+      <a class="navbar-brand btn " href="/" style="background: rgb(101, 157, 189); color: #FFF2CC; ">42 knots</a>
+    </div>
+  </nav>
+
+  <!-- Masthead -->
+  <header class="masthead text-white text-center branches" style="background:url({$image_url}) no-repeat center center; background-size:cover;">
+    <div class="overlay"></div>
+    <div class="container">
+      <div class="row">
+        <div class="col-xl-9 mx-auto">
+          <h1 class="mb-5 branches" id="ch_title_0">{$title}</h1>
+		  <h2 class="mb-5 branches" id="ch_description_0">{$description}</h2>
+        </div>
+
+	
+      </div>
+    </div>
+  </header>
+
+
+  <!-- Image Showcases -->
+  <section class="showcase">
+    <div class="container-fluid p-0 leaves" id="items">
+        
+      <div class="row no-gutters">
+
+        <div class="col-lg-6 text-white showcase-img half" style="background-image: url('{$image_url}');"></div>
+        <div class="col-lg-6 my-auto showcase-text half">
+          <h2><a href="{$guid}">{$title}</a></h2>
+          <p class="lead mb-0">{$description}</p>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+
+  <!-- Footer -->
+  <footer class="footer bg-light">
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-6 h-100 text-center text-lg-left my-auto">
+          <ul class="list-inline mb-2">
+            <li class="list-inline-item">
+              <a href="#">About</a>
+            </li>
+            <li class="list-inline-item">&sdot;</li>
+            <li class="list-inline-item">
+              <a href="#">Contact</a>
+            </li>
+            <li class="list-inline-item">&sdot;</li>
+            <li class="list-inline-item">
+              <a href="#">Terms of Use</a>
+            </li>
+            <li class="list-inline-item">&sdot;</li>
+            <li class="list-inline-item">
+              <a href="#">Privacy Policy</a>
+            </li>
+          </ul>
+          <p class="text-muted small mb-4 mb-lg-0">&copy; Your Website 2019. All Rights Reserved.</p>
+        </div>
+        <div class="col-lg-6 h-100 text-center text-lg-right my-auto">
+          <ul class="list-inline mb-0">
+            <li class="list-inline-item mr-3">
+              <a href="#">
+                <i class="fab fa-facebook fa-2x fa-fw"></i>
+              </a>
+            </li>
+            <li class="list-inline-item mr-3">
+              <a href="#">
+                <i class="fab fa-twitter-square fa-2x fa-fw"></i>
+              </a>
+            </li>
+            <li class="list-inline-item">
+              <a href="#">
+                <i class="fab fa-instagram fa-2x fa-fw"></i>
+              </a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Bootstrap core JavaScript -->
+  <script src="/pub/jquery/jquery.min.js"></script>
+  <script src="/pub/bootstrap/js/bootstrap.bundle.min.js"></script>
+  <script type="text/javascript">
+	
+	// Https validation
+    if (location.protocol != 'https:')
+    {
+     location.href = 'https:' + window.location.href.substring(window.location.protocol.length);
+    }
+	
+ </script>
+<script type="text/javascript">
+        (function(){
+
+        if (location.protocol != 'https:')
+        {
+         location.href = 'https:' + window.location.href.substring(window.location.protocol.length);
+        }
+
+		// on load, set global vars and objects
+		
+		var branch = new branches();
+		const urlParams = new URLSearchParams(window.location.search);
+        const GETp = urlParams.get('p');
+        const GETchannel = urlParams.get('channel');
+		var items = {};
+
+		const displayamount = 10; // the items per 'page'
+		const minload = 20;
+		var currentdisplay = 0; // the total items already displayed
+		var listlength = 0 // Object.keys(cardsjson).length; // the current length of the list
+		var sliceat = 0;
+		var sliced = 0;
+		if (!(!GETchannel)) {
+		    var fetchurl = '/42/6x7.php?channel=' + GETchannel + '&v=json';
+		} else {
+		    var fetchurl = '/42/6x7.php?p=' + GETp + '&v=json';
+		}
+		console.log('GETchannel: ' + GETchannel);
+		console.log('isset GETchannel: ' + !(!GETchannel));
+		
+		
+		var laf = new lostandfound();
+		
+		// on load function
+		
+        fetch(fetchurl + '&limstart=' + listlength + '&limend=' + minload , { 
+          method: 'GET'
+        })
+        .then(function(response) { return response.json(); })
+        .then(function(json) {
+      	    branch.climbABranch(json);
+			// add json.items to the global object items
+			items = json.items;
+			listlength = json.items.length; // the current length of the list
+			// move to the function
+			addItems(0);
+
+        });
+
+		function addItems(append = 1) {
+			// slice the global items based on the page parameter...?
+			// add the items to the current DOM element
+			sliceat = Math.min(displayamount,listlength);
+			var sliced = laf.objSlice(items, currentdisplay, currentdisplay + sliceat);
+			branch.leavesLuv('items',sliced,append);
+			currentdisplay += sliceat;
+			let halves = document.querySelectorAll(".half");
+            for (let i = 0; i < halves.length; i++) {
+                if ((i + 1) % 4 > 1) {
+                    console.log(i +", order-lg-2");
+                    halves[i].classList.add('order-lg-2');
+                } else {
+                    console.log(i +", order-lg-1");
+                    halves[i].classList.add('order-lg-1');
+                }
+                
+            }
+		}
+
+		
+		//on scroll. no jQuery !
+		window.onscroll = function () {
+		    // if the window display, after scrolling down has reached the bottom: the current X axis - (doc height - window height) then
+			if(Math.abs(window.scrollY - (document.documentElement.scrollHeight - window.innerHeight)) < 1) {
+			    console.log("listlength: " + listlength);
+			    console.log("displayamount: " + displayamount);
+			    console.log("currentdisplay: " + currentdisplay);
+				   // ajax call get data from server and append to the div
+				   var aggitems = {};
+					if (currentdisplay > 0) {
+						if (listlength - currentdisplay <= 0) {
+                            console.log("ajax!");
+                                    fetch(fetchurl + '&limstart=' + listlength + '&limend=' + (listlength + displayamount) , { 
+                                      method: 'GET'
+                                    })
+                                    .then(function(response) { return response.json(); })
+                                    .then(function(json) {
+                            			// add json.items to the global object items
+                            			console.log('json.items:');
+                            			console.log(json.items);
+                            			items = laf.objUnionAll(items,json.items);
+                            			console.log('items:');
+                            			console.log(items);
+                            			listlength = Object.keys(items).length; // the current length of the list
+                            			// move to the function
+
+                                    });
+						}
+							sliceat = Math.min(displayamount,listlength - currentdisplay);
+							aggitems = laf.objSlice(items,currentdisplay, currentdisplay + sliceat);
+						
+						console.log('listlength:' + listlength);
+						branch.leavesLuv('items',aggitems,1);
+						currentdisplay += sliceat;
+						listlength += laf.isError(aggitems.length,0);
+					}
+					
+			}    
+        };
+        
+
+        })();
+</script>
+
+
+</body>
+
+</html>

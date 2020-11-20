@@ -10,7 +10,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <title>42 knots</title>
-<base href="https://42knots.midrehov.com/" target="_blank">
+<base href="/" target="_blank">
 
 
 <script src="../pub/js/jquery-2.1.1.min.js" type="text/javascript"></script>
@@ -23,10 +23,8 @@
 <!-- link href="../pub/fonts/42font/style.css" rel="stylesheet" -->
 <link href="../pub/fonts/babelfish/babelfish.css" rel="stylesheet">
 
-<link rel="preload" href="/pub/images/tplicons/tmplt_magazine.png" as="image" type="image/png">
-<link rel="preload" href="/pub/images/tplicons/tmplt_cards.png" as="image" type="image/png">
-<link rel="preload" href="/pub/images/tplicons/tmplt_landing.png" as="image" type="image/png">
-<link rel="preload" href="/pub/images/tplicons/tmplt_42knots.png" as="image" type="image/png">
+<link rel="preload" href="../pub/images/loading.gif" as="image" type="image/gif">
+
 
 
 <link href="../pub/css/twitterstyle.css" type="text/css" rel="stylesheet" media="screen" />
@@ -36,6 +34,7 @@
 
 <!-- Matomo -->
 <script type="text/javascript">
+window.onload = function() {
   var _paq = window._paq || [];
   /* tracker methods like "setCustomDimension" should be called before "trackPageView" */
   _paq.push(['trackPageView']);
@@ -47,6 +46,8 @@
     var d=document, g=d.createElement('script'), s=d.getElementsByTagName('script')[0];
     g.type='text/javascript'; g.async=true; g.defer=true; g.src=u+'piwik.js'; s.parentNode.insertBefore(g,s);
   })();
+
+};
 </script>
 <!-- End Matomo Code -->
 
@@ -147,6 +148,11 @@
 	</div>
 </div>
 <template id="start" routeto2="ftype=flow"></template>
+<template id="artloadwrapper">
+	<div class="media media-item" id="artloading">
+						  <img src="../pub/images/loading.gif" style="display: block;margin-left: auto;margin-right: auto;width: 50%; padding: 10px;">
+	  </div>
+</template>
 <div id="change_password0"  style="display:none;">
     <form action="" method="post" enctype="multipart/form-data" class="change_password" id="change_password">
         <input type="hidden" name="iaction" value="password">
@@ -276,6 +282,7 @@
 		var channelEditFunc = 'editRetailerBtn';
 		var baseurl = ''; // 'https://42knots.midrehov.com/';
 		var fortytwobase ='';
+		var channelbase = '';
 
 		// scroller vars
     	const displayamount = 20; // the items per 'page'
@@ -324,6 +331,27 @@
                     		"textcolor": "#2bb24c",
                     		"background":"#fff",
 							"icon":"feedly babelfish",
+                    		"linkbase":"https://feedly.com/i/subscription/feed%2Fhttps%3A%2F%2F42knots.midrehov.com%2F42%2F6x7.php%3Fv%3Drss%26channel%3D"
+						}
+						,
+						"facebook": {
+                    		"textcolor": "#fff",
+                    		"background":"#3b5998",
+							"icon":"facebook",
+                    		"linkbase":"https://feedly.com/i/subscription/feed%2Fhttps%3A%2F%2F42knots.midrehov.com%2F42%2F6x7.php%3Fv%3Drss%26channel%3D"
+						}
+						,
+						"twitter": {
+                    		"textcolor": "#fff",
+                    		"background":"#1da1f2",
+							"icon":"twitter",
+                    		"linkbase":"https://feedly.com/i/subscription/feed%2Fhttps%3A%2F%2F42knots.midrehov.com%2F42%2F6x7.php%3Fv%3Drss%26channel%3D"
+						}
+						,
+						"linkedin": {
+                    		"textcolor": "#fff",
+                    		"background":"#0077b5",
+							"icon":"linkedin",
                     		"linkbase":"https://feedly.com/i/subscription/feed%2Fhttps%3A%2F%2F42knots.midrehov.com%2F42%2F6x7.php%3Fv%3Drss%26channel%3D"
 						}
 						,
@@ -450,7 +478,6 @@
         	sliced = 0;
     	    scrolliterations = 0;
 			
-			
 			//loopitems(objsjson[ctrlr.loopsobj],'main',ctrlr.func); /* loop through the sliced*/
 			$("#main").append(loopitems(objsjson[ctrlr.loopsobj],ctrlr.func));
 			window[ctrlr.eventTriggers](bulk);
@@ -461,6 +488,8 @@
 			
 			window[ctrlr.specsFunc]();
 			displayView(ctrlr.otype);
+
+			
 		}
 		
 		function init() {
@@ -477,7 +506,7 @@
         	    case 'fbt':
         		    ctrlr = channels; // fbt
         	    break;
-        	    case 'item':
+        	    case 'flow':
         	        objsheader = JSON.parse(JSON.stringify(objsjson['feed']));
         	        objsjson['feed'] = objsjson['feed']['items'];
 		  	        delete objsheader['items'];
@@ -506,7 +535,6 @@
         	        objsjson['feed'] = objsjson['feed']['items'];
 		  	        delete objsheader['items'];
         		    ctrlr = item;
-        		break;
 		    	}
 		    	
 
@@ -566,12 +594,14 @@
             
             // to be imported as a part of channel
             let whois = 'me';
+			let titlelink = `ftype=stream&fid=${channel['owner_id']}`;
             if (typeof channel['whois'] == 'undefined') {
                 if (channel.owner_id != me && channel.owner_type != 'fbt') {
 					whois = 'notme';
 				}
             } else {
 				whois = channel['whois'];
+				titlelink = `channel_id=${channel['channel_id']}`;
 			}
 
 			chtview = {
@@ -630,7 +660,7 @@
                     <div class="card-body pt-5">
                         <img src="${channel.profile_pic}" alt="profile-image" class="profile ${chtview.profile}">
                         ${flowstring}
-                        <h4 class="card-title"><a id="hdlink_${channel['key']}" class="route2" routeto2="ftype=stream&fid=${channel['owner_id']}" href="#"><span style="font-size: 70%; color:#999999; font-style: italic;" class="${chtview.handle}">@${channel.handle} </span><span id="ch_title_${channel['key']}">${channel.title}</span></a></h5>
+                        <h4 class="card-title"><a id="hdlink_${channel['key']}" class="route2" routeto2="${titlelink}" href="#"><span style="font-size: 70%; color:#999999; font-style: italic;" class="${chtview.handle}">@${channel.handle} </span><span id="ch_title_${channel['key']}">${channel.title}</span></a></h5>
                         <p class="card-text" id="ch_description_${channel['key']}">${channel.description}</p>
                         <div class="icon-block">
                             <!-- --> ${btnsstr} <!-- -->
@@ -943,6 +973,8 @@
 				$("#item_0").remove();
 				$("#formtag_0").remove();
 			}
+			let artld = document.getElementById("artloadwrapper").innerHTML;
+			$(artld).insertAfter('#channel_-1');
 
 			$.ajax({
 			   type: "POST",
@@ -952,6 +984,7 @@
 			   //dataType: "text",
 			   success: function(data)
 			   {
+					document.getElementById("artloading").remove();
 			       if(laf.isJSON(data)) {
 			           console.log("fetch Json !");
 			       } else {
@@ -964,7 +997,6 @@
 				   data.otype = 'item';
 				   data.retailer_id = me;
 				   var newitem = drawitem(data,chtypes);
-				   //$("#main").prepend(newitem);
 				   $(newitem).insertAfter('#channel_-1');
 					itemEventsTriggers(antibulk--,'itemSharer');
 					tagsarray[data['obj_id']] = '';
@@ -1004,6 +1036,7 @@
 				   */
 				},
 				error: function(data) {
+					document.getElementById("artloading").remove();
 					console.log(data.responseText);
 				}
 				
@@ -1546,7 +1579,7 @@
 
 	}
 
-		$(window).load(function() {
+		$(window).ready(function() {
 			// check for cache
 			/**/
 			//console.log("typeof localStorage['42knots,objsjson'] !== 'undefined': " + localStorage['42knots,objsjson'] + ", typeof: " + typeof localStorage['42knots,objsjson'] + " && localStorage['42knots,objsjson'].length: " + localStorage['42knots,objsjson'].length + ", (typeof localStorage['42knots,constants']: " + localStorage['42knots,constants'] +  ", typeof: " + typeof localStorage['42knots,constants']);
@@ -1573,6 +1606,7 @@
 						inituser();
 					}
 				});
+				
 
 		});
 
@@ -1610,7 +1644,7 @@
 			});
     	}
 
-    	const timedRefresh = setInterval(loadOnRefresh, 3000000);
+		setInterval(loadOnRefresh, 3000000); // 
 
 
 function setConstants(constants) {
@@ -1639,7 +1673,7 @@ function setConstants(constants) {
 		//
 		feedlink = baseurl + 'index.php?route=retailer/app/json';
 		feedsrc = feedlink + '&ftype=' + ftype;
-		const channelbase = baseurl + '42/6x7.php?v=webapp&channel=';
+		channelbase = baseurl + '42/6x7.php?v=webapp&channel=';
 
 
 }

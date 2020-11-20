@@ -39,34 +39,30 @@
     <!--meta property="fb:admins" content="Facebook numeric ID" / -->
     <!-- default metas end -->
 
+<!-- Matomo -->
+<script type="text/javascript">
+window.onload = function() {
+  var _paq = window._paq || [];
+  /* tracker methods like "setCustomDimension" should be called before "trackPageView" */
+  _paq.push(['trackPageView']);
+  _paq.push(['enableLinkTracking']);
+  (function() {
+    var u="//42knots.midrehov.com/analytics/";
+    _paq.push(['setTrackerUrl', u+'piwik.php']);
+    _paq.push(['setSiteId', '1']);
+    var d=document, g=d.createElement('script'), s=d.getElementsByTagName('script')[0];
+    g.type='text/javascript'; g.async=true; g.defer=true; g.src=u+'piwik.js'; s.parentNode.insertBefore(g,s);
+  })();
+
+};
+</script>
+<!-- End Matomo Code -->
+
 
 <script src="/pub/js/branches3.js"></script>
 <script src="/pub/js/lostandfound.js"></script>
 <style>
-    .single_cat_spread_content {
-        max-width: 342px;
-        float: left;
-        margin: 10px;
-        padding: 10px;
-    }
-    
-    .moreitems {
-        width: 1096px;
-        position: relative;
-    }
-    
-    .sliderfix {
-        max-height: 340px;
-    }
-    
-    .bxslider img {
-        width: 100%;
-    }
 
-    .hdr {
-        font-family: 'old_standard_ttregular';
-        font-weight: bold;
-    }
 
 </style>
 
@@ -89,7 +85,7 @@
     </div>
 
     <div class="main_menu_area">
-      <ul id="nav">
+      <ul id="nav" style="display: none;">
         <li><a href="#section1">Section 1</a>
           <!-- ul>
             <li><a href="#">Single item</a></li>
@@ -174,7 +170,7 @@
             <!-- a class="more" href="#">more</a -->
 			<div class="leaves0" id="l1">
             <div class="single_left_coloum floatleft leaves" id="lcol1"> <img class="branch" src="{$image_url}" alt="" onerr="" />
-              <h3>{$title}</h3>
+              <h3>{$title}</h3><h5 class="artmeta">{$author}, {$pubDate}</h5>
               <p>{$description}</p>
               <a class="readmore" href="{$guid}">read more</a> </div>
 			</div>
@@ -184,7 +180,7 @@
             <!-- a class="more" href="#">more</a -->
             <div class=" leaves0"  id="l2">
             <div class="single_left_coloum floatleft"> <img src="{$image_url}" alt="" onerr="">
-              <h3 class="branch">{$title}</h3>
+              <h3 class="branch">{$title}</h3><h5 class="artmeta">{$author}, {$pubDate}</h5>
               <p class="branch">{$description}</p>
               <a class="readmore branch" href="{$guid}">read more</a> </div>
              </div>
@@ -197,7 +193,7 @@
             <!-- a class="more" href="#">more</a -->
             <div class="leaves0" id="l3">
                 <div class="single_cat_left_content floatleft"> <img class="branch" src="{$image_url}" alt="" onerr="" />
-                  <h3 class="branch">{$title}</h3>
+                  <h3 class="branch">{$title}</h3><h5 class="artmeta">{$author}, {$pubDate}</h5>
                   <p class="branch">{$description}</p>
     			  <a class="readmore branch" href="{$guid}">read more</a> 
                   <p class="single_cat_left_content_meta"><span class="branch">{$author}</span></p>
@@ -213,9 +209,9 @@
               <li>
                 <div class="single_cat_right_content">
 					<img class="branch" src="{$image_url}" alt="" onerr="" />
-                  <h3 class="branch">{$title}</h3>
+                  <h3 class="branch">{$title}</h3><h5 class="artmeta">{$author}, {$pubDate}</h5>
                   <p class="branch">{$description}</p>
-                  <p class="single_cat_right_content_meta"><a href="{$guid}" class="branch"><span>read more</span></a> 3 hours ago</p>
+                  <p class="single_cat_right_content_meta"><a href="{$guid}" class="branch"><span>read more</span></a></p>
                 </div>
               </li>
             </ul>
@@ -224,9 +220,9 @@
             <h2 class="title">Section 5</h2>
             <div class="leaves0" id="l5">
                 <div class="single_cat_right_content editorial"> <img class="branch" src="{$image_url}" alt="" />
-                  <h3 class="branch">{$title}</h3>
+                  <h3 class="branch">{$title}</h3><h5 class="artmeta">{$author}, {$pubDate}</h5>
     			  <p class="branch">{$description}</p>
-    			  <p class="single_cat_right_content_meta"><a href="{$guid}" class="branch"><span>read more</span></a> 3 hours ago</p>
+    			  <p class="single_cat_right_content_meta"><a href="{$guid}" class="branch"><span>read more</span></a></p>
                 </div>
             </div>
 
@@ -296,14 +292,14 @@
         </div>
         <div class="single_sidebar"> <img src="/pub/assets/images/news-reporter/add1.png" alt="" /> </div>
         <div class="single_sidebar">
-          <h2 class="title">ADs</h2>
+          <h2 class="title"  class="notmobile" style="display: none;">ADs</h2>
           <img src="/pub/assets/images/news-reporter/add2.png" alt="" /> </div>
       </div>
         <div class="moreitems">
             <h2 class="title">Section 7</h2>
             <div  class="leaves0" id="l6">
                 <div class="single_cat_spread_content"> <img class="branch" src="{$image_url}" alt="" onerr="" />
-                  <h3 class="branch">{$title}</h3>
+                  <h3 class="branch">{$title}</h3><h5 class="artmeta">{$author}, {$pubDate}</h5>
                   <p class="branch">{$description}</p>
         		  <a class="readmore branch" href="{$guid}">read more</a> 
                   <p class="single_cat_left_content_meta"><span class="branch">{$author}</span> |  29 comments</p>
@@ -346,7 +342,7 @@
 <script type="text/javascript" src="/pub/assets/js/news-reporter/selectnav.min.js"></script> 
 <script type="text/javascript">
 
-$(window).load(function() {
+$(window).ready(function() {
 
 		var items = {};
 		var headerdata = {};

@@ -1,3 +1,3 @@
-# 42knots frontend
-## The webApp of 42knots project opensourced
- 
+# NewsScroller frontend
+## The frontend webApp of the Newsscroller project, opensourced
+

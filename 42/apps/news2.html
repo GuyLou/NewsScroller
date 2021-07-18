@@ -1,0 +1,747 @@
+<!DOCTYPE html>
+<html>
+<head>
+
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" type="text/css" href="/pub/assets/css/bootstrap.min.css">
+<link rel="stylesheet" type="text/css" href="/pub/assets/css/font-awesome.min.css">
+<link rel="stylesheet" type="text/css" href="/pub/assets/css/animate.css">
+<link rel="stylesheet" type="text/css" href="/pub/assets/css/font.css">
+<link rel="stylesheet" type="text/css" href="/pub/assets/css/li-scroller.css">
+<link rel="stylesheet" type="text/css" href="/pub/assets/css/slick.css">
+<link rel="stylesheet" type="text/css" href="/pub/assets/css/jquery.fancybox.css">
+<link rel="stylesheet" type="text/css" href="/pub/assets/css/newstheme2.css">
+<link rel="stylesheet" type="text/css" href="/pub/assets/css/newsfeed2.css">
+<base target="_blank">
+
+
+    <!-- default metas -->
+
+    <title>NewsScroller</title>    
+    <meta name="description" content="Content streaming">
+
+    <meta name="keywords" content="NewsScroller, content, streaming, rss, newsfeed">
+
+    <!-- Twitter Card data -->
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:title" content="NewsScroller">
+    <meta name="twitter:url" content="https://42knots.midrehov.com/">
+    <meta name="twitter:description" content="Content streaming">
+    <meta name="twitter:image" content="https://42knots.midrehov.com/image/catalog/logo.png">
+
+    <!-- Open Graph data -->
+    <meta property="og:title" content="NewsScroller">
+    <meta property="og:type" content="article" />
+    <meta property="og:url" content="https://42knots.midrehov.com/">
+    <meta property="og:image" content="https://42knots.midrehov.com/image/catalog/logo.png">
+    <meta property="og:description" content="Content streaming">
+    <meta property="og:site_name" content="NewsScroller">
+    <!--meta property="fb:admins" content="Facebook numeric ID" / -->
+    <!-- default metas end -->
+
+
+<link href="/pub/fonts/oldstandard/oldstandard.css" rel="stylesheet">
+<!--[if lt IE 9]>
+<script src="/pub/assets/js/html5shiv.min.js"></script>
+<script src="/pub/assets/js/respond.min.js"></script>
+<![endif]-->
+</head>
+<body>
+<div id="preloader">
+  <div id="status">&nbsp;</div>
+</div>
+<a class="scrollToTop" href="#"><i class="fa fa-angle-up"></i></a>
+<div class="container" id="items">
+  <header id="header">
+    <div class="row">
+      <div class="col-lg-12 col-md-12 col-sm-12">
+        <div class="header_top">
+          <div class="header_top_left">
+            <sub class="pby">powered by NewsScroller</sub>
+            <!-- ul class="top_nav">
+              <li><a href="index.html">Home</a></li>
+              <li><a href="#">About</a></li>
+              <li><a href="pages/contact.html">Contact</a></li>
+            </ul -->
+          </div>
+          <div class="header_top_right hdttl" id="today">
+            <p>{$todaysdate}</p>
+          </div>
+        </div>
+      </div>
+      <div class="col-lg-12 col-md-12 col-sm-12">
+        <div class="header_bottom">
+          <div class="hdttl" id="headertitle">
+            <div class="logo_area"><span class="hdr">{$title} </span><br><span class="hdr">{$description}<!-- img src="images/addbanner_728x90_V1.jpg" alt="" --></span></div>
+            <div class="add_banner"><a href="#" class="logo"><img src="{$image_url}" alt=""></a></div>
+        </div>
+        </div>
+      </div>
+    </div>
+  </header>
+  <section id="navArea">
+    <nav class="navbar navbar-inverse" role="navigation">
+      <div class="navbar-header">
+        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar"> <span class="sr-only">Toggle navigation</span> <span class="icon-bar"></span> <span class="icon-bar"></span> <span class="icon-bar"></span> </button>
+      </div>
+      <div id="navbar" class="navbar-collapse collapse">
+        <ul class="nav navbar-nav main_nav">
+          <li class="active"><a href="index.html"><span class="fa fa-home desktop-home"></span><span class="mobile-show">Home</span></a></li>
+          <li><a href="#Section1">Section 1</a></li>
+        <!--
+          <li class="dropdown"> <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Mobile</a>
+            <ul class="dropdown-menu" role="menu">
+              <li><a href="#">Android</a></li>
+              <li><a href="#">Samsung</a></li>
+              <li><a href="#">Nokia</a></li>
+              <li><a href="#">Walton Mobile</a></li>
+              <li><a href="#">Sympony</a></li>
+            </ul>
+          </li>
+        -->
+          <li><a href="#Section2">Section 2</a></li>
+          <li><a href="#Section3">Section 3</a></li>
+          <li><a href="#Section4">Section 4</a></li>
+          <li><a href="#More">More</a></li>
+        </ul>
+      </div>
+    </nav>
+  </section>
+  <section id="newsSection">
+    <div class="row">
+      <div class="col-lg-12 col-md-12">
+        <div class="latest_newsarea"> <span class="bgpurple notmobile">Share</span>
+          <ul id="ticker01" class="news_sticker notmobile">
+            <!--
+            <li><a href="#"><img src="images/news_thumbnail3.jpg" alt="">My First News Item</a></li>
+            <li><a href="#"><img src="images/news_thumbnail3.jpg" alt="">My Second News Item</a></li>
+            <li><a href="#"><img src="images/news_thumbnail3.jpg" alt="">My Third News Item</a></li>
+            <li><a href="#"><img src="images/news_thumbnail3.jpg" alt="">My Four News Item</a></li>
+            <li><a href="#"><img src="images/news_thumbnail3.jpg" alt="">My Five News Item</a></li>
+            <li><a href="#"><img src="images/news_thumbnail3.jpg" alt="">My Six News Item</a></li>
+            <li><a href="#"><img src="images/news_thumbnail3.jpg" alt="">My Seven News Item</a></li>
+            <li><a href="#"><img src="images/news_thumbnail3.jpg" alt="">My Eight News Item</a></li>
+            <li><a href="#"><img src="images/news_thumbnail2.jpg" alt="">My Nine News Item</a></li>
+            -->
+          </ul>
+          <div class="social_area leaves0" id="social">
+            <ul class="social_nav leaves">
+              <li class="facebook"><a href="https://www.facebook.com/sharer/sharer.php?u=https://42knots.midrehov.com/42/6x7.php?v=webapp&channel={$channel}"></a></li>
+              <li class="twitter"><a href="https://twitter.com/share?url=https://42knots.midrehov.com/42/6x7.php?v=webapp&channel={$channel}"></a></li>
+              <li class="whatsapp"><a href="whatsapp://send?text=https://42knots.midrehov.com/42/6x7.php?v=webapp&channel={$channel}"></a></li>
+              <li class="feedly"><a href="https://feedly.com/i/subscription/feed%2Fhttps%3A%2F%2F42knots.midrehov.com%2F42%2F6x7.php%3Fv%3Drss%26channel%3D{$channel}"></a></li>
+              <li class="rss"><a href="https://42knots.midrehov.com/42/6x7.php?v=rss&channel={$channel}"></a></li>
+              <li class="piedpiper"><a href="https://www.piedpiper.com/"></a></li>
+              <li class="youtube"><a href="#"></a></li>
+              <li class="mail"><a href="mailto:?Body=https://42knots.midrehov.com/42/6x7.php?v=webapp&amp;channel={$channel}"></a></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  <section id="sliderSection">
+    <div class="row">
+      <div class="col-lg-8 col-md-8 col-sm-8">
+        <div class="slick_slider leaves0" id="l1">
+          <div class="single_iteam leaves"> <a href="{$guid}"> <img src="{$image_url}" alt=""></a>
+            <div class="slider_article">
+              <h2><a class="slider_tittle" href="{$guid}">{$title}</a></h2>
+              <p>{$description}</p>
+            </div>
+          </div>
+        <!--
+          <div class="single_iteam"> <a href="pages/single_page.html"> <img src="images/slider_img4.jpg" alt=""></a>
+            <div class="slider_article">
+              <h2><a class="slider_tittle" href="pages/single_page.html">Fusce eu nulla semper porttitor felis sit amet</a></h2>
+              <p>Nunc tincidunt, elit non cursus euismod, lacus augue ornare metus, egestas imperdiet nulla nisl quis mauris. Suspendisse a pharetra urna. Morbi dui...</p>
+            </div>
+          </div>
+          <div class="single_iteam"> <a href="pages/single_page.html"> <img src="images/slider_img2.jpg" alt=""></a>
+            <div class="slider_article">
+              <h2><a class="slider_tittle" href="pages/single_page.html">Fusce eu nulla semper porttitor felis sit amet</a></h2>
+              <p>Nunc tincidunt, elit non cursus euismod, lacus augue ornare metus, egestas imperdiet nulla nisl quis mauris. Suspendisse a pharetra urna. Morbi dui...</p>
+            </div>
+          </div>
+          <div class="single_iteam"> <a href="pages/single_page.html"> <img src="images/slider_img3.jpg" alt=""></a>
+            <div class="slider_article">
+              <h2><a class="slider_tittle" href="pages/single_page.html">Fusce eu nulla semper porttitor felis sit amet</a></h2>
+              <p>Nunc tincidunt, elit non cursus euismod, lacus augue ornare metus, egestas imperdiet nulla nisl quis mauris. Suspendisse a pharetra urna. Morbi dui...</p>
+            </div>
+          </div>
+          <div class="single_iteam"> <a href="pages/single_page.html"> <img src="images/slider_img1.jpg" alt=""></a>
+            <div class="slider_article">
+              <h2><a class="slider_tittle" href="pages/single_page.html">Fusce eu nulla semper porttitor felis sit amet</a></h2>
+              <p>Nunc tincidunt, elit non cursus euismod, lacus augue ornare metus, egestas imperdiet nulla nisl quis mauris. Suspendisse a pharetra urna. Morbi dui...</p>
+            </div>
+          </div>
+        -->
+        </div>
+      </div>
+      <div class="col-lg-4 col-md-4 col-sm-4">
+        <div class="latest_post">
+          <h2><span class="bgpurple">Latest post</span></h2>
+          <div class="latest_post_container">
+            <div id="prev-button"><i class="fa fa-chevron-up"></i></div>
+            <ul class="latest_postnav leaves0" id="l2">
+              <li>
+                <div class="media leaves"> <a href="{$guid}" class="media-left"> <img alt="" src="{$image_url}"> </a>
+                  <div class="media-body"> <a href="{$guid}" class="catg_title"> {$title}</a> </div>
+                </div>
+              </li>
+              <!--
+              <li>
+                <div class="media"> <a href="pages/single_page.html" class="media-left"> <img alt="" src="images/post_img1.jpg"> </a>
+                  <div class="media-body"> <a href="pages/single_page.html" class="catg_title"> Aliquam malesuada diam eget turpis varius 2</a> </div>
+                </div>
+              </li>
+              <li>
+                <div class="media"> <a href="pages/single_page.html" class="media-left"> <img alt="" src="images/post_img1.jpg"> </a>
+                  <div class="media-body"> <a href="pages/single_page.html" class="catg_title"> Aliquam malesuada diam eget turpis varius 3</a> </div>
+                </div>
+              </li>
+              <li>
+                <div class="media"> <a href="pages/single_page.html" class="media-left"> <img alt="" src="images/post_img1.jpg"> </a>
+                  <div class="media-body"> <a href="pages/single_page.html" class="catg_title"> Aliquam malesuada diam eget turpis varius 4</a> </div>
+                </div>
+              </li>
+              <li>
+                <div class="media"> <a href="pages/single_page.html" class="media-left"> <img alt="" src="images/post_img1.jpg"> </a>
+                  <div class="media-body"> <a href="pages/single_page.html" class="catg_title"> Aliquam malesuada diam eget turpis varius 2</a> </div>
+                </div>
+              </li>
+            -->
+            </ul>
+            <div id="next-button"><i class="fa  fa-chevron-down"></i></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  <section id="contentSection">
+    <div class="row">
+      <div class="col-lg-8 col-md-8 col-sm-8">
+        <div class="left_content">
+          <div class="single_post_content">
+            <a name="Section1"></a>
+            <h2><span class="bgpurple">Section 1</span></h2>
+            <div class="single_post_content_left">
+              <ul class="business_catgnav  wow fadeInDown">
+                <li class="leaves0" id="l3">
+                  <figure class="bsbig_fig leaves"> <a href="{$guid}" class="featured_img"> <img alt="{$title}" src="{$image_url}"> <span class="overlay"></span> </a>
+                    <figcaption> <a href="{$guid}">{$title}</a> </figcaption>
+                    <p>{$description}</p>
+                  </figure>
+                </li>
+              </ul>
+            </div>
+            <div class="single_post_content_right">
+              <ul class="spost_nav">
+                <li class="leaves0" id="l4">
+                  <div class="media wow fadeInDown leaves"> <a href="{$guid}" class="media-left"> <img alt="" src="{$image_url}"> </a>
+                    <div class="media-body"> <a href="{$guid}" class="catg_title"> {$title}</a> </div>
+                  </div>
+                </li>
+                <!--
+                <li>
+                  <div class="media wow fadeInDown"> <a href="pages/single_page.html" class="media-left"> <img alt="" src="images/post_img2.jpg"> </a>
+                    <div class="media-body"> <a href="pages/single_page.html" class="catg_title"> Aliquam malesuada diam eget turpis varius 2</a> </div>
+                  </div>
+                </li>
+                <li>
+                  <div class="media wow fadeInDown"> <a href="pages/single_page.html" class="media-left"> <img alt="" src="images/post_img1.jpg"> </a>
+                    <div class="media-body"> <a href="pages/single_page.html" class="catg_title"> Aliquam malesuada diam eget turpis varius 3</a> </div>
+                  </div>
+                </li>
+                <li>
+                  <div class="media wow fadeInDown"> <a href="pages/single_page.html" class="media-left"> <img alt="" src="images/post_img2.jpg"> </a>
+                    <div class="media-body"> <a href="pages/single_page.html" class="catg_title"> Aliquam malesuada diam eget turpis varius 4</a> </div>
+                  </div>
+                </li>
+                -->
+              </ul>
+            </div>
+          </div>
+          <div class="fashion_technology_area">
+            <div class="fashion">
+              <div class="single_post_content">
+                <a name="Section2"></a>
+                <h2><span class="bgpurple">Section 2</span></h2>
+                <ul class="business_catgnav wow fadeInDown">
+                  <li class="leaves0" id="l5">
+                    <figure class="bsbig_fig leaves"> <a href="{$guid}" class="featured_img"> <img alt="" src="{$image_url}"> <span class="overlay"></span> </a>
+                      <figcaption> <a href="{$guid}">{$title}</a> </figcaption>
+                      <p>{$description}</p>
+                    </figure>
+                  </li>
+                </ul>
+                <ul class="spost_nav">
+                  <li class="leaves0" id="l6">
+                    <div class="media wow fadeInDown leaves"> <a href="{$guid}" class="media-left"> <img alt="" src="{$image_url}"> </a>
+                      <div class="media-body"> <a href="{$guid}" class="catg_title"> {$title}</a> </div>
+                    </div>
+                  </li>
+                  <!--
+                  <li>
+                    <div class="media wow fadeInDown"> <a href="pages/single_page.html" class="media-left"> <img alt="" src="images/post_img2.jpg"> </a>
+                      <div class="media-body"> <a href="pages/single_page.html" class="catg_title"> Aliquam malesuada diam eget turpis varius 2</a> </div>
+                    </div>
+                  </li>
+                  <li>
+                    <div class="media wow fadeInDown"> <a href="pages/single_page.html" class="media-left"> <img alt="" src="images/post_img1.jpg"> </a>
+                      <div class="media-body"> <a href="pages/single_page.html" class="catg_title"> Aliquam malesuada diam eget turpis varius 3</a> </div>
+                    </div>
+                  </li>
+                  <li>
+                    <div class="media wow fadeInDown"> <a href="pages/single_page.html" class="media-left"> <img alt="" src="images/post_img2.jpg"> </a>
+                      <div class="media-body"> <a href="pages/single_page.html" class="catg_title"> Aliquam malesuada diam eget turpis varius 4</a> </div>
+                    </div>
+                  </li>
+                -->
+                </ul>
+              </div>
+            </div>
+            <div class="technology">
+              <div class="single_post_content">
+                <a name="Section3"></a>
+                <h2><span class="bgpurple">Section 3</span></h2>
+                <ul class="business_catgnav">
+                  <li class="leaves0" id="l7">
+                    <figure class="bsbig_fig wow fadeInDown leaves"> <a href="{$guid}" class="featured_img"> <img alt="" src="{$image_url}"> <span class="overlay"></span> </a>
+                      <figcaption> <a href="{$guid}">{$title}</a> </figcaption>
+                      <p>{$description}</p>
+                    </figure>
+                  </li>
+                </ul>
+                <ul class="spost_nav">
+                  <li class="leaves0" id="l8">
+                    <div class="media wow fadeInDown leaves"> <a href="{$guid}" class="media-left"> <img alt="" src="{$image_url}"> </a>
+                      <div class="media-body"> <a href="{$guid}" class="catg_title"> {$title}</a> </div>
+                    </div>
+                  </li>
+                  <!--
+                  <li>
+                    <div class="media wow fadeInDown"> <a href="pages/single_page.html" class="media-left"> <img alt="" src="images/post_img2.jpg"> </a>
+                      <div class="media-body"> <a href="pages/single_page.html" class="catg_title"> Aliquam malesuada diam eget turpis varius 2</a> </div>
+                    </div>
+                  </li>
+                  <li>
+                    <div class="media wow fadeInDown"> <a href="pages/single_page.html" class="media-left"> <img alt="" src="images/post_img1.jpg"> </a>
+                      <div class="media-body"> <a href="pages/single_page.html" class="catg_title"> Aliquam malesuada diam eget turpis varius 3</a> </div>
+                    </div>
+                  </li>
+                  <li>
+                    <div class="media wow fadeInDown"> <a href="pages/single_page.html" class="media-left"> <img alt="" src="images/post_img2.jpg"> </a>
+                      <div class="media-body"> <a href="pages/single_page.html" class="catg_title"> Aliquam malesuada diam eget turpis varius 4</a> </div>
+                    </div>
+                  </li>
+                -->
+                </ul>
+              </div>
+            </div>
+          </div>
+          <!-- div class="single_post_content">
+            <h2><span class="bgpurple">Photography</span></h2>
+            <ul class="photograph_nav  wow fadeInDown">
+              <li>
+                <div class="photo_grid">
+                  <figure class="effect-layla"> <a class="fancybox-buttons" data-fancybox-group="button" href="images/photograph_img2.jpg" title="Photography Ttile 1"> <img src="images/photograph_img2.jpg" alt=""/></a> </figure>
+                </div>
+              </li>
+              <li>
+                <div class="photo_grid">
+                  <figure class="effect-layla"> <a class="fancybox-buttons" data-fancybox-group="button" href="images/photograph_img3.jpg" title="Photography Ttile 2"> <img src="images/photograph_img3.jpg" alt=""/> </a> </figure>
+                </div>
+              </li>
+              <li>
+                <div class="photo_grid">
+                  <figure class="effect-layla"> <a class="fancybox-buttons" data-fancybox-group="button" href="images/photograph_img4.jpg" title="Photography Ttile 3"> <img src="images/photograph_img4.jpg" alt=""/> </a> </figure>
+                </div>
+              </li>
+              <li>
+                <div class="photo_grid">
+                  <figure class="effect-layla"> <a class="fancybox-buttons" data-fancybox-group="button" href="images/photograph_img4.jpg" title="Photography Ttile 4"> <img src="images/photograph_img4.jpg" alt=""/> </a> </figure>
+                </div>
+              </li>
+              <li>
+                <div class="photo_grid">
+                  <figure class="effect-layla"> <a class="fancybox-buttons" data-fancybox-group="button" href="images/photograph_img2.jpg" title="Photography Ttile 5"> <img src="images/photograph_img2.jpg" alt=""/> </a> </figure>
+                </div>
+              </li>
+              <li>
+                <div class="photo_grid">
+                  <figure class="effect-layla"> <a class="fancybox-buttons" data-fancybox-group="button" href="images/photograph_img3.jpg" title="Photography Ttile 6"> <img src="images/photograph_img3.jpg" alt=""/> </a> </figure>
+                </div>
+              </li>
+            </ul>
+          </div -->
+          <div class="single_post_content">
+            <a name="Section4"></a>
+            <h2><span class="bgpurple">Section 4</span></h2>
+            <div class="single_post_content_left">
+              <ul class="business_catgnav">
+                <li class="leaves0" id="l9">
+                  <figure class="bsbig_fig  wow fadeInDown leaves"> <a class="featured_img" href="{$guid}"> <img src="{$image_url}" alt=""> <span class="overlay"></span> </a>
+                    <figcaption> <a href="{$guid}">{$title}</a> </figcaption>
+                    <p>{$description}</p>
+                  </figure>
+                </li>
+              </ul>
+            </div>
+            <div class="single_post_content_right">
+              <ul class="spost_nav">
+                <li class="leaves0" id="l10">
+                  <div class="media wow fadeInDown leaves"> <a href="{$guid}" class="media-left"> <img alt="" src="{$image_url}"> </a>
+                    <div class="media-body"> <a href="{$guid}" class="catg_title"> {$title}</a> </div>
+                  </div>
+                </li>
+                <!--
+                <li>
+                  <div class="media wow fadeInDown"> <a href="pages/single_page.html" class="media-left"> <img alt="" src="images/post_img2.jpg"> </a>
+                    <div class="media-body"> <a href="pages/single_page.html" class="catg_title"> Aliquam malesuada diam eget turpis varius 2</a> </div>
+                  </div>
+                </li>
+                <li>
+                  <div class="media wow fadeInDown"> <a href="pages/single_page.html" class="media-left"> <img alt="" src="images/post_img1.jpg"> </a>
+                    <div class="media-body"> <a href="pages/single_page.html" class="catg_title"> Aliquam malesuada diam eget turpis varius 3</a> </div>
+                  </div>
+                </li>
+                <li>
+                  <div class="media wow fadeInDown"> <a href="pages/single_page.html" class="media-left"> <img alt="" src="images/post_img2.jpg"> </a>
+                    <div class="media-body"> <a href="pages/single_page.html" class="catg_title"> Aliquam malesuada diam eget turpis varius 4</a> </div>
+                  </div>
+                </li>
+              -->
+              </ul>
+            </div>
+          </div>
+          <div class="single_post_content">
+            <a name="More"></a>
+            <h2><span class="bgpurple">More</span></h2>
+            <ul class="spost_nav">
+              <li class="leaves0" id="l11">
+                <div class="media wow fadeInDown animated animated" style="visibility: visible; animation-name: fadeInDown;"> <a href="{$guid}" class="media-left"> <img alt="" src="{$image_url}"> </a>
+                  <div class="media-body"> <a href="{$guid}" class="catg_title"> {$title}</a>
+                    <p>{$description}</p>
+                  </div>
+                </div>
+              </li>
+              
+            </ul>
+          </div>
+        </div>
+      </div>
+      <div class="col-lg-4 col-md-4 col-sm-4">
+        <aside class="right_content">
+          <div class="single_sidebar notmobile">
+            <h2><span class="bgpurple">NScroller's Latest</span></h2>
+            <ul class="spost_nav">
+              <div class="leaves0" id="l12">
+              <li>
+                <div class="media wow fadeInDown"> <a href="{$guid}" class="media-left"> <img alt="" src="{$image_url}"> </a>
+                  <div class="media-body"> <a href="{$guid}" class="catg_title"> {$title}</a> </div>
+                </div>
+              </li>
+            </div>
+              <!--
+              <li>
+                <div class="media wow fadeInDown"> <a href="pages/single_page.html" class="media-left"> <img alt="" src="images/post_img2.jpg"> </a>
+                  <div class="media-body"> <a href="pages/single_page.html" class="catg_title"> Aliquam malesuada diam eget turpis varius 2</a> </div>
+                </div>
+              </li>
+              <li>
+                <div class="media wow fadeInDown"> <a href="pages/single_page.html" class="media-left"> <img alt="" src="images/post_img1.jpg"> </a>
+                  <div class="media-body"> <a href="pages/single_page.html" class="catg_title"> Aliquam malesuada diam eget turpis varius 3</a> </div>
+                </div>
+              </li>
+              <li>
+                <div class="media wow fadeInDown"> <a href="pages/single_page.html" class="media-left"> <img alt="" src="images/post_img2.jpg"> </a>
+                  <div class="media-body"> <a href="pages/single_page.html" class="catg_title"> Aliquam malesuada diam eget turpis varius 4</a> </div>
+                </div>
+              </li>
+            -->
+            </ul>
+          </div>
+          <!-- div class="single_sidebar notmobile">
+            <ul class="nav nav-tabs" role="tablist">
+              <li role="presentation" class="active"><a href="#category" aria-controls="home" role="tab" data-toggle="tab">Category</a></li>
+              <li role="presentation"><a href="#video" aria-controls="profile" role="tab" data-toggle="tab">Video</a></li>
+              <li role="presentation"><a href="#comments" aria-controls="messages" role="tab" data-toggle="tab">Comments</a></li>
+            </ul>
+            <div class="tab-content">
+              <div role="tabpanel" class="tab-pane active" id="category">
+                <ul>
+                  <li class="cat-item"><a href="#">Sports</a></li>
+                  <li class="cat-item"><a href="#Section2">Section 2</a></li>
+                  <li class="cat-item"><a href="#">Section 1</a></li>
+                  <li class="cat-item"><a href="#">Section 3</a></li>
+                  <li class="cat-item"><a href="#">Games</a></li>
+                  <li class="cat-item"><a href="#">Life &amp; Style</a></li>
+                  <li class="cat-item"><a href="#">Photography</a></li>
+                </ul>
+              </div>
+              <div role="tabpanel" class="tab-pane" id="video">
+                <div class="vide_area">
+                  <iframe width="100%" height="250" src="http://www.youtube.com/embed/h5QWbURNEpA?feature=player_detailpage" frameborder="0" allowfullscreen></iframe>
+                </div>
+              </div>
+              <div role="tabpanel" class="tab-pane" id="comments">
+                <ul class="spost_nav">
+                  <li>
+                    <div class="media wow fadeInDown"> <a href="pages/single_page.html" class="media-left"> <img alt="" src="images/post_img1.jpg"> </a>
+                      <div class="media-body"> <a href="pages/single_page.html" class="catg_title"> Aliquam malesuada diam eget turpis varius 1</a> </div>
+                    </div>
+                  </li>
+                  <li>
+                    <div class="media wow fadeInDown"> <a href="pages/single_page.html" class="media-left"> <img alt="" src="images/post_img2.jpg"> </a>
+                      <div class="media-body"> <a href="pages/single_page.html" class="catg_title"> Aliquam malesuada diam eget turpis varius 2</a> </div>
+                    </div>
+                  </li>
+                  <li>
+                    <div class="media wow fadeInDown"> <a href="pages/single_page.html" class="media-left"> <img alt="" src="images/post_img1.jpg"> </a>
+                      <div class="media-body"> <a href="pages/single_page.html" class="catg_title"> Aliquam malesuada diam eget turpis varius 3</a> </div>
+                    </div>
+                  </li>
+                  <li>
+                    <div class="media wow fadeInDown"> <a href="pages/single_page.html" class="media-left"> <img alt="" src="images/post_img2.jpg"> </a>
+                      <div class="media-body"> <a href="pages/single_page.html" class="catg_title"> Aliquam malesuada diam eget turpis varius 4</a> </div>
+                    </div>
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </div -->
+          <div class="single_sidebar wow fadeInDown notmobile">
+            <h2><span class="bgpurple">Sponsor</span></h2>
+            <a class="sideAdd" href="#"><img src="/pub/images/nsbanner.png" alt=""></a> </div>
+          <div class="single_sidebar wow fadeInDown hidden">
+            <h2><span class="bgpurple">Category Archive</span></h2>
+            <select class="catgArchive">
+              <option>Select Category</option>
+              <option>Life styles</option>
+              <option>Sports</option>
+              <option>Section 3</option>
+              <option>Treads</option>
+            </select>
+          </div>
+          <!-- div class="single_sidebar wow fadeInDown notmobile">
+            <h2><span>Links</span></h2>
+            <ul>
+              <li><a href="#">Blog</a></li>
+              <li><a href="#">Rss Feed</a></li>
+              <li><a href="#">Login</a></li>
+              <li><a href="#">Life &amp; Style</a></li>
+            </ul>
+          </div -->
+        </aside>
+      </div>
+    </div>
+  </section>
+  <footer id="footer">
+    <div class="footer_top">
+      <div class="row">
+        <div class="col-lg-4 col-md-4 col-sm-4">
+          <div class="footer_widget wow fadeInRightBig">
+            <h2>About</h2>
+            <p>NewsScroller is a open content sharing platform, designed to create and deliver personalized rss feeds, and json feeds. </p>
+            <address>
+            15 Yemen road, Yemen
+            </address>
+          </div>
+        </div>
+        <div class="col-lg-4 col-md-4 col-sm-4">
+          <!--div class="footer_widget wow fadeInDown">
+            <h2>Tag</h2>
+            <ul class="tag_nav">
+              <li><a href="#Section1">Section 1</a></li>
+              <li><a href="#Section2">Section 2</a></li>
+              <li><a href="#Section3">Section 3</a></li>
+              <li><a href="#Section4">Section 4</a></li>
+              <li><a href="#More">More</a></li>
+            </ul>
+          </div-->
+        </div>
+        <div class="col-lg-4 col-md-4 col-sm-4">
+        </div>
+      </div>
+    </div>
+    <div class="footer_bottom">
+      <p class="copyright">Copyright &copy; 2021 <a href="index.html">Guy Louzon</a></p>
+      <p class="developer">Developed By Wpfreeware</p>
+    </div>
+  </footer>
+</div>
+<script src="/pub/js/branches3.js"></script>
+<script src="/pub/js/lostandfound.js"></script>
+<script src="/pub/assets/js/jquery.min.js"></script> 
+<script src="/pub/assets/js/wow.min.js"></script> 
+<script src="/pub/assets/js/bootstrap.min.js"></script> 
+<script src="/pub/assets/js/slick.min.js"></script> 
+<script src="/pub/assets/js/jquery.li-scroller.1.0.js"></script> 
+<script src="/pub/assets/js/jquery.newsTicker.min.js"></script> 
+<script src="/pub/assets/js/jquery.fancybox.pack.js"></script> 
+<script src="/pub/assets/js/custom.js"></script>
+
+<script type="text/JavaScript">
+$(window).ready(function() {
+
+  // global vars and consts
+  var items = {};
+  var headerdata = {};
+
+  // scrolling vars
+  const displayamount = 5; // the items per 'page'
+  const minload = 40;
+  var currentdisplay = 0; // the total items already displayed.
+  var listlength = 0 // Object.keys(cardsjson).length; // the current length of the list
+  var sliceat = 0;
+  var sliced = 0;
+  var lvdiv0 = new branches({"masterNode":"#items","masterClass":"leaves0","type":"leaves"});
+  //var headerleaf = new branches({"masterNode":".header_area","masterClass":"branch","type":"branches"});
+  var headerleaf = new branches({"masterNode":"#header","masterClass":"hdttl","type":"leaves"});
+
+  // to remove - was set for the slider
+  //var sliderleaf = 3;
+  //currentdisplay += sliderleaf;//set to 3 to keep the 1st 3 to the slider
+
+  var today = new Date();
+  const monthNames = ["January", "February", "March", "April", "May", "June",    "July", "August", "September", "October", "November", "December"  ];
+  const weekDayNames = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
+
+  var baseurl = 'https://42knots.midrehov.com/42/6x7.php?v=json&channel=';
+  var laf = new lostandfound();
+  const urlParams = new URLSearchParams(window.location.search);
+      const GETchannel = urlParams.get('channel');
+  if (!(!GETchannel)) {
+      var fetchurl = baseurl + GETchannel;
+  }
+
+  var poposts = baseurl + '56';
+
+  var laf = new lostandfound();
+		var numOfLeaves = {
+		    // id : number of leaves
+		    //"l0" : 3,
+        "l1" : 1,
+        "l2" : 4,
+        "l3" : 1,
+        "l4" : 4,
+        "l5" : 1,
+        "l6" : 4,
+        "l7" : 1,
+        "l8" : 4,
+        "l9" : 1,
+        "l10" : 4,
+        "l11" : 4
+		};
+
+  // right to left alignment
+  //dirclass = 'directionl';
+  //rtlDirCheck = new RegExp('^[^'+'A-Za-z\u00C0-\u00D6\u00D8-\u00F6\u00F8-\u02B8\u0300-\u0590\u0800-\u1FFF'+'\u2C00-\uFB1C\uFDFE-\uFE6F\uFEFD-\uFFFF'+']*['+'\u0591-\u07FF\uFB1D-\uFDFD\uFE70-\uFEFC'+']');
+
+
+    // fetch the poposts
+    fetch(poposts + '&limstart=' + '0' + '&limend=' + '10', { 
+          method: 'GET'
+        })
+        .then(function(response) { return response.json(); })
+        .then(function(json) {
+          lvdiv0.leavesLuv('l12',json.items,0);
+        });
+
+		// on load functions
+        fetch(fetchurl + '&limstart=' + listlength + '&limend=' + minload , { 
+          method: 'GET'
+        })
+        .then(function(response) { return response.json(); })
+        .then(function(json) {
+
+            
+        headerdata = JSON.parse(JSON.stringify(json));
+        delete headerdata.items;
+        let wrapper = {};
+        wrapper.headerdata = headerdata;
+        headerleaf.leavesLuv("headertitle",wrapper,0);
+        let wrapper2 = {};
+        wrapper2.todaysdate = weekDayNames[today.getDay()] + ', ' + monthNames[today.getMonth()] + ' ' + String(today.getDate()).padStart(2, '0') + ', ' + today.getFullYear();
+        let wrapper4 = {};
+        wrapper4.wrapper2 = wrapper2;
+        headerleaf.leavesLuv("today",wrapper4,0);
+        wrapper4 = {};
+        wrapper2.channel = wrapper.headerdata.channel_id;
+        wrapper4.wrapper2 = wrapper2;
+        lvdiv0.leavesLuv("social",wrapper4,0);
+
+        //wrapper2.channel = wrapper.headerdata.channel_id
+
+        //headerleaf.leavesLuv("sharebar",wrapper,0);
+
+			// add json.items to the global object items
+			items = JSON.parse(JSON.stringify(json.items));
+			listlength = items.length; // test.items.length //json.items.length; // the current length of the list
+			for (var key in numOfLeaves) {
+    			let sliced = laf.objSlice(items, currentdisplay, Math.min(listlength,currentdisplay + numOfLeaves[key]));
+    			currentdisplay = currentdisplay + Math.min(listlength - currentdisplay,numOfLeaves[key]); 
+    			lvdiv0.leavesLuv(key,sliced,0);
+
+			}
+
+      // specifically fill popular, and latest bar
+
+			//let sliced = laf.objSlice(items, 0, Math.min(listlength,6));
+			//lvdiv0.leavesLuv('l7',sliced,0);
+
+		});
+
+		function addItems(append = 1) {
+			// slice the global items based on the page parameter...?
+			// add the items to the current DOM element
+			sliceat = Math.min(displayamount,listlength);
+			let sliced = laf.objSlice(items, currentdisplay, currentdisplay + sliceat);
+			lvdiv0.leavesLuv('l6',sliced,append);
+			currentdisplay += sliceat;
+		}
+
+		//on scroll. no jQuery !
+		function draw() {
+    	sliceat = Math.min(displayamount,listlength - currentdisplay);
+			aggitems = laf.objSlice(items,currentdisplay, currentdisplay + sliceat);
+			lvdiv0.leavesLuv('l11',aggitems,1);
+			currentdisplay += sliceat;
+			listlength = Object.keys(items).length;	    
+		}
+		
+		window.onscroll = function () {
+		    // if the window display, after scrolling down has reached the bottom: the current X axis - (doc height - window height) then
+			if(Math.abs(window.scrollY - (document.documentElement.scrollHeight - window.innerHeight)) < 1) {
+				   // ajax call get data from server and append to the div
+				   var aggitems = {};
+					if (currentdisplay > 0) {
+						if (listlength - currentdisplay <= 0) {
+                                    fetch(fetchurl + '&limstart=' + listlength + '&limend=' + (listlength + displayamount) , { 
+                                      method: 'GET'
+                                    })
+                                    .then(function(response) { return response.json(); })
+                                    .then(function(json) {
+                            			// add json.items to the global object items
+                            			items = laf.objUnionAll(items,json.items);
+                            			listlength = Object.keys(items).length; // the current length of the list
+                            			// move to the function
+                            			draw();
+
+                                    });
+						} else if (listlength - currentdisplay > 0) {
+						    draw();
+						}
+
+					}
+					
+			}    
+        };
+
+  });
+</script>
+</body>
+</html>

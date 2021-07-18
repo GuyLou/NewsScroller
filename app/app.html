@@ -12,7 +12,7 @@
 <title>42 knots</title>
 <base href="/" target="_blank">
 
-
+<!-- Bootstrap -->
 <script src="../pub/js/jquery-2.1.1.min.js" type="text/javascript"></script>
 <link href="../pub/css/3.3.5_bootstrap.min.css" rel="stylesheet" media="screen" />
 <script src="../pub/js/3.3.5_bootstrap.min.js" type="text/javascript"></script>
@@ -23,11 +23,12 @@
 <!-- link href="../pub/fonts/42font/style.css" rel="stylesheet" -->
 <link href="../pub/fonts/babelfish/babelfish.css" rel="stylesheet">
 
+<!-- external styling -->
 <link rel="preload" href="../pub/images/loading.gif" as="image" type="image/gif">
-
-
-
 <link href="../pub/css/twitterstyle.css" type="text/css" rel="stylesheet" media="screen" />
+<link href="../pub/css/sidebar.css" type="text/css" rel="stylesheet" media="screen" />
+
+<!-- own js -->
 <script src="../pub/js/lostandfound.js" type="text/javascript"></script>
 <script src="../pub/js/popup-share.js" type="text/javascript"></script>
 
@@ -73,60 +74,77 @@ window.onload = function() {
 
 <body>
 <div class="navbar navbar-default navbar-static-top" id="topbar">
-
+	<img src="/pub/images/nslogo.png" style="height: 40px;left: 1%;max-width: 100%;transform: translateX(00%);position: absolute;margin-top: 5px; box-shadow: 2px 2px 2px #888;" class="notmobile">
     <ul class="topbar" role="navigation">
+		<li><button class="btn btn-link" id="menu"><span class="icon-tiles babelfish"></button></li>
         <li><button class="btn btn-link" id="backwardsbtn"><span class="icon-back babelfish"></span><span class="notmobile">  Back</span></button></li>
 		<li><button class="btn btn-link route2" routeto2="ftype=flow"  id="rtstream"><span class="icon-feed42 babelfish"></span><span class="notmobile">  Home</span></button></li>
 		<!-- li><button class="btn btn-link route2" routeto2="ftype=stream"  id="rtstream"><span class="icon-boat42 babelfish"></span><span class="notmobile">  Stream</span></button></li -->
-        <li><button class="btn btn-link route2" routeto2="ftype=fbt" id="rtfbt"><span class="icon-film babelfish"></span><span class="notmobile"> Channels</span></button></li>
-        <li><button class="btn btn-link popup-share" id="editpasswordbtn"><span class="icon-key babelfish"></span><span class="notmobile">  Settings</span></button></li>
-        
-        <li><button class="btn btn-link" id="rtout"><span class="icon-exit babelfish"></span><span class="notmobile"> Log out</span></button></li>
         <li><img src="/pub/images/rss-wifi-signal-preloader-gif.gif" style="max-height: 33px; display: none;" id="countdown"></li>
         <li><form id="search"><input type="text" class="form-control-nav" id="searchi" aria-describedby="search1" name="find" placeholder="search"></form></li>
     </ul>
 
 </div>
+<!-- sidebar addition-->
+<!-- https://codepen.io/vincebrown/pen/yyLNPR -->
+<nav class="sidenav hidden" id="sidebar">
+	<ul class="ulsidenav">
+		<li><button class="sideitems btn-link route2" routeto2="ftype=fbt" id="rtfbt"><span class="icon-film babelfish"></span><span class=""> Channels</span></button></li>
+	  
+        <li><button class="sideitems btn-link popup-share" id="editpasswordbtn"><span class="icon-key babelfish"></span><span class="">  Password</span></button></li>
+        
+        <li><button class="sideitems btn-link" id="rtout"><span class="icon-exit babelfish"></span><span class=""> Log out</span></button></li>
+
+		  
+	</ul>
+  </nav>
+
+
+<!-- -->
+
 
 <div class="container">
 	<div class="row">
 		<div class="col-sm-1 col-md-2 col-lg-3">
 		</div>
 		<div class="col-sm-10 col-md-8 col-lg-6">
-			<div class="panel panel-info">
-			    
-                <div class="panel-heading view view-fbt" style="display: block;">
-					<div class="media">
-						
-						<div class="media-body">
-							<div class="form-group has-feedback">
-								    <button id="addChannel" aria-describedby="search" class="form-control btn btn42"><span class="icon-film babelfish"></span></button>
-							</div>
+
+			<div class="panel-heading view view-fbt" style="display: block;">
+				<div class="media">
+					
+					<div class="media-body">
+						<div class="form-group has-feedback">
+								<button id="addChannel" aria-describedby="search" class="form-control btn btn42"><span class="icon-film babelfish"></span></button>
 						</div>
 					</div>
 				</div>
-			    
-				<div class="panel-heading view view-item">
-					<div class="media">
-						<form action="" method="post" enctype="multipart/form-data" id="fetchform">
-							<div class="media-body">
-								<div class="form-group has-feedback">
-									<label class="control-label sr-only" for="inputSuccess5">Hidden label</label>
+			</div>
+			
+			<div class="panel-heading view view-item">
+				<div class="media">
+					<form action="" method="post" enctype="multipart/form-data" id="fetchform">
+						<div class="media-body">
+							<div class="form-group has-feedback">
+								<label class="control-label sr-only" for="inputSuccess5">Hidden label</label>
 
-										<input type="hidden" name="iaction" value="fetchnadd">
-										<input type="hidden" name="tags" value="">
-										<input type="text" class="form-control in42" id="fetch" aria-describedby="search" name="fetchurl" placeholder="paste a url...">
+									<input type="hidden" name="iaction" value="fetchnadd">
+									<input type="hidden" name="tags" value="">
+									<input type="text" class="form-control in42" id="fetch" aria-describedby="search" name="fetchurl" placeholder="paste a url...">
 
-									<span class="icon-chain babelfish form-control-feedback" aria-hidden="true"></span>
-									<span id="search2" class="sr-only">(success)</span>
-								</div>
+								<span class="icon-chain babelfish form-control-feedback" aria-hidden="true"></span>
+								<span id="search2" class="sr-only">(success)</span>
 							</div>
-							<a class="media-left">
-								<button class="btn btn-xs btn42"><span class="icon-cube babelfish"></span></button>
-							</a>
-					</form>
-					</div>
+						</div>
+						<a class="media-left">
+							<button class="btn btn-xs btn42"><span class="icon-cube babelfish"></span></button>
+						</a>
+				</form>
 				</div>
+			</div>
+
+			<div class="panel panel-info">
+			    
+
 				<div class="panel-body" id="main">
                 <div id="newitem0">
                     
@@ -156,10 +174,10 @@ window.onload = function() {
 <div id="change_password0"  style="display:none;">
     <form action="" method="post" enctype="multipart/form-data" class="change_password" id="change_password">
         <input type="hidden" name="iaction" value="password">
-	    <input type="password" class="form-control" aria-describedby="search" name="curpass" style="background-color: beige;" value="" placeholder="current password">
-	        <input type="password" class="form-control" aria-describedby="search" name="newpass" style="background-color: beige;" value="" placeholder="new password">
+	    <input type="password" class="form-control input_edit_style" aria-describedby="search" name="curpass"  value="" placeholder="current password">
+	        <input type="password" class="form-control input_edit_style" aria-describedby="search" name="newpass"  value="" placeholder="new password">
 	        <div class="input-group">
-		        <input type="password" class="form-control" aria-describedby="search" name="confirm" style="background-color: beige;" value="" placeholder="confirm new password" id="confirm">
+		        <input type="password" class="form-control input_edit_style" aria-describedby="search" name="confirm"  value="" placeholder="confirm new password" id="confirm">
 	            <span class="input-group-btn">
 	                <button type="submit" class="btn btn-default btn-twitter gopass"><span class="icon-power babelfish"></span></button>
 	            </span>
@@ -339,7 +357,7 @@ window.onload = function() {
                     		"background":"#3b5998",
 							"icon":"facebook",
                     		"linkbase":"https://feedly.com/i/subscription/feed%2Fhttps%3A%2F%2F42knots.midrehov.com%2F42%2F6x7.php%3Fv%3Drss%26channel%3D"
-						}
+						}/*
 						,
 						"twitter": {
                     		"textcolor": "#fff",
@@ -353,7 +371,7 @@ window.onload = function() {
                     		"background":"#0077b5",
 							"icon":"linkedin",
                     		"linkbase":"https://feedly.com/i/subscription/feed%2Fhttps%3A%2F%2F42knots.midrehov.com%2F42%2F6x7.php%3Fv%3Drss%26channel%3D"
-						}
+						}*/
 						,
                       	"json": {
                     		"textcolor": "#32CD32",
@@ -646,9 +664,9 @@ window.onload = function() {
     	    let itemsarr = chtypes[whois][channel.owner_type]['actions'];
     	    let btns = {};
 			let btnsstr = '';
-            btns['editbutton'] = `<button class="${btnbar['editbutton'].jsClass}" id="${btnbar['editbutton'].idprefix}${channel.key}"><span class="icon-${btnbar['editbutton'].icon} babelfish"></i></button>`;
-            btns['templatebutton'] = `<button class="${btnbar['templatebutton'].jsClass}${channel.bulk}" id="${btnbar['templatebutton'].idprefix}${channel.channel_id}"><span class="icon-${btnbar['templatebutton'].icon} babelfish"></span></button>`;
-            btns['followbutton'] = `<button class="${btnbar['followbutton'].jsClass}" id="${btnbar['followbutton'].idprefix}${channel.owner_id}"  isfl="${channel.IsFl}"><span class="icon-${btnbar['followbutton'].icon} babelfish"></span></button>`;
+            btns['editbutton'] = `<button class="${btnbar['editbutton'].jsClass}" id="${btnbar['editbutton'].idprefix}${channel.key}"><span class="icon-${btnbar['editbutton'].icon} babelfish"></span><span>edit</span></button>`;
+            btns['templatebutton'] = `<button class="${btnbar['templatebutton'].jsClass}${channel.bulk}" id="${btnbar['templatebutton'].idprefix}${channel.channel_id}"><span class="icon-${btnbar['templatebutton'].icon} babelfish"></span><span>template</span></button>`;
+            btns['followbutton'] = `<button class="${btnbar['followbutton'].jsClass}" id="${btnbar['followbutton'].idprefix}${channel.owner_id}"  isfl="${channel.IsFl}"><span class="icon-${btnbar['followbutton'].icon} babelfish"></span><span>follow</span></button>`;
     	    itemsarr.forEach(actn => btnsstr += btns[actn]);
     	    // '<div id="channel_' + channel['key'] + '" class="schannel' + channel.bulk + '" >';
     	    tmplt += `
@@ -664,8 +682,8 @@ window.onload = function() {
                         <p class="card-text" id="ch_description_${channel['key']}">${channel.description}</p>
                         <div class="icon-block">
                             <!-- --> ${btnsstr} <!-- -->
-                            <button id="ch_share_${channel['channel_id']}" class="viewsbtn channel-share${channel.bulk}" href="#"> <span class="icon-share babelfish"></span></button>
-                            <button id="horn_${channel['channel_id']}" class="viewsbtn channel-horn${channel.bulk}" href="#"> <span class="icon-bullhorn babelfish"></span></button>
+                            <button id="ch_share_${channel['channel_id']}" class="viewsbtn channel-share${channel.bulk}" href="#"> <span class="icon-share babelfish"></span><span>share</span></button>
+                            <button id="horn_${channel['channel_id']}" class="viewsbtn channel-horn${channel.bulk}" href="#"> <span class="icon-bullhorn babelfish"></span><span>publish</span></button>
                             
                         </div>
                     </div>
@@ -767,7 +785,7 @@ window.onload = function() {
 			tmplt += specs;
 			tmplt += `<input type="hidden" name="obj_id" value="${itemdata.item_id}">
 					<input type="hidden" name="otype" value="${itemdata.otype}">
-					<input type="text" class="form-control" aria-describedby="search" name="tags" style="background-color: beige;" value="${tags}" placeholder="tag by text, comma seperated" ${dissed}>    								</form>
+					<input type="text" class="form-control input_edit_style" aria-describedby="search" name="tags" value="${tags}" placeholder="tag by text, comma seperated" ${dissed}>    								</form>
                                 <i type="submit" class="fa fa-tags form-control-feedback" aria-hidden="true"></i>
                             </div></div>
     		`;
@@ -791,7 +809,7 @@ window.onload = function() {
 			}
 			chtview = { ...chtview, ...chtypes['me'][channel.owner_type]['classHidden'] };
 			if (channel.owner_type == 'fbt') {
-                tagsinput = `<input type="text" class="form-control" aria-describedby="search" name="tags" style="background-color: beige;" value="${tags}" placeholder="tags names, comma seperated">`;
+                tagsinput = `<input type="text" class="form-control input_edit_style" aria-describedby="search" name="tags"  value="${tags}" placeholder="tags names, comma seperated">`;
 			}
 			tmplt += `<div style="margin-top: 2px;box-shadow: 1px 1px 2px #888888;" class="" id="edit_channel_${channel.obj_id}">
 				<div class="form-group has-feedback">
@@ -800,11 +818,11 @@ window.onload = function() {
 													<input type="hidden" name="iaction" value="${channel.iactn}">
 													<input type="hidden" name="fbt_id" value="${channel.owner_id}">
 													${tagsinput}
-													<input type="text" class="form-control in_editchannel" aria-describedby="search" name="title" style="background-color: beige;" value="${channel.title}" placeholder="Title" id="title_for_${channel.owner_id}">
-													<input type="text" class="form-control in_editchannel" aria-describedby="search" name="description" style="background-color: beige;" value="${channel['description']}" placeholder="Description" id="description_for_${channel.owner_id}">
-													<input type="text" class="form-control in_profiepic ${chtview.profile}" aria-describedby="search" name="profile_pic" style="background-color: beige;" value="${channel.profile_pic}" placeholder="avatar Icon" id="profile_pic_for_${channel.owner_id}">
+													<input type="text" class="form-control in_editchannel input_edit_style" aria-describedby="search" name="title" value="${channel.title}" placeholder="Title" id="title_for_${channel.owner_id}">
+													<input type="text" class="form-control in_editchannel input_edit_style" aria-describedby="search" name="description"  value="${channel['description']}" placeholder="Description" id="description_for_${channel.owner_id}">
+													<input type="text" class="form-control in_profiepic input_edit_style ${chtview.profile}" aria-describedby="search" name="profile_pic" value="${channel.profile_pic}" placeholder="avatar Icon" id="profile_pic_for_${channel.owner_id}">
 													<div class="input-group">
-													    <input type="text" class="form-control in_editimg" aria-describedby="search" name="header_image" style="background-color: beige;" value="${channel.image_url}" placeholder="Channel header image url" id="img_for_${channel.owner_id}">
+													    <input type="text" class="form-control in_editimg input_edit_style" aria-describedby="search" name="header_image" value="${channel.image_url}" placeholder="Channel header image url" id="img_for_${channel.owner_id}">
                                                                   <span class="input-group-btn btn42">
                                                                     <button type="button" class="btn btn-default btn-twitter submitedit btn42"><span class="icon-power babelfish"></span></button>
                                                                   </span>
@@ -1712,6 +1730,20 @@ $(".route2").click(function(e){
     routeto2($(this).attr('id'));
     
 });
+
+
+
+
+$("#menu").click(function(e){
+    e.preventDefault();
+	sidelm = document.getElementById("sidebar");
+	if (sidelm.classList.contains('hidden')) {
+		sidelm.classList.remove('hidden');
+	} else {
+		sidelm.classList.add('hidden');
+	}
+});
+
 
 $("#backwardsbtn").click(function(){
     if (typeof routehistory !== 'undefined' && routehistory.length > 0) {

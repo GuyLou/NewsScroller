@@ -31,12 +31,14 @@
         }
     var tmplt = `<div id ="item_${item.item_id}" class="sitem${item.bulk}">
                     <div class="media media-item"><div class="media-heading">
-                    <div class="media-left"><a href="#" id="href_item_${item.item_id}" class="route2" routeto2="ftype=stream&fid=${item.retailer_id}"><img alt="" class="media-object img-rounded" src="${item.profile_pic}" style="max-width: 32px;"></a></div>
-                    <div class="media-body" style="vertical-align: middle;"><h4 class="media-heading"><a href="#" id="href_item_${item.item_id}" class="route2 link-unstyled" routeto2="ftype=stream&fid=${item.retailer_id}"><span style="font-size: 70%; color:#999999; font-style: italic;">@${item.handle} </span> <span style="font-weight: bold;">${item.retailer_full_name}</span></a></h4></div></div>
-                    <div class="media-body ${dirclass}"  style="padding-left: 10px;">
-                    <h4 class="media-heading"><a href="${item['link']}">${item.title}</a></h4>`;
-        tmplt += `<p>${item.description}<img class="media-body-image" src="${item.image_url}" onerror="if (this.src != '/image/catalog/42/42knots.png') this.src = '/image/catalog/42/42knots.png';"></p>
-                    <ul class="nav nav-pills nav-pills-custom">
+                    <div class="media-left"><a href="#" id="href_item_${item.item_id}" class="route2" routeto2="ftype=stream&fid=${item.retailer_id}"><img alt="" class="media-object img-rounded" src="${item.profile_pic}" style="max-width: 42px;"></a></div>
+                    <div class="media-body" style="vertical-align: middle;"><h4 class="media-heading"><a href="#" id="href_item_${item.item_id}" class="route2 link-unstyled" routeto2="ftype=stream&fid=${item.retailer_id}"><span style="font-size: 70%; color:#999999; font-style: italic;">@${item.handle} </span> <span style="font-weight: bold;">${item.retailer_full_name}</span></a></h4></div></div>`;
+        tmplt += `  <div class="itemgrid media-body ${dirclass}">
+                    <div class="igarea1"><img class="media-body-image" src="${item.image_url}" onerror="if (this.src != '/image/catalog/42/42knots.png') this.src = '/image/catalog/42/42knots.png';"></div>
+                    <div class="igarea2"><h4 class="media-heading"><a href="${item['link']}">${item.title}</a></h4></div>
+                    <div class="igarea3"><p>${item.description}</p></div>
+                    </div>`;
+        tmplt += `  <ul class="nav nav-pills nav-pills-custom">
                     <li><button class="btn btn-link item-share${item.bulk}" id="share_item_${item.item_id}" routeto="${item['link']}"><span class="icon-share"></span></button></li>
                     <li><button class="btn btn-link item-star${item.bulk}" id="star_item_${item.item_id}"><span class="icon-star"></span></button></li>
                     <li><button class="btn btn-link item-tag${item.bulk}" id="${isme}_tag_item_${item.item_id}"><span class="icon-tags"></span></button></li>
@@ -47,6 +49,24 @@
                 </div>
             </div>
     `;
+
+/*
+`<div class="itemgrid media-body ${dirclass}">
+      <div class="igarea1"><img class="media-body-image" src="${item.image_url}" onerror="if (this.src != '/image/catalog/42/42knots.png') this.src = '/image/catalog/42/42knots.png';"></div>
+      <div class="igarea2"><h4 class="media-heading"><a href="${item['link']}">${item.title}</a></h4></div>
+      <div class="igarea3"><p>${item.description}</p></div>
+ </div>`
+
+
+*/
+
+/*
+`  <div class="media-body ${dirclass}"  style="padding-left: 10px;">
+                    <h4 class="media-heading"><a href="${item['link']}">${item.title}</a></h4>
+                    <p>${item.description}<img class="media-body-image" src="${item.image_url}" onerror="if (this.src != '/image/catalog/42/42knots.png') this.src = '/image/catalog/42/42knots.png';"></p>`
+
+*/
+
     return tmplt;
 
     }

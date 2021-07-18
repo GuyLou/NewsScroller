@@ -47,6 +47,13 @@
     .view-login {
         display : none;
     }
+
+	.topbtn {
+		border-radius: 11px;
+		color: #fff;
+		background-color: #337ab7;
+		border-color: #337ab7;
+	}
 	
 	/* Mark input boxes that gets an error on validation: */
 	.form-row input.invalid {
@@ -89,7 +96,8 @@
 	}
 	
 	header.masthead {
-		background:url(../pub/images/boattrail.jpg) no-repeat center center; background-size:cover; /*  /pub/images/sblanding/bg-masthead.jpg  no-repeat center center;   */
+		/*background:url(../pub/images/boattrail.jpg) no-repeat center center; background-size:cover; /*  /pub/images/sblanding/bg-masthead.jpg  no-repeat center center;   */
+		background:url(../pub/images/news_scroller_bg.png) no-repeat center center; background-size:cover; 
 	}
 	
 	.bemsg {
@@ -143,10 +151,10 @@
   <!-- Navigation -->
   <nav class="navbar navbar-light bg-light static-top" id="topbar">
     <div class="container">
-      <a class="navbar-brand btn " href="/" style="background: rgb(101, 157, 189); color: #FFF2CC; ">42 knots</a>
+      <!--a class="navbar-brand btn " href="/" style="background: rgb(101, 157, 189); color: #FFF2CC; ">42 knots</a -->
         <a class="navbar-brand btn " href="https://www.youtube.com/watch?v=y5YRDkmjtjA" target="_blank" style="background: #fefefe; color: #fdfdfd; font-size: 7px;">An obvious easter egg...</a>
-	  <button class="btn btn-primary showlogin view-register loginregister">Log In</button>
-	  <button class="btn btn-primary showlogin view-login loginregister">Sign Up</button>
+	  <button class="btn showlogin view-register loginregister topbtn">Log In</button>
+	  <button class="btn showlogin view-login loginregister topbtn">Sign Up</button>
     </div>
   </nav>
 
@@ -156,8 +164,9 @@
     <div class="container">
       <div class="row">
         <div class="col-xl-9 mx-auto">
-          <h1 class="mb-5" id="ch_title_0">42 knots</h1>
-		  <h2 class="mb-5" id="ch_description_0">create your own content stream</h2>
+          <!-- h1 class="mb-5" id="ch_title_0">42 knots</h1 -->
+		  <img src="/pub/images/nslogo.png">
+		  <h2 class="mb-5" id="ch_description_0">your own newsFeed</h2>
         </div>
 		<div class="showlogin view-login col-md-10 col-lg-8 col-xl-7 mx-auto">
 
@@ -344,7 +353,7 @@
 
                                               
         </div>
-        <div class="col-lg-6 my-auto showcase-text">
+        <!-- div class="col-lg-6 my-auto showcase-text">
           <h2>Contact us</h2>
           <p class="lead mb-0">On any topic</p>
                                                   <div id="wuf-adv" style="font-family:inherit;font-size: small;color:#a7a7a7;text-align:center;display:block;">
@@ -352,7 +361,7 @@
                               HTML Forms powered by <a href="http://www.wufoo.com">Wufoo</a>.
                             </span>
                           </div>
-        </div>
+        </div -->
       </div>
       <!--      
       <div class="row no-gutters">
